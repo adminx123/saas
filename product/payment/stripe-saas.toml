@@ -1,0 +1,24 @@
+compatibility_date = "2025-07-22"
+account_id = "b70c309587ed8ba2bfa06320792ea457"
+workers_dev = true
+
+# --- SaaS Package Payments Worker ---
+name = "stripe-saas"
+main = "./stripe-saas.js"
+
+# R2 bucket for storing client assets (docs, images, videos)
+[[r2_buckets]]
+binding = "CLIENT_BUCKET"
+bucket_name = "clients"
+preview_bucket_name = "clients-preview"
+
+# R2 bucket for role templates
+[[r2_buckets]]
+binding = "ROLE_DOCS_BUCKET"
+bucket_name = "role-docs"
+preview_bucket_name = "role-docs-preview"
+
+# Variables for SaaS package payments
+[vars]
+DOMAIN_URL = "https://inexasli.com"
+R2_PUBLIC_DOMAIN = "clients.inexasli.com"

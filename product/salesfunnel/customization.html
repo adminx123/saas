@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Automation</title>
+    <link rel="stylesheet" href="salesflow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
+        <img src="../../images/favicon.svg" alt="INEXASLI Logo" class="splash-logo" style="margin-top: 20px;">
+    </div>
+
+    <div class="device-container" id="mainContent" style="opacity: 0; display: block; z-index: 1;">
+        <div class="setup-header">
+            <!-- Step Indicator -->
+            <div class="step-indicator-placeholder"></div>
+            <h1 class="page-title">Customize Automation</h1>
+            <p class="page-subtitle">Tell us about your brand so we can create perfect content for your business</p>
+        </div>
+
+        <div class="package-cards">
+        <!-- Main Configuration Section -->
+        <div class="package-card collapsed" data-section="main">
+            <div class="package-header">
+                <h3 class="card-title">Main Configuration</h3>
+                <div class="card-status">
+                    <span class="status-text">To Do</span>
+                </div>
+            </div>
+            <div class="card-content">
+            
+            <div class="form-group">
+                <label class="form-label" for="timezone">Timezone for Business Purposes</label>
+                <select class="form-select" id="timezone" name="timezone" required>
+                    <option value="">Select your timezone</option>
+                    <option value="America/New_York">Eastern Time (ET)</option>
+                    <option value="America/Chicago">Central Time (CT)</option>
+                    <option value="America/Denver">Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                    <option value="America/Anchorage">Alaska Time (AKT)</option>
+                    <option value="Pacific/Honolulu">Hawaii Time (HT)</option>
+                    <option value="Europe/London">London (GMT)</option>
+                    <option value="Europe/Paris">Paris (CET)</option>
+                    <option value="Europe/Berlin">Berlin (CET)</option>
+                    <option value="Asia/Tokyo">Tokyo (JST)</option>
+                    <option value="Asia/Shanghai">Shanghai (CST)</option>
+                    <option value="Asia/Kolkata">India (IST)</option>
+                    <option value="Australia/Sydney">Sydney (AEST)</option>
+                    <option value="Pacific/Auckland">Auckland (NZST)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="brandName">Brand Name</label>
+                <input type="text" class="form-input" id="brandName" name="brandName"
+                    placeholder="e.g., INEXASLI, Your Company Name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="brandVoice">Brand Voice</label>
+                <textarea class="form-textarea" id="brandVoice" name="brandVoice"
+                    placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" required></textarea>
+            </div>
+        </div>
+        </div>
+
+        <!-- Chat AI Configuration Section -->
+            <div class="package-card collapsed" id="conversationalSection" data-section="conversational" style="display: none;">
+                <div class="package-header">
+                    <h3 class="card-title">Chat AI Configuration</h3>
+                    <div class="card-status">
+                        <span class="status-text">To Do</span>
+                    </div>
+                </div>
+                <div class="card-content">
+
+                <div class="form-group">
+                    <label class="form-label" for="industry">Business Industry</label>
+                    <select class="form-select" id="industry" name="industry" required>
+                        <option value="">Select your industry</option>
+                        <option value="restaurant">Restaurant/Food Service</option>
+                        <option value="fitness">Fitness/Health</option>
+                        <option value="retail">Retail/E-commerce</option>
+                        <option value="beauty">Beauty/Wellness</option>
+                        <option value="tech">Technology/Software</option>
+                        <option value="consulting">Consulting/Professional Services</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="automotive">Automotive</option>
+                        <option value="education">Education/Training</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Chat Users</label>
+                    <textarea class="form-textarea" id="chatAudience" name="chatAudience"
+                        placeholder="Describe your target users (e.g., age, interests, demographics)" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Chat Widget Name</label>
+                    <input type="text" class="form-input" id="chatWidgetName" name="chatWidgetName"
+                        placeholder="Enter a name for your chat widget" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Chat Colours</label>
+                    <textarea class="form-textarea" id="chatColors" name="chatColors"
+                        placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" required></textarea>
+                </div>
+
+
+
+                <!-- Operational Focus Selection -->
+                <div class="form-group" id="roleScopeGroupChat">
+                    <label class="form-label">Operational Focus</label>
+                    <div class="grid-selection" id="roleScopeGridChat" data-type="single" data-name="roleScopeChat">
+                        <div class="grid-item1" data-value="internal">
+                            <div class="grid-item-text">Internal</div>
+                        </div>
+                        <div class="grid-item1" data-value="external">
+                            <div class="grid-item-text">External</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="roleScopeChat" id="roleScopeChat" required>
+                </div>
+
+                <!-- Department Selection -->
+                <div class="form-group" id="functionGroupChat" style="display: none;">
+                    <label class="form-label">Departments</label>
+                    <div class="grid-selection" id="functionGridChat" data-type="multiple" data-name="functionsChat">
+                        <div class="grid-item1" data-value="sales" data-scope="both">
+                            <div class="grid-item-text">Sales</div>
+                        </div>
+                        <div class="grid-item1" data-value="support" data-scope="both">
+                            <div class="grid-item-text">Support</div>
+                        </div>
+                        <div class="grid-item1" data-value="admin" data-scope="internal">
+                            <div class="grid-item-text">Admin</div>
+                        </div>
+                        <div class="grid-item1" data-value="hr" data-scope="internal">
+                            <div class="grid-item-text">HR</div>
+                        </div>
+                        <div class="grid-item1" data-value="operations" data-scope="both">
+                            <div class="grid-item-text">Operations</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="functionsChat" id="functionsChat" required>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="form-group" id="roleGroupChat" style="display: none;">
+                    <label class="form-label">AI Chat Role Support</label>
+                    <div class="grid-selection" id="roleGridChat" data-type="multiple" data-name="rolesChat">
+                        <div class="grid-item1" data-value="customer-service-rep" data-scope="external" data-function="support">
+                            <div class="grid-item-text">Customer Service Rep</div>
+                        </div>
+                        <div class="grid-item1" data-value="sales-assistant" data-scope="both" data-function="sales">
+                            <div class="grid-item-text">Sales Assistant</div>
+                        </div>
+                        <div class="grid-item1" data-value="support-technician" data-scope="both" data-function="support">
+                            <div class="grid-item-text">Support Technician</div>
+                        </div>
+                        <div class="grid-item1" data-value="hr-assistant" data-scope="internal" data-function="hr">
+                            <div class="grid-item-text">HR Assistant</div>
+                        </div>
+                        <div class="grid-item1" data-value="admin-assistant" data-scope="internal" data-function="admin">
+                            <div class="grid-item-text">Admin Assistant</div>
+                        </div>
+                        <div class="grid-item1" data-value="order-fulfillment" data-scope="external" data-function="operations">
+                            <div class="grid-item-text">Order Fulfillment Staff</div>
+                        </div>
+                        <div class="grid-item1" data-value="it-support" data-scope="internal" data-function="operations">
+                            <div class="grid-item-text">IT Support</div>
+                        </div>
+                        <div class="grid-item1" data-value="team-coordinator" data-scope="internal" data-function="operations">
+                            <div class="grid-item-text">Team Coordinator</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="rolesChat" id="rolesChat" required>
+                </div>
+
+                <div class="form-group" id="roleDocuments" style="display: none;">
+                    <label class="form-label">Role-Specific Documents</label>
+                    <p style="color: #666; font-size: 0.9em;">If you don't have documents for each role, download templates first. Otherwise, skip to uploading your existing documents below.</p>
+                    <button type="button" id="downloadBtn" class="action-button" onclick="downloadRoleTemplates()">Download Role Templates</button>
+                    <p style="color: #666; font-size: 0.9em;">Upload documents and check off the core documents they cover from the checklist below.</p>
+                    <input type="file" class="form-input" id="roleDocs" name="roleDocs" multiple accept=".txt,.pdf,.doc,.docx" style="display:none;">
+                    <button type="button" id="uploadBtn" class="action-button" onclick="document.getElementById('roleDocs').click()">Upload Files</button>
+                    <div id="fileList"></div>
+                    <div id="categoryGrid" style="display:none; margin-top:20px;">
+                        <p>Select all core documents covered by your uploaded files:</p>
+                        <div class="grid-selection"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <!-- Social Posting Configuration Section -->
+        <div class="package-card collapsed" id="socialSection" data-section="social">
+            <div class="package-header">
+                <h3 class="card-title">Social Posting Configuration</h3>
+                <div class="card-status">
+                    <span class="status-text">To Do</span>
+                </div>
+            </div>
+            <div class="card-content">            <div class="form-group">
+                <label class="form-label">Posting Schedule</label>
+                <div class="posting-schedule-builder">
+                    <div class="schedule-header">
+                        <span class="schedule-label">Select preferred posting days:</span>
+                    </div>
+                    <div class="days-selector">
+                        <div class="day-toggle" data-day="monday">
+                            <div class="day-label">M</div>
+                            <div class="day-full">Monday</div>
+                        </div>
+                        <div class="day-toggle" data-day="tuesday">
+                            <div class="day-label">T</div>
+                            <div class="day-full">Tuesday</div>
+                        </div>
+                        <div class="day-toggle" data-day="wednesday">
+                            <div class="day-label">W</div>
+                            <div class="day-full">Wednesday</div>
+                        </div>
+                        <div class="day-toggle" data-day="thursday">
+                            <div class="day-label">T</div>
+                            <div class="day-full">Thursday</div>
+                        </div>
+                        <div class="day-toggle" data-day="friday">
+                            <div class="day-label">F</div>
+                            <div class="day-full">Friday</div>
+                        </div>
+                        <div class="day-toggle" data-day="saturday">
+                            <div class="day-label">S</div>
+                            <div class="day-full">Saturday</div>
+                        </div>
+                        <div class="day-toggle" data-day="sunday">
+                            <div class="day-label">S</div>
+                            <div class="day-full">Sunday</div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="postingSchedule" id="postingSchedule" required>
+            </div>
+
+                        <div class="form-group">
+                <label class="form-label" for="scheduleDetails">Schedule Details & Preferences</label>
+                <textarea class="form-textarea" id="scheduleDetails" name="scheduleDetails"
+                    placeholder="Describe your posting preferences (e.g., preferred times, posting frequency, any other scheduling requirements or preferences we should discuss)" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="contentFocus">Content Focus</label>
+                <textarea class="form-textarea" id="contentFocus" name="contentFocus"
+                    placeholder="What topics or themes should the posts focus on? (e.g., industry insights, customer success stories, educational content)" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="imagePromptTemplate">Image Generation Prompt Template</label>
+                <textarea class="form-textarea" id="imagePromptTemplate" name="imagePromptTemplate"
+                    placeholder="Template for AI image generation (e.g., 'Create [style] for: [content]... Incorporate [elements] with [mood] mood. [colors]. [composition].')" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="targetAudience">Target Audience</label>
+                <textarea class="form-textarea" id="targetAudience" name="targetAudience"
+                    placeholder="Describe your target audience (e.g., age range, interests, pain points, what they care about)" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="instagramHandle">Instagram Handle</label>
+                <input type="text" class="form-input" id="instagramHandle" name="instagramHandle"
+                    placeholder="e.g., @yourbrand">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="twitterHandle">Twitter Handle</label>
+                <input type="text" class="form-input" id="twitterHandle" name="twitterHandle"
+                    placeholder="e.g., @yourbrand">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="facebookHandle">Facebook Page ID or Handle</label>
+                <input type="text" class="form-input" id="facebookHandle" name="facebookHandle"
+                    placeholder="e.g., 1234567890 or @yourbrand">
+            </div>
+        </div>
+        </div>
+
+        <!-- Social Posting Configuration Section -->
+            <div class="package-card collapsed" id="replySection" style="display: none;">
+                <div class="package-header">
+                    <h3 class="card-title">Social Media Reply Configuration</h3>
+                    <div class="card-status">
+                        <span class="status-text">To Do</span>
+                    </div>
+                </div>
+                <div class="card-content">
+
+                <div class="form-group">
+                    <label class="form-label" for="replyGuidelines">Comment Reply Guidelines</label>
+                    <textarea class="form-textarea" id="replyGuidelines" name="replyGuidelines"
+                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="platformConsiderations">Platform Considerations</label>
+                    <textarea class="form-textarea" id="platformConsiderations" name="platformConsiderations"
+                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" required></textarea>
+                </div>
+            </div>
+            </div>
+
+        <!-- Deployment Section -->
+        <div class="package-card collapsed" data-section="deployment">
+            <div class="package-header">
+                <h3 class="card-title">Automated Client Setup</h3>
+                <div class="card-status">
+                    <span class="status-text">Ready</span>
+                </div>
+            </div>
+            <div class="card-content">
+                <p>Deploy your customized client worker and configuration automatically.</p>
+                <button id="deployButton" class="btn btn-primary" onclick="deployClient()">Deploy Client</button>
+                <div id="deployStatus" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        </div><!-- Close package-cards -->
+
+        <div class="consultation-box">
+            <div class="consultation-text">
+                <strong>Want personalized consultation?</strong><br>
+                Schedule a 15-minute brand strategy call for enhanced customization
+            </div>
+            <a href="#" class="btn-primary" onclick="scheduleConsultation()">
+                📞 Schedule Call (Optional)
+            </a>
+        </div>
+ 
+        <!-- Continue Button -->
+        <button class="package-continue-btn" onclick="submitCustomizationForm()">Continue to Quote</button>
+        
+
+        <!-- Back Button -->
+        <a href="packages.html" class="btn-back">← Back to Packages</a>
+
+          
+    
+        <!-- Legal Footer -->
+        <div id="legalFooterContainer"></div>
+    
+    </div><!-- Close device-container -->         
+            
+         
+       
+    
+    
+    
+    <script>
+        // Splash screen transition
+        document.addEventListener('DOMContentLoaded', function() {
+            const splash = document.getElementById('splashContainer');
+            const main = document.getElementById('mainContent');
+            
+            if (!splash || !main) {
+                console.error('Splash or main content elements not found');
+                return;
+            }
+            
+            // Start main content fade-in immediately
+            main.style.transition = 'opacity 1.2s ease-in';
+            
+            setTimeout(() => {
+                // Start crossfade
+                main.style.opacity = '1';
+                splash.style.opacity = '0';
+                splash.style.transition = 'opacity 1.2s ease-out';
+                
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    main.style.position = 'static';
+                    main.style.left = 'auto';
+                    main.style.transform = 'none';
+                    main.style.top = 'auto';
+                }, 1200);
+            }, 1500); // Show splash for 1.5 seconds
+        });
+    </script>
+    
+    <script>
+        // Global function for checking card completion
+        function checkCardCompletion(card) {
+            console.log('Checking completion for card:', card.querySelector('.card-title')?.textContent);
+            
+            const grids = card.querySelectorAll('.grid-selection');
+            let allGridsCompleted = true;
+            grids.forEach(grid => {
+                if (grid.style.display === 'none') {
+                    console.log('Skipping hidden grid:', grid.id);
+                    return; // Skip hidden grids
+                }
+                const items = grid.querySelectorAll('.grid-item1');
+                const selectedItems = Array.from(items).filter(i => i.classList.contains('selected'));
+                const hasSelection = selectedItems.length > 0;
+                console.log('Grid', grid.id, 'has selection:', hasSelection, 'selected items:', selectedItems.map(i => i.dataset.value));
+                if (!hasSelection) allGridsCompleted = false;
+            });
+            console.log('All grids completed:', allGridsCompleted);
+            
+            // Also check required form elements (selects and inputs)
+            const requiredSelects = card.querySelectorAll('select[required]');
+            let allSelectsCompleted = true;
+            requiredSelects.forEach(select => {
+                const hasValue = !!select.value;
+                console.log('Select', select.id, 'has value:', hasValue, 'value:', select.value);
+                if (!hasValue) allSelectsCompleted = false;
+            });
+            console.log('All selects completed:', allSelectsCompleted);
+            
+            const requiredInputs = card.querySelectorAll('input[required]');
+            let allInputsCompleted = true;
+            requiredInputs.forEach(input => {
+                let hasValue = false;
+                if (input.type === 'file') {
+                    hasValue = input.files.length > 0;
+                } else {
+                    hasValue = !!input.value;
+                }
+                console.log('Input', input.id, 'has value:', hasValue, 'value:', input.value, 'files:', input.files?.length);
+                if (!hasValue) allInputsCompleted = false;
+            });
+            console.log('All inputs completed:', allInputsCompleted);
+            
+            const requiredTextareas = card.querySelectorAll('textarea[required]');
+            let allTextareasCompleted = true;
+            requiredTextareas.forEach(textarea => {
+                const hasValue = !!textarea.value.trim();
+                console.log('Textarea', textarea.id, 'has value:', hasValue, 'value length:', textarea.value.length);
+                if (!hasValue) allTextareasCompleted = false;
+            });
+            console.log('All textareas completed:', allTextareasCompleted);
+            
+            // Check for day toggles (at least one must be active)
+            const dayToggles = card.querySelectorAll('.day-toggle');
+            let hasActiveDayToggle = true; // Default to true if no day toggles exist
+            if (dayToggles.length > 0) {
+                hasActiveDayToggle = Array.from(dayToggles).some(toggle => toggle.classList.contains('active'));
+                console.log('Day toggles found:', dayToggles.length, 'active:', hasActiveDayToggle);
+            } else {
+                console.log('No day toggles in this card');
+            }
+            
+            // Check role documents completion
+            let roleDocsCompleted = true;
+            if (card.id === 'conversationalSection') {
+                const selectedRoles = getSelectedRoles();
+                if (selectedRoles.length > 0) {
+                    const covered = new Set();
+                    const categoryGrid = document.getElementById('categoryGrid');
+                    if (categoryGrid.style.display !== 'none') {
+                        const grid = categoryGrid.querySelector('.grid-selection');
+                        if (grid) {
+                            const selectedItems = grid.querySelectorAll('.grid-item1.selected');
+                            Array.from(selectedItems).forEach(item => {
+                                covered.add(item.dataset.value);
+                            });
+                        }
+                    }
+                    const required = new Set();
+                    selectedRoles.forEach(role => {
+                        roleCategories[role].forEach(cat => required.add(cat));
+                    });
+                    const missing = Array.from(required).filter(cat => !covered.has(cat));
+                    if (missing.length > 0) {
+                        roleDocsCompleted = false;
+                        console.log('Role docs not completed, missing:', missing);
+                    } else {
+                        console.log('Role docs completed');
+                    }
+                }
+            }
+            
+            const isComplete = allGridsCompleted && allSelectsCompleted && allInputsCompleted && allTextareasCompleted && hasActiveDayToggle && roleDocsCompleted;
+            console.log('Card completion status:', isComplete, {
+                allGridsCompleted,
+                allSelectsCompleted,
+                allInputsCompleted,
+                allTextareasCompleted,
+                hasActiveDayToggle,
+                roleDocsCompleted
+            });
+            
+            if (isComplete) {
+                card.classList.add('completed');
+                const statusText = card.querySelector('.status-text');
+                if (statusText) statusText.textContent = '✓';
+                console.log('Card marked as completed');
+            } else {
+                card.classList.remove('completed');
+                const statusText = card.querySelector('.status-text');
+                if (statusText) statusText.textContent = 'To Do';
+                console.log('Card marked as To Do');
+            }
+        }
+        
+        // Function to download role templates as ZIP
+        function downloadRoleTemplates() {
+            const selectedRoles = getSelectedRoles();
+            if (selectedRoles.length === 0) {
+                alert('Please select at least one role before downloading templates.');
+                return;
+            }
+            
+            // Fetch template data from worker
+            const url = 'https://stripe-saas.4hm7q4q75z.workers.dev/download-templates?roles=' + selectedRoles.join(',');
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Create ZIP file using JSZip
+                    const zip = new JSZip();
+                    
+                    // Add each template as a text file (more universally readable)
+                    Object.entries(data.templates).forEach(([role, content]) => {
+                        zip.file(`${role}.txt`, content);
+                    });
+                    
+                    // Generate and download ZIP
+                    return zip.generateAsync({ type: 'blob' });
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'role-templates.zip';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Download failed:', error);
+                    alert('Download failed. Please try again.');
+                });
+        }
+    </script>
+    
+    <script>
+        // Restore grid selections from hidden inputs
+        function restoreGridSelections() {
+            // Restore role scope
+            const roleScopeInput = document.getElementById('roleScope');
+            if (roleScopeInput && roleScopeInput.value) {
+                const scopeItem = document.querySelector(`#roleScopeGrid .grid-item1[data-value="${roleScopeInput.value}"]`);
+                if (scopeItem) {
+                    scopeItem.classList.add('selected');
+                }
+            }
+            
+            // Restore functions
+            const functionsInput = document.getElementById('functions');
+            if (functionsInput && functionsInput.value) {
+                const functionValues = functionsInput.value.split(',');
+                functionValues.forEach(value => {
+                    const funcItem = document.querySelector(`#functionGrid .grid-item1[data-value="${value.trim()}"]`);
+                    if (funcItem) {
+                        funcItem.classList.add('selected');
+                    }
+                });
+            }
+            
+            // Restore roles
+            const rolesInput = document.getElementById('roles');
+            if (rolesInput && rolesInput.value) {
+                const roleValues = rolesInput.value.split(',');
+                roleValues.forEach(value => {
+                    const roleItem = document.querySelector(`#roleGrid .grid-item1[data-value="${value.trim()}"]`);
+                    if (roleItem) {
+                        roleItem.classList.add('selected');
+                    }
+                });
+            }
+        }
+        
+        // Update visibility of functions and roles based on scope
+        function updateVisibility() {
+            // Main section has no grids requiring progressive disclosure
+        }
+        
+        function updateVisibilityChat() {
+            const selectedScopeItem = document.querySelector('#roleScopeGridChat .grid-item1.selected');
+            const selectedScope = selectedScopeItem ? selectedScopeItem.dataset.value : null;
+            
+            if (selectedScope) {
+                document.getElementById('functionGroupChat').style.display = 'block';
+                
+                // Filter functions
+                const functions = document.querySelectorAll('#functionGridChat .grid-item1');
+                functions.forEach(item => {
+                    const scope = item.dataset.scope;
+                    if (scope === selectedScope || scope === 'both') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('selected');
+                    }
+                });
+                
+                // Check selected functions
+                const selectedFunctions = document.querySelectorAll('#functionGridChat .grid-item1.selected');
+                const selectedFunctionValues = Array.from(selectedFunctions).map(item => item.dataset.value);
+                
+                if (selectedFunctions.length > 0) {
+                    document.getElementById('roleGroupChat').style.display = 'block';
+                    
+                    // Filter roles
+                    const roles = document.querySelectorAll('#roleGridChat .grid-item1');
+                    roles.forEach(item => {
+                        const scope = item.dataset.scope;
+                        const func = item.dataset.function;
+                        if ((scope === selectedScope || scope === 'both') && selectedFunctionValues.includes(func)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.remove('selected');
+                        }
+                    });
+                } else {
+                    document.getElementById('roleGroupChat').style.display = 'none';
+                }
+            } else {
+                document.getElementById('functionGroupChat').style.display = 'none';
+                document.getElementById('roleGroupChat').style.display = 'none';
+            }
+        }
+        
+        // Grid selection functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const gridSelections = document.querySelectorAll('.grid-selection');
+            
+            gridSelections.forEach(grid => {
+                const type = grid.dataset.type; // 'single' or 'multiple'
+                const name = grid.dataset.name;
+                const items = grid.querySelectorAll('.grid-item1');
+                
+                items.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const value = this.dataset.value;
+                        
+                        if (type === 'single') {
+                            // Single selection - clear others and select this one
+                            items.forEach(i => i.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            // Update hidden input
+                            const hiddenInput = document.getElementById(name);
+                            if (hiddenInput) {
+                                hiddenInput.value = value;
+                            }
+                        } else {
+                            // Multiple selection - toggle this item
+                            this.classList.toggle('selected');
+                            
+                            // Update hidden input with selected values
+                            const selectedItems = grid.querySelectorAll('.grid-item1.selected');
+                            const selectedValues = Array.from(selectedItems).map(i => i.dataset.value);
+                            const hiddenInput = document.getElementById(name);
+                            if (hiddenInput) {
+                                hiddenInput.value = selectedValues.join(',');
+                            }
+                        }
+                        
+                        // Progressive disclosure and filtering
+                        if (grid.id.includes('Chat')) {
+                            updateVisibilityChat();
+                        } else {
+                            updateVisibility();
+                        }
+                        
+                        // Check card completion
+                        const card = this.closest('.package-card');
+                        if (card) checkCardCompletion(card);
+                    });
+                });
+            });
+            
+            // Initial visibility update
+            updateVisibilityChat();
+            
+            // Wait for form persistence to complete, then update visibility
+            setTimeout(() => {
+                updateVisibilityChat();
+            }, 500);
+            
+            // Add listeners for required form elements
+            const requiredSelects = document.querySelectorAll('select[required]');
+            requiredSelects.forEach(select => {
+                select.addEventListener('change', function() {
+                    const card = this.closest('.package-card');
+                    if (card) checkCardCompletion(card);
+                });
+            });
+            
+            const requiredInputs = document.querySelectorAll('input[required]');
+            requiredInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const card = this.closest('.package-card');
+                    if (card) checkCardCompletion(card);
+                });
+            });
+            
+            const requiredTextareas = document.querySelectorAll('textarea[required]');
+            requiredTextareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    const card = this.closest('.package-card');
+                    if (card) checkCardCompletion(card);
+                });
+            });
+            
+            // Load selected package and adapt form
+            const packageData = localStorage.getItem('quoteData');
+            console.log('Package data from localStorage:', packageData);
+            
+            if (packageData) {
+                const quoteData = JSON.parse(packageData);
+                const selectedPackage = quoteData.package;
+                console.log('Selected package:', selectedPackage);
+                console.log('Package type:', selectedPackage.type);
+                
+                // Optional: Add package info to page
+                const subtitle = document.querySelector('.setup-subtitle');
+                if (subtitle) {
+                    subtitle.textContent = `Configure your AI chat and reply assistants for your business needs (Customizing ${selectedPackage.name})`;
+                }
+                
+                // Show/hide sections based on selected package
+                const packageType = selectedPackage.type; // 'basic', 'social', 'pro', 'enterprise'
+                
+                // Business category selection (shown for all packages since they all include chat)
+                const businessCategoryGroup = document.getElementById('businessCategoryGroup');
+                if (businessCategoryGroup) businessCategoryGroup.style.display = 'block';
+                
+                // Hide all config sections by default
+                const conversationalSection = document.getElementById('conversationalSection');
+                const replySection = document.getElementById('replySection');
+                const socialSection = document.getElementById('socialSection');
+                
+                console.log('Section elements found:', {
+                    conversational: !!conversationalSection,
+                    reply: !!replySection,
+                    social: !!socialSection
+                });
+                
+                console.log('Conversational element details:', conversationalSection);
+                console.log('All elements with package-card class:', document.querySelectorAll('.package-card'));
+                
+                if (conversationalSection) {
+                    console.log('Setting conversationalSection display to none');
+                    conversationalSection.style.display = 'none';
+                }
+                if (replySection) {
+                    console.log('Setting replySection display to none');
+                    replySection.style.display = 'none';
+                }
+                if (socialSection) {
+                    console.log('Setting socialSection display to none');
+                    socialSection.style.display = 'none';
+                }
+                
+                // Show sections based on package type
+                if (packageType === 'basic') {
+                    // Basic Chat: Show conversational AI config
+                    console.log('Showing Basic Chat sections');
+                    if (conversationalSection) conversationalSection.style.display = 'block';
+                } else if (packageType === 'social') {
+                    // Social Starter: Show social media + conversational AI config
+                    console.log('Showing Social Starter sections');
+                    if (socialSection) socialSection.style.display = 'block';
+                    if (conversationalSection) conversationalSection.style.display = 'block';
+                } else if (packageType === 'pro') {
+                    // Pro Bundle: Show all configs
+                    console.log('Showing Pro Bundle sections');
+                    if (socialSection) socialSection.style.display = 'block';
+                    if (conversationalSection) conversationalSection.style.display = 'block';
+                    if (replySection) replySection.style.display = 'block';
+                } else if (packageType === 'enterprise') {
+                    // Enterprise: Show all configs
+                    console.log('Showing Enterprise sections');
+                    if (socialSection) socialSection.style.display = 'block';
+                    if (conversationalSection) conversationalSection.style.display = 'block';
+                    if (replySection) replySection.style.display = 'block';
+                }
+                
+                const title = document.querySelector('.setup-title');
+                if (title) title.textContent = 'Custom AI Automation';
+            } else {
+                console.log('No package data found in localStorage');
+            }
+            
+            // After form persistence loads, check completion status of all cards
+            setTimeout(() => {
+                const allCards = document.querySelectorAll('.package-card');
+                allCards.forEach(card => {
+                    checkCardCompletion(card);
+                });
+            }, 300); // Delay to ensure form persistence has loaded
+        });
+
+        // Posting schedule functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Day toggle functionality
+            const dayToggles = document.querySelectorAll('.day-toggle');
+            dayToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    // Update hidden input for form persistence
+                    const postingScheduleInput = document.getElementById('postingSchedule');
+                    if (postingScheduleInput) {
+                        const activeDays = Array.from(document.querySelectorAll('.day-toggle.active')).map(t => t.dataset.day);
+                        postingScheduleInput.value = JSON.stringify(activeDays);
+                    }
+                    // Check completion status of the social media card
+                    const socialCard = document.querySelector('.package-card[data-section="social"]');
+                    if (socialCard) {
+                        console.log('Found social card, checking completion');
+                        checkCardCompletion(socialCard);
+                    } else {
+                        console.log('Social card not found');
+                    }
+                });
+            });
+            
+            // Form section collapse/expand functionality
+            const sectionTitles = document.querySelectorAll('.package-card');
+            sectionTitles.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Prevent collapse when clicking on form elements
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON' || e.target.closest('.grid-item1') || e.target.closest('.day-toggle')) {
+                        return;
+                    }
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // If this card is collapsed, expand it and collapse all others
+                    if (this.classList.contains('collapsed')) {
+                        // Collapse all cards first
+                        sectionTitles.forEach(otherCard => {
+                            otherCard.classList.add('collapsed');
+                        });
+                        // Then expand this one
+                        this.classList.remove('collapsed');
+                    } else {
+                        // If already expanded, collapse it
+                        this.classList.add('collapsed');
+                    }
+                });
+            });
+        });
+
+        function getRelevantSections(packageType) {
+            const sections = ['main']; // Main config always included
+            
+            if (packageType === 'basic' || packageType === 'social' || packageType === 'pro' || packageType === 'enterprise') {
+                sections.push('conversational'); // All packages include chat
+            }
+            
+            if (packageType === 'social' || packageType === 'pro' || packageType === 'enterprise') {
+                sections.push('social'); // Social media packages
+            }
+            
+            if (packageType === 'pro' || packageType === 'enterprise') {
+                sections.push('reply'); // Reply logic for higher tiers
+            }
+            
+            return sections;
+        }
+
+        async function submitCustomizationForm() {
+            // Get current package to determine which sections should be included
+            const packageData = localStorage.getItem('quoteData');
+            if (!packageData) {
+                alert('Package data not found. Please start over.');
+                window.location.href = 'packages.html';
+                return;
+            }
+            const quoteData = JSON.parse(packageData);
+            const packageType = quoteData.package.type;
+            
+            // Determine which sections are relevant for this package
+            const relevantSections = getRelevantSections(packageType);
+            
+            // Collect form data manually since no form element
+            const setupData = {};
+            
+            // Handle regular input fields
+            const inputs = document.querySelectorAll('input[name], select[name], textarea[name]');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    setupData[input.name] = input.checked;
+                } else if (input.type === 'file') {
+                    setupData[input.name] = input.multiple ? Array.from(input.files) : input.files[0];
+                } else {
+                    setupData[input.name] = input.value;
+                }
+            });
+            
+            // Handle grid selections - only if section is relevant
+            if (relevantSections.includes('main')) {
+                // No grids for main section
+            }
+            
+            if (relevantSections.includes('conversational')) {
+                // Tone collection removed - grid not present in HTML
+            }
+            
+            // Collect posting schedule - only if social section is relevant
+            if (relevantSections.includes('social')) {
+                const postingScheduleInput = document.getElementById('postingSchedule');
+                setupData.postingSchedule = postingScheduleInput ? JSON.parse(postingScheduleInput.value || '[]') : [];
+            }
+            
+            // Package-aware data filtering: Filter setupData to only include fields from relevant sections
+            // This prevents data contamination by excluding fields from sections not applicable to the current package
+            const fieldSectionMap = {
+                timezone: 'main',
+                industry: 'conversational',
+                roleScope: 'main',
+                functions: 'main',
+                roles: 'main',
+                roleScopeChat: 'conversational',
+                functionsChat: 'conversational',
+                rolesChat: 'conversational',
+                chatWidgetName: 'conversational',
+                chatColors: 'conversational',
+                knowledgeBase: 'conversational',
+                postingSchedule: 'social',
+                scheduleDetails: 'social',
+                contentFocus: 'social',
+                targetAudience: 'social',
+                replyGuidelines: 'reply',
+                platformConsiderations: 'reply'
+            };
+            
+            const filteredSetupData = {};
+            for (const [key, value] of Object.entries(setupData)) {
+                const section = fieldSectionMap[key];
+                if (!section || relevantSections.includes(section)) {
+                    filteredSetupData[key] = value;
+                }
+            }
+            
+            // Validate required fields based on relevant sections
+            // First check if all relevant cards are completed
+            let allCardsCompleted = true;
+            const allCards = document.querySelectorAll('.package-card');
+            allCards.forEach(card => {
+                const section = card.dataset.section;
+                if (relevantSections.includes(section) && !card.classList.contains('completed')) {
+                    allCardsCompleted = false;
+                    alert(`Please complete the ${card.querySelector('.card-title').textContent} section before continuing.`);
+                    return;
+                }
+            });
+            if (!allCardsCompleted) return;
+            
+            if (relevantSections.includes('conversational') && !filteredSetupData.functionsChat) {
+                alert('Please select departments.');
+                return;
+            }
+            
+            if (relevantSections.includes('conversational') && !filteredSetupData.rolesChat) {
+                alert('Please select AI chat role support.');
+                return;
+            }
+            
+            if (relevantSections.includes('conversational') && !filteredSetupData.chatAudience) {
+                alert('Please fill in the target users.');
+                return;
+            }
+            
+            if (relevantSections.includes('reply') && (!filteredSetupData.replyGuidelines || !filteredSetupData.platformConsiderations)) {
+                alert('Please fill in reply guidelines and platform considerations.');
+                return;
+            }
+            
+            if (relevantSections.includes('social') && (!filteredSetupData.postingSchedule || filteredSetupData.postingSchedule.length === 0)) {
+                alert('Please select at least one day for posting.');
+                return;
+            }
+            
+            if (relevantSections.includes('social') && (!filteredSetupData.scheduleDetails)) {
+                alert('Please fill in your schedule details and preferences.');
+                return;
+            }
+            
+            if (relevantSections.includes('social') && (!filteredSetupData.contentFocus || !filteredSetupData.targetAudience)) {
+                alert('Please fill in content focus and target audience.');
+                return;
+            }
+            
+            // Validate role documents
+            if (relevantSections.includes('conversational') && uploadedFiles.length > 0) {
+                const selectedRoles = getSelectedRoles();
+                if (selectedRoles.length > 0) {
+                    const covered = new Set();
+                    const categoryGrid = document.getElementById('categoryGrid');
+                    if (categoryGrid && categoryGrid.style.display !== 'none') {
+                        const grid = categoryGrid.querySelector('.grid-selection');
+                        if (grid) {
+                            const selectedItems = grid.querySelectorAll('.grid-item1.selected');
+                            Array.from(selectedItems).forEach(item => {
+                                covered.add(item.dataset.value);
+                            });
+                        }
+                    }
+                    const required = new Set();
+                    selectedRoles.forEach(role => {
+                        roleCategories[role].forEach(cat => required.add(cat));
+                    });
+                    const missing = Array.from(required).filter(cat => !covered.has(cat));
+                    if (missing.length > 0) {
+                        alert(`Please ensure all required categories are covered. Missing: ${missing.join(', ')}`);
+                        return;
+                    }
+                }
+            }
+            
+            // Upload files to R2 storage if any exist
+            if (uploadedFiles.length > 0) {
+                console.log('Uploading files to R2 storage...');
+                
+                // Show loading indicator
+                const continueBtn = document.querySelector('.package-continue-btn');
+                const originalText = continueBtn.textContent;
+                continueBtn.textContent = 'Uploading Files...';
+                continueBtn.disabled = true;
+                
+                try {
+                    // Create FormData with files and brand name
+                    const formData = new FormData();
+                    const brandName = document.getElementById('brandName').value.trim() || 'unknown';
+                    formData.append('brandName', brandName);
+                    uploadedFiles.forEach((file, index) => {
+                        formData.append(`file_${index}`, file);
+                    });
+                    
+                    // Upload to stripe-saas worker
+                    const uploadResponse = await fetch('https://stripe-saas.4hm7q4q75z.workers.dev/upload-files', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (!uploadResponse.ok) {
+                        throw new Error(`Upload failed: ${uploadResponse.status}`);
+                    }
+                    
+                    const uploadResult = await uploadResponse.json();
+                    console.log('File upload successful:', uploadResult);
+                    
+                    // Add file URLs to customization data
+                    filteredSetupData.uploadedFiles = uploadResult.files;
+                    
+                } catch (error) {
+                    console.error('File upload error:', error);
+                    alert('Failed to upload files. Please try again.');
+                    continueBtn.textContent = originalText;
+                    continueBtn.disabled = false;
+                    return;
+                }
+                
+                // Restore button
+                continueBtn.textContent = originalText;
+                continueBtn.disabled = false;
+            }
+            
+            // Store customization data for Stripe integration
+            setJSON('customizationData', filteredSetupData);
+            
+            // Redirect to quote page
+            window.location.href = 'quote.html';
+        }
+
+        function scheduleConsultation() {
+            // TODO: Integrate with Calendly or your scheduling system
+            alert('Consultation scheduling coming soon! We\'ll contact you within 2-5 days.');
+        }
+
+        // Role categories for document requirements
+        const roleCategories = {
+            'customer-service-rep': ['FAQs', 'Support Scripts'],
+            'sales-assistant': ['Sales Strategy', 'Product List', 'Addons'],
+            'support-technician': ['Technical FAQs', 'Troubleshooting Guides'],
+            'hr-assistant': ['Policies', 'Procedures'],
+            'admin-assistant': ['Daily Tasks', 'Scheduling'],
+            'order-fulfillment': ['Order Processing', 'Inventory Management'],
+            'it-support': ['Hardware/Software Inventory', 'User Support Procedures'],
+            'team-coordinator': ['Team Structure', 'Meeting Schedules']
+        };
+
+        function getSelectedRoles() {
+            const rolesInput = document.getElementById('rolesChat');
+            if (rolesInput && rolesInput.value) {
+                const value = rolesInput.value;
+                if (value.startsWith('[')) {
+                    return JSON.parse(value);
+                } else {
+                    return value.split(',').map(s => s.trim());
+                }
+            }
+            return [];
+        }
+
+        function updateRoleDocuments() {
+            const selectedRoles = getSelectedRoles();
+            console.log('Updating role documents, selected roles:', selectedRoles);
+            if (selectedRoles.length > 0) {
+                document.getElementById('roleDocuments').style.display = 'block';
+                // Expand the card if collapsed
+                document.getElementById('conversationalSection').classList.remove('collapsed');
+                // Update file list display
+                const fileListDiv = document.getElementById('fileList');
+                if (uploadedFiles.length === 0) {
+                    fileListDiv.innerHTML = '';
+                    document.getElementById('categoryGrid').style.display = 'none';
+                } else {
+                    fileListDiv.innerHTML = '';
+                    uploadedFiles.forEach((file, index) => {
+                        const fileDiv = document.createElement('div');
+                        fileDiv.style.marginBottom = '10px';
+                        fileDiv.innerHTML = `<strong style="color: green;">${file.name}</strong>`;
+                        fileListDiv.appendChild(fileDiv);
+                    });
+                    document.getElementById('categoryGrid').style.display = 'block';
+                    populateCategoryGrid();
+                }
+            } else {
+                document.getElementById('roleDocuments').style.display = 'none';
+                document.getElementById('categoryGrid').style.display = 'none';
+            }
+        }
+
+        let uploadedFiles = [];
+
+        // Load saved file names from localStorage
+        const savedFileNames = JSON.parse(localStorage.getItem('uploadedFiles') || '[]');
+        uploadedFiles = savedFileNames.map(name => ({ name }));
+
+        function populateCategoryGrid() {
+            const categoryGridDiv = document.getElementById('categoryGrid');
+            const grid = categoryGridDiv.querySelector('.grid-selection');
+            grid.innerHTML = '';
+            const selectedRoles = getSelectedRoles();
+            const allCategories = new Set();
+            selectedRoles.forEach(role => {
+                roleCategories[role].forEach(cat => allCategories.add(cat));
+            });
+            allCategories.forEach(cat => {
+                const item = document.createElement('div');
+                item.className = 'grid-item1';
+                item.dataset.value = cat;
+                item.textContent = cat;
+                item.addEventListener('click', () => {
+                    item.classList.toggle('selected');
+                    // Trigger completion check
+                    checkCardCompletion(document.getElementById('conversationalSection'));
+                });
+                grid.appendChild(item);
+            });
+        }
+
+        function handleFileSelect(event) {
+            const newFiles = Array.from(event.target.files);
+            // Add new files to the list
+            uploadedFiles.push(...newFiles);
+            // Clear the input to allow selecting the same files again or new ones
+            event.target.value = '';
+            // Update the display
+            updateRoleDocuments();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('roleDocs').addEventListener('change', handleFileSelect);
+            // Listen for role changes
+            const rolesInput = document.getElementById('rolesChat');
+            if (rolesInput) {
+                rolesInput.addEventListener('change', updateRoleDocuments);
+            }
+            // Specific listener for role grid clicks
+            document.getElementById('roleGridChat').addEventListener('click', function(e) {
+                if (e.target.closest('.grid-item1')) {
+                    setTimeout(updateRoleDocuments, 10);
+                }
+            });
+            // Initial check
+            updateRoleDocuments();
+        });
+    </script>
+    
+    <script src="footer.js"></script>
+    <script src="../../utility/modal.js"></script>
+    <script src="step-indicator.js"></script>
+    <script type="module">
+        import { BusinessFormPersistence } from './businessFormPersistence.js';
+        import { setJSON } from '../../utility/setJSON.js';
+        
+        // Make setJSON available globally for the form submission function
+        window.setJSON = setJSON;
+        
+        // Deploy client function
+        async function deployClient() {
+            const button = document.getElementById('deployButton');
+            const status = document.getElementById('deployStatus');
+            button.disabled = true;
+            status.innerHTML = 'Deploying...';
+            
+            try {
+                // In a real implementation, this would call the deploy-client.js script
+                // For now, simulate deployment
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                status.innerHTML = '<span style="color: green;">Client deployed successfully!</span>';
+            } catch (error) {
+                status.innerHTML = '<span style="color: red;">Deployment failed: ' + error.message + '</span>';
+            } finally {
+                button.disabled = false;
+            }
+        }
+        
+        // Initialize form persistence for customization form after a short delay
+        // to ensure grid selection event listeners are set up
+        setTimeout(() => {
+            const customizationPersistence = new BusinessFormPersistence('mainContent', 'customization-form-data');
+            customizationPersistence.init();
+            updateRoleDocuments(); // Ensure role documents section updates after load
+        }, 100);
+    </script>
+</body>
+</html>

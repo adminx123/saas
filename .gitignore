@@ -1,0 +1,50 @@
+# Cloudflare Workers configuration
+wrangler*
+
+# INEXASLI .gitignore files
+
+# Ignore engineered prompts and worker files containing sensitive IP
+calorie.js
+income.js
+enneagram.js
+event.js
+decision.js
+quiz.js
+philosophy.js
+fashion.js
+shop.js
+fishing.js
+
+# Module creation instructions
+MODULE-CREATION-INSTRUCTIONS.md
+
+# Entire prompts directory
+future/
+
+# Private rate limiter logic
+app/rate-limiter/rateLimit.js
+
+# OS generated files
+.DS_Store
+
+# Node.js dependencies
+node_modules/
+
+# Editor directories and files
+.vscode/
+
+app/master.js
+
+# Payment processing worker
+app/payment/stripe-app.js
+
+# any folder named hide
+hide
+
+# Config files
+app/master.toml
+app/fact-generator/fact-generator.toml
+app/rate-limiter/ratelimit.toml
+
+# All markdown files
+*.md
