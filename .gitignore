@@ -25,6 +25,7 @@ product/utility/
 product/widget/
 product/.wrangler/
 product/orchestrator.js
+product/terms.txt
 
 # Exception: Keep salesfunnel HTML files and legal documents
 !product/salesfunnel/*.html
