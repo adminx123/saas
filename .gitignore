@@ -15,14 +15,21 @@ node_modules/
 *.md
 
 # Product folder - Cloudflare Workers and dependencies
-product/
+# Ignore specific subdirectories and files
+product/_agents/
+product/_chains/
+product/_tools/
+product/client/
+product/payment/
+product/utility/
+product/widget/
+product/.wrangler/
+product/orchestrator.js
 
 # Exception: Keep salesfunnel HTML files and legal documents
 !product/salesfunnel/*.html
 !product/legal/*.html
 !product/README.md
-!product/architecture.md
-!product/terms.txt
 !product/wrangler.toml
 !product/legal/*.js
 
