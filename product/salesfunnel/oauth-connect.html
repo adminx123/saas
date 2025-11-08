@@ -402,30 +402,30 @@
         
         // Fetch OAuth configuration and set up buttons
         async function setupOAuthButtons() {
-            // Use new OAuth worker for X.com authentication
-            const OAUTH_WORKER_URL = 'https://oauth.4hm7q4q75z.workers.dev';
+            // Use orchestrator for OAuth flows (integrated OAuth)
+            const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev'; // Deployed orchestrator URL
             
             // Generate unique client ID for this user session
             const clientId = 'client_' + Math.random().toString(36).substring(2, 15);
             
-            // X OAuth URL using new OAuth worker
-            const xOauthUrl = `${OAUTH_WORKER_URL}/oauth/start`;
+            // X OAuth URL using orchestrator
+            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start`;
             
-            // Instagram OAuth URL using new OAuth worker
-            const instagramOauthUrl = `${OAUTH_WORKER_URL}/oauth/instagram/start`;
+            // Instagram OAuth URL using orchestrator
+            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start`;
             
-            // Facebook OAuth URL using new OAuth worker
-            const facebookOauthUrl = `${OAUTH_WORKER_URL}/oauth/facebook/start`;
+            // Facebook OAuth URL using orchestrator
+            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start`;
             
-            // Set up OAuth buttons with new unified worker
+            // Set up OAuth buttons with orchestrator
             document.getElementById('instagramOauthButton').href = instagramOauthUrl;
             document.getElementById('facebookOauthButton').href = facebookOauthUrl;
             document.getElementById('xOauthButton').href = xOauthUrl;
             
             // Log OAuth URLs for debugging
-            console.log('Instagram OAuth URL (new worker):', instagramOauthUrl);
-            console.log('Facebook OAuth URL (new worker):', facebookOauthUrl);
-            console.log('X OAuth URL (new worker):', xOauthUrl);
+            console.log('Instagram OAuth URL (orchestrator):', instagramOauthUrl);
+            console.log('Facebook OAuth URL (orchestrator):', facebookOauthUrl);
+            console.log('X OAuth URL (orchestrator):', xOauthUrl);
         }
         
         // Check if at least one platform is connected and show complete setup button
