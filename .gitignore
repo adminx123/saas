@@ -27,11 +27,11 @@ product/.wrangler/
 product/orchestrator.js
 product/terms.txt
 
+# Exception: Keep wrangler config files
 # Exception: Keep salesfunnel HTML files and legal documents
 !product/salesfunnel/*.html
 !product/legal/*.html
 !product/README.md
-!product/wrangler.toml
 !product/legal/*.js
 
 # any folder named hide
