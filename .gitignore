@@ -34,6 +34,9 @@ product/terms.txt
 !product/README.md
 !product/legal/*.js
 
+# Ignore wrangler config files
+product/wrangler-*.toml
+
 # any folder named hide
 hide
 
