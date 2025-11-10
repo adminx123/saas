@@ -295,22 +295,39 @@
     <script src="footer.js"></script>
     <script src="../../utility/modal.js"></script>
     <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1430248878244997',
-                xfbml      : true,
-                version    : 'v23.0'
-            });
-            FB.AppEvents.logPageView();
-        };
+        // Fetch OAuth config and initialize Facebook SDK dynamically
+        const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev';
+        
+        async function initializeFacebookSDK() {
+            try {
+                const response = await fetch(`${ORCHESTRATOR_URL}/oauth/config`);
+                const oauthConfig = await response.json();
+                
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId      : oauthConfig.facebook.appId,
+                        xfbml      : true,
+                        version    : oauthConfig.facebook.apiVersion
+                    });
+                    FB.AppEvents.logPageView();
+                };
 
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+                // Load Facebook SDK
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            } catch (error) {
+                console.error('Failed to load OAuth config:', error);
+                // Fallback: load SDK without initialization (won't work but prevents script errors)
+            }
+        }
+        
+        // Initialize on page load
+        initializeFacebookSDK();
     </script>
 
     <script>
