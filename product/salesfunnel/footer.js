@@ -11,8 +11,8 @@
     }
     
     // Load legal scripts
-    loadScript('../legal/legalSocial.js');
-    loadScript('../legal/legalDPA.js');
+    loadScript('../../legal/legalSocial.js');
+    loadScript('../../legal/legalDPA.js');
     
     function createFooter() {
         const footer = document.createElement('div');
