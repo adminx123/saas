@@ -43,3 +43,6 @@ hide
 # Payment folders (contain sensitive Stripe keys and configurations)
 product/payment/stripe-saas.js
 product/payment/wrangler-stripe-saas.toml
+
+# Security analysis reports
+oauth-security-risks.txt
