@@ -10,40 +10,20 @@ node_modules/
 # Cloudflare Workers
 .wrangler/
 
-
 # All markdown files
 *.md
-
-# Product folder - Cloudflare Workers and dependencies
-# Ignore specific subdirectories and files
-product/_agents/
-product/_chains/
-product/_tools/
-product/_utilities/
-product/client/
-product/payment/
-product/utility/
-product/widget/
-product/.wrangler/
-product/orchestrator.js
-product/terms.txt
-
-# Exception: Keep wrangler config files
-# Exception: Keep salesfunnel HTML files and legal documents
-!product/salesfunnel/*.html
-!product/legal/*.html
-!product/README.md
-!product/legal/*.js
-
-# Ignore wrangler config files
-product/wrangler-*.toml
 
 # any folder named hide
 hide
 
-# Payment folders (contain sensitive Stripe keys and configurations)
-product/payment/stripe-saas.js
-product/payment/wrangler-stripe-saas.toml
+# Source code folder
+src/
 
-# Security analysis reports
-oauth-security-risks.txt
+# Documentation folder
+docs/
+
+# Client folder
+client/
+
+# Exception: Keep redirectUrl.html
+!src/payment/redirectUrl.html
