@@ -169,7 +169,7 @@
 </head>
 <body>
     <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
-        <img src="../../images/favicon.svg" alt="INEXASLI Logo" class="splash-logo" style="margin-top: 20px;">
+        <img src="../../public/images/favicon.svg" alt="INEXASLI Logo" class="splash-logo" style="margin-top: 20px;">
     </div>
 
     <div class="device-container" id="mainContent" style="opacity: 0; display: block; z-index: 1;">
@@ -466,7 +466,7 @@
 <div id="legalFooterContainer"></div>
 
 </div>
-    <script src="footer.js"></script>
+    <script src="../utilities/footer.js"></script>
     <script>
         // Splash screen transition
         const splash = document.getElementById('splashContainer');
@@ -524,8 +524,10 @@
     <!-- <script src="https://27c01404.master-widget.pages.dev/masterWidget.js"></script> -->
     <script src="https://05e0fd28.master-widget.pages.dev/masterWidget.js"></script>
     
-    <script src="../../utility/modal.js"></script>
-    <script src="step-indicator.js"></script>
+    <script src="../utilities/modal.js"></script>
+    <script src="/public/legal/legalSocial.js"></script>
+    <script src="/public/legal/legalDPA.js"></script>
+    <script src="../utilities/step-indicator.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const packageCards = document.querySelectorAll('.package-card');
