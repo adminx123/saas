@@ -493,17 +493,8 @@
             const completeSetupButton = document.getElementById('completeSetupButton');
             if (completeSetupButton) {
                 completeSetupButton.addEventListener('click', function() {
-                    // Get flow type from URL
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const flowType = urlParams.get('flow') || 'service';
-                    
-                    if (flowType === 'service') {
-                        // Service flow: redirect to setup completion
-                        window.location.href = '/product/salesfunnel/setupComplete.html';
-                    } else {
-                        // App flow: redirect to app (fallback)
-                        window.location.href = '/app/landing/landing.html';
-                    }
+                    // Always redirect to setup completion
+                    window.location.href = '/salesfunnel/setupComplete.html';
                 });
             }
         });
