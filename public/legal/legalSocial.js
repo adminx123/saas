@@ -7,7 +7,7 @@
 console.log('[LegalSocial] Script loading...');
 
 // Terms of Service content for All INEXASLI B2B Services
-const TERMS_OF_SERVICE = {
+var TERMS_OF_SERVICE = {
     title: "Terms of Service for INEXASLI Business Services",
     
     // Main disclaimer at the top
@@ -430,7 +430,7 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 };
 
 // Privacy Policy content for Social Media Automation Business
-const PRIVACY_POLICY = {
+var PRIVACY_POLICY = {
     title: "Privacy Policy for INEXASLI Social Media Automation Services",
     
     sections: [
@@ -560,7 +560,7 @@ We respond to privacy inquiries within 5 business days and fulfill data requests
 };
 
 // Data Deletion Instructions content
-const DATA_DELETION = {
+var DATA_DELETION = {
     title: "Data Deletion Instructions - INEXASLI",
     
     sections: [
@@ -655,7 +655,7 @@ function createLegalSocialModal() {
         onOpen: function(modal, modalContent) {
             // Add scroll function to modal context
             window.scrollToSection = function(sectionId) {
-                const section = modalContent.querySelector(`#${sectionId}`);
+                const section = modalContent.querySelector(`#section-${sectionId}`);
                 if (section) {
                     section.scrollIntoView({ 
                         behavior: 'smooth', 

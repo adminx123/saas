@@ -7,7 +7,7 @@
 console.log('[LegalDPA] Script loading...');
 
 // Data Processing Agreement content
-const DATA_PROCESSING_AGREEMENT = {
+var DATA_PROCESSING_AGREEMENT = {
     title: "Data Processing Agreement (DPA)",
     
     preamble: `This Data Processing Agreement ("DPA") forms part of the Terms of Service between INEXASLI ("Data Processor") and the business client ("Data Controller") and governs the processing of personal data in connection with INEXASLI's services.
