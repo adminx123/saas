@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INEXASLI - Social Media Automation</title>
+  <link rel="icon" type="image/x-icon" href="../../images/newLogo.jpg">
+  <link rel="stylesheet" href="salesflow.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Page-specific styles for social.html */
+
+    /* Hero Section */
+    .hero-section {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .promo-badge-outer {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 3px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .promo-badge-inner {
+        background: linear-gradient(135deg, #4f46e5, #3730a3);
+        padding: 8px 20px;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .hero-title {
+        font-size: 3.2em;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4em;
+        color: white;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .hero-strong {
+        color: white;
+    }
+
+    /* Urgency Section - Glassmorphism */
+    .urgency-section {
+        background: rgba(16, 185, 129, 0.15);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        margin: 25px 0;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.2);
+    }
+
+    .urgency-title {
+        color: white;
+        margin-bottom: 15px;
+        font-size: 2.2em;
+    }
+
+    .urgency-text {
+        color: white;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .urgency-timing-box {
+        background: rgba(255,255,255,0.15);
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .urgency-timing-main {
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .urgency-timing-sub {
+        color: white;
+        font-size: 14px;
+    }
+
+    /* Benefit Card Enhanced */
+    .benefit-card-enhanced {
+        border: 2px solid #28a745;
+        position: relative;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .most-popular-badge {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        background: #ffffff;
+        color: #000000;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .solution-title {
+        text-align: center;
+        font-size: 2.0em;
+        margin-bottom: 25px;
+        color: white;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Stats Section */
+    .stats-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+
+    .stat-item {
+        background: rgba(255,255,255,0.1);
+        padding: 10px 12px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        flex: 1 1 calc(33.333% - 10px);
+        max-width: 140px;
+        min-width: 120px;
+        text-align: center;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    .stat-number {
+        color: #a855f7;
+        font-weight: bold;
+        font-size: 24px;
+        order: 2;
+    }
+
+    .stat-label {
+        color: white;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.3;
+        margin: 2px 0;
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+    }
+
+    /* Make labels stack consistently */
+    .stat-label:first-child {
+        order: 1;
+    }
+    
+    .stat-label:last-child {
+        order: 3;
+    }
+
+    /* Problem Section - Glassmorphism (Red) */
+    .problem-section {
+        background: rgba(220, 53, 69, 0.15);
+        border: 1px solid rgba(220, 53, 69, 0.3);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        box-shadow: 0 8px 32px 0 rgba(220, 53, 69, 0.2);
+    }
+
+    .problem-title {
+        color: #dc2626;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+
+    .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 5px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .problem-item {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
+        min-height: 80px;
+    }
+
+    .problem-emoji {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .problem-text {
+        color: white;
+        max-width: 280px;
+        line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-header {
+        text-align: center;
+        margin: 30px 0 20px 0;
+    }
+
+    .cta-title {
+        font-size: 2.8em;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .cta-subtitle {
+        font-size: 1.3em;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .guarantee-box {
+        background: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+    }
+
+    .guarantee-text {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+    <div class="floating-particles">
+        <div class="particle" style="top: 20%; left: 20%; width: 6px; height: 6px; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 60%; left: 80%; width: 4px; height: 4px; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 80%; left: 30%; width: 8px; height: 8px; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 40%; left: 70%; width: 5px; height: 5px; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 10%; left: 60%; width: 7px; height: 7px; animation-delay: 3s;"></div>
+    </div>
+    
+    <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
+        <img src="../../public/images/favicon.svg" alt="INEXASLI Logo" class="splash-logo" style="margin-top: 20px;">
+        <div class="splash-inexasli">INEXASLI<span class="tm">™</span></div>
+        <div class="splash-empowering">Empowering Thee<span class="tm">™</span></div>
+    </div>
+    
+    <div class="device-container" id="mainContent" style="opacity: 0; display: block; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; z-index: 1;">
+        
+    <!-- Hero Section with Social Proof -->
+        <div class="hero-section">
+      <h1 class="hoead-1 hero-title" style="font-size: 2.0em; line-height: 1.2;">
+        Automate Your Business While You Sleep
+      </h1>
+      <p class="hoead-2 hero-subtitle">
+        AI-powered solutions for social media, customer chat, and automated replies. Generate content, handle inquiries, and engage customers 24/7. 
+        <strong class="hero-strong">Turn hours of daily work into minutes with minimal setup.</strong>
+      </p>
+      
+      <!-- Urgency & Social Proof -->
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-label">Serve Simultaneously</div>
+          <div class="stat-number" data-target="1000">0</div>
+          <div class="stat-label">Customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Capture Sales</div>
+          <div class="stat-number" data-target="24">0</div>
+          <div class="stat-label">Hours Per Day</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Support</div>
+          <div class="stat-number" data-target="100">0</div>
+          <div class="stat-label">+ Languages</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Potentially Save</div>
+          <div class="stat-number" data-target="50000">0</div>
+          <div class="stat-label">$ Per Employee</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Available</div>
+          <div class="stat-number" data-target="365">0</div>
+          <div class="stat-label">Days Per Year</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Save</div>
+          <div class="stat-number" data-target="8">0</div>
+          <div class="stat-label">+ Hours Per Day</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Problem/Pain Points Section -->
+    <div class="problem-section">
+      <h2 class="problem-title">Struggling With These Daily Challenges?</h2>
+      <div class="problem-grid">
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Missing sales while you sleep or are offline</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Overwhelmed by unanswered messages and comments</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Hours spent creating content instead of growing your business</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Can't afford 24/7 customer support staff</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Manually responding to every comment and message</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-emoji"></div>
+          <div class="problem-text">Declining engagement despite hours of posting</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solution/Benefits Section -->
+    <h2 class="solution-title" style="font-size: 2.0em; line-height: 1.2;">How Our System Fixes That Forever</h2>
+    <div class="benefits">
+            <div class="benefit-card benefit-card-enhanced">
+        <div class="most-popular-badge">MOST POPULAR</div>
+        <h3>AI Customer Chat</h3>
+        <p><strong>24/7 sales conversion</strong> AI engages inquiries instantly, converting customers after-hours when competitors are offline. No employees needed – no hiring, firing, sick days, or management overhead.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Unlimited Scalability</h3>
+        <p><strong>Convert inquiries to sales 24/7</strong> Handle 1000+ customers simultaneously, capturing sales after-hours when competitors are closed. Zero employee costs or management overhead.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Multilingual Support</h3>
+        <p><strong>Serve global customers instantly</strong> AI communicates in 100+ languages, opening markets traditional employees can't reach. Break language barriers and expand your customer base worldwide.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Auto Visual Creation</h3>
+        <p><strong>Professional graphics made easy</strong> AI generates quality images or uses your branded content library</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Multi-Platform Posting</h3>
+        <p><strong>Reach more platforms efficiently</strong> Instagram, X, and Facebook with platform-specific optimization</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Smart Scheduling</h3>
+        <p><strong>Consistent posting schedule</strong> Automated posting during optimal engagement times</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Performance Analytics</h3>
+        <p><strong>Track your growth</strong> Monitor engagement, reach, and performance across all platforms</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Professional Setup</h3>
+        <p><strong>We handle the technical work</strong> From initial setup to ongoing maintenance and optimization</p>
+      </div>
+    </div>
+    
+    <!-- Urgency/Scarcity Section -->
+    <div class="urgency-section">
+      <h2 class="urgency-title" style="font-size: 1.8em; line-height: 1.2;">Ready to Streamline Your Social Media?</h2>
+      <p class="urgency-text">
+        Every day spent on manual posting is time you could invest in growing your business
+      </p>
+      <div class="urgency-timing-box">
+        <div class="urgency-timing-main">Your automation setup typically takes 2-5 business days</div>
+        <div class="urgency-timing-sub">Start automating within a week</div>
+      </div>
+    </div>
+
+    <!-- CTA Header -->
+    <div class="cta-header">
+      <h2 class="cta-title" style="font-size: 2.2em; line-height: 1.2;">Get Started in 5 Easy Steps</h2>
+      <p class="cta-subtitle">
+        Pick your package, customize automation, review your quote, complete payment, and connect your socials
+      </p>
+      <div class="guarantee-box">
+        <div class="guarantee-text">No contracts • Cancel anytime</div>
+      </div>
+
+      <!-- Single Clear Path -->
+      <div style="margin: 30px 0; text-align: center;">
+        <a href="packages.html?step=1" class="btn-primary" style="font-size: 1.3em; padding: 22px 60px; text-decoration: none; display: inline-block; background: linear-gradient(135deg, #10b981, #059669); margin-bottom: 20px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);">
+          🚀 Start Your Setup
+        </a>
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+          <div style="text-align: center; color: #ccc; font-size: 13px;">
+            <div style="color: #10b981; font-weight: bold; margin-bottom: 5px;">Step 1</div>
+            Packages
+          </div>
+          <div style="text-align: center; color: #ccc; font-size: 13px;">
+            <div style="color: #10b981; font-weight: bold; margin-bottom: 5px;">Step 2</div>
+            Customize
+          </div>
+          <div style="text-align: center; color: #ccc; font-size: 13px;">
+            <div style="color: #10b981; font-weight: bold; margin-bottom: 5px;">Step 3</div>
+            Quote
+          </div>
+          <div style="text-align: center; color: #ccc; font-size: 13px;">
+            <div style="color: #10b981; font-weight: bold; margin-bottom: 5px;">Step 4</div>
+            Payment
+          </div>
+          <div style="text-align: center; color: #ccc; font-size: 13px;">
+            <div style="color: #10b981; font-weight: bold; margin-bottom: 5px;">Step 5</div>
+            Connect
+          </div>
+        </div>
+      </div>
+      
+      <!-- Legal Footer -->
+      <div id="legalFooterContainer"></div>
+    </div>
+
+</body>
+<script src="../utilities/footer.js"></script>
+<script src="../utilities/modal.js"></script>
+<script>
+  // Counter animation for stats with domino/sequential effect
+  function animateCounters() {
+    const counters = Array.from(document.querySelectorAll('.stat-number'));
+    
+    function animateCounter(counter, delay) {
+      setTimeout(() => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const labels = counter.parentElement.querySelectorAll('.stat-label');
+        const labelText = Array.from(labels).map(l => l.textContent).join(' ');
+        
+        const increment = target / 100; // 100 steps for smooth animation
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          
+          // Format display
+          const suffix = labelText.includes('Languages') || labelText.includes('Customers') || labelText.includes('$ Per Employee') ? '+' : '';
+          counter.textContent = Math.floor(current).toLocaleString() + suffix;
+        }, 16); // Reduced from 18ms to 16ms (20% faster total)
+      }, delay);
+    }
+    
+    // Animate each counter sequentially with 2-second delay between each
+    counters.forEach((counter, index) => {
+      animateCounter(counter, index * 2000);
+    });
+  }
+
+  // Start counter animation after page loads
+  setTimeout(animateCounters, 2000);
+
+  // Splash screen transition
+  document.addEventListener('DOMContentLoaded', function() {
+    const splash = document.getElementById('splashContainer');
+    const main = document.getElementById('mainContent');
+    
+    // Clear any previous session data when starting fresh from landing page
+    if (window.location.search === '') {
+      localStorage.removeItem('orderData');
+      localStorage.removeItem('customizationData');
+      localStorage.removeItem('business-social-form-data');
+    }
+    
+    // Start main content fade-in immediately
+    main.style.transition = 'opacity 1.2s ease-in';
+    
+    setTimeout(() => {
+      // Start crossfade
+      main.style.opacity = '1';
+      splash.style.opacity = '0';
+      splash.style.transition = 'opacity 1.2s ease-out';
+      
+      setTimeout(() => {
+        splash.style.display = 'none';
+        main.style.position = 'static';
+        main.style.left = 'auto';
+        main.style.transform = 'none';
+        
+        // Check for URL parameters to auto-open modals
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('terms') === 'true') {
+          setTimeout(() => showSocialTerms(), 300);
+        } else if (urlParams.get('privacy') === 'true') {
+          setTimeout(() => showSocialPrivacy(), 300);
+        }
+      }, 1200);
+    }, 1500); // Show splash for 1.5 seconds
+  });
+</script>
+</html>
+
+
+
