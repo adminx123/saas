@@ -11,6 +11,50 @@
         /* Page-specific styles for packages.html */
         /* Package-card styles moved to salesflow.css */
         
+        /* Blur the page content */
+        #mainContent {
+            filter: blur(5px);
+            transition: filter 0.5s ease;
+        }
+        #mainContent.unblurred {
+            filter: none;
+        }
+
+        /* Demo buttons */
+        .demo-buttons {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .demo-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        .demo-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+        
         /* Platform Selection Grid - Single Row Layout */
         .platform-selection-grid {
             display: flex;
@@ -170,6 +214,11 @@
 <body>
     <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
         <img src="../../public/images/favicon.svg" alt="INEXASLI Logo" class="splash-logo" style="margin-top: 20px;">
+    </div>
+
+    <div class="demo-buttons" style="display: none;">
+        <button class="demo-btn" id="instagramBtn">See Real AI-Generated Posts</button>
+        <button class="demo-btn" id="chatBtn">Click the Chat Icon in Lower Right to Try the Chat</button>
     </div>
 
     <div class="device-container" id="mainContent" style="opacity: 0; display: block; z-index: 1;">
@@ -1164,6 +1213,24 @@
                     }
                 });
             }
+        });
+    </script>
+    
+    <script>
+        // Demo buttons functionality
+        setTimeout(() => {
+            document.querySelector('.demo-buttons').style.display = 'flex';
+        }, 2300); // Wait for splash animation (~2.2s)
+        
+        document.getElementById('instagramBtn').addEventListener('click', function() {
+            window.open('https://www.instagram.com/inexasli_', '_blank');
+        });
+        
+        document.getElementById('chatBtn').addEventListener('click', function() {
+            // Unblur the page to reveal content
+            document.getElementById('mainContent').classList.add('unblurred');
+            // Hide the buttons
+            document.querySelector('.demo-buttons').style.display = 'none';
         });
     </script>
 </body>
