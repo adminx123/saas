@@ -13,6 +13,9 @@ node_modules/
 # All markdown files
 *.md
 
+# All text files
+*.txt
+
 # any folder named hide
 hide
 
