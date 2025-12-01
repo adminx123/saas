@@ -425,14 +425,18 @@
             // Generate unique client ID for this user session
             const clientId = 'client_' + Math.random().toString(36).substring(2, 15);
             
+            // Generate CSRF state parameter
+            const state = crypto.randomUUID();
+            sessionStorage.setItem('oauth_state', state);
+            
             // X OAuth URL using orchestrator
-            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start`;
+            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start?state=${encodeURIComponent(state)}`;
             
             // Instagram OAuth URL using orchestrator
-            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start`;
+            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start?state=${encodeURIComponent(state)}`;
             
             // Facebook OAuth URL using orchestrator
-            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start`;
+            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start?state=${encodeURIComponent(state)}`;
             
             // Set up OAuth buttons with orchestrator
             document.getElementById('instagramOauthButton').href = instagramOauthUrl;
