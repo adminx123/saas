@@ -63,8 +63,7 @@ This DPA applies to the following INEXASLI services:
 INEXASLI is authorized to process personal data only for the following purposes:
 • Generate AI responses to chat widget queries using xAI API
 • Generate automated responses to social media direct messages using xAI API
-• Store conversation history for service delivery and quality improvement
-• Analyze interaction data to optimize AI response accuracy
+• Analyze interaction data temporarily to optimize AI response accuracy (no long-term storage)
 • Provide customer support and troubleshooting assistance
 • Send SMS notifications to clients for AI knowledge updates (client phone numbers only)
 • Process client SMS responses to train AI systems
@@ -99,7 +98,7 @@ INEXASLI is authorized to process personal data only for the following purposes:
 
 **Limitations:**
 - Data transmitted to xAI API is protected by TLS encryption only (no additional encryption layer)
-- Chat conversation history stored without end-to-end encryption (encrypted at rest only)
+- No long-term storage of chat or DM data; temporary processing only
 - INEXASLI does not implement data anonymization or pseudonymization by default
 
 **Security Updates:**
@@ -188,7 +187,7 @@ A personal data breach means a breach of security leading to accidental or unlaw
 
 **INEXASLI Obligations:**
 Upon becoming aware of a personal data breach affecting Controller's data, INEXASLI will:
-1. Notify Controller without undue delay (target: within 48 hours)
+1. Notify Controller without undue delay (within 72 hours)
 2. Provide the following information (to the extent available):
    • Nature of the breach and categories of data affected
    • Approximate number of data subjects and personal data records affected
@@ -278,19 +277,19 @@ On-site audits may be permitted in limited circumstances (e.g., regulatory inves
             title: "10. Data Retention and Deletion",
             content: `**Retention Periods:**
 Personal data will be retained for the following periods:
-• Chat conversation history: Duration of service + 90 days
-• DM interaction logs: Duration of service + 90 days
-• Business account data: Duration of service + 30 days
-• Payment/billing records: 7 years (legal compliance requirement)
+• Chat conversation history: No long-term retention; processed temporarily and deleted immediately after response generation
+• DM interaction logs: No long-term retention; processed temporarily and deleted immediately after response generation
+• Business account data: Duration of service + 60 days (then deleted)
+• Payment/billing records: Not stored locally; retained by Stripe per their policies
 
 **Deletion Upon Termination:**
-Upon termination of services, INEXASLI will (at Controller's choice):
-1. **Delete all personal data** within 30 days of termination, OR
-2. **Return personal data** to Controller in commonly used format within 30 days
+Upon termination of services, INEXASLI will:
+1. **Delete all personal data** (chat/DM data already deleted immediately; business data deleted within 60 days)
+2. **Return personal data** to Controller in commonly used format within 60 days (if requested before deletion)
 
 **Exceptions to Deletion:**
 Personal data may be retained beyond termination periods if required for:
-• Legal compliance (e.g., tax records, financial audits)
+• Legal compliance (e.g., tax records, financial audits - though billing data not stored locally)
 • Establishment, exercise, or defense of legal claims
 • Compliance with court orders or regulatory investigations
 
@@ -298,7 +297,7 @@ Personal data may be retained beyond termination periods if required for:
 Upon request, INEXASLI will provide written certification that personal data has been deleted or returned, except for data retained under legal exceptions.
 
 **Backup Data:**
-Data in backup systems will be deleted in accordance with standard backup rotation schedules (maximum 90 days after deletion from production systems).`
+No backups of chat or DM data are maintained, as data is not stored long-term. Business account data backups are retained for up to 60 days after service termination.`
         },
         {
             title: "11. Liability and Indemnification",
@@ -358,7 +357,7 @@ The following provisions survive termination:
 **Effect of Termination:**
 Upon termination, INEXASLI will:
 • Cease all processing of personal data (except as necessary for deletion/return)
-• Delete or return personal data as instructed by Controller
+• Delete or return personal data within 60 days of termination
 • Ensure sub-processors delete or return personal data
 • Provide deletion certification upon request`
         },

@@ -135,6 +135,11 @@ var TERMS_OF_SERVICE = {
 - Businesses must comply with Meta Platform Terms Section 3.2 prohibiting deceptive automation practices.
 - INEXASLI is not responsible for account suspension or platform actions resulting from business use of automation services.
 
+**Platform-Specific Disclaimers**
+- **Instagram/Facebook**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries.
+- **Twitter/X**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries (future implementation).
+- **LinkedIn**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries.
+
 **End-User Privacy**
 - DM content is processed through INEXASLI systems and transmitted to xAI API for response generation.
 - Businesses are responsible for obtaining appropriate consents for automated processing of user messages.
