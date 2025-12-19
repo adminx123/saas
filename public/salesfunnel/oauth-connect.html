@@ -293,7 +293,15 @@
     </div>
 
     <script src="../utilities/footer.js"></script>
-    <script src="../../utility/modal.js"></script>
+    <script src="../utilities/modal.js"></script>
+    <script type="module">
+        import { getJSON } from '../utilities/getJSON.js';
+        import { setJSON } from '../utilities/setJSON.js';
+        
+        // Make functions available globally
+        window.getJSON = getJSON;
+        window.setJSON = setJSON;
+    </script>
     <script>
         // Fetch OAuth config and initialize Facebook SDK dynamically
         const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev';
@@ -359,9 +367,11 @@
         
         // Show/hide OAuth buttons based on selected platforms from localStorage
         function showSelectedPlatformButtons() {
-            const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage') || '{}');
+            const quoteData = JSON.parse(localStorage.getItem('quoteData') || '{}');
+            const selectedPackage = quoteData.package || {};
             const selectedPlatforms = selectedPackage.platforms || [];
             
+            console.log('Quote data:', quoteData);
             console.log('Selected package:', selectedPackage);
             console.log('Selected platforms:', selectedPlatforms);
             
@@ -422,21 +432,45 @@
             // Use orchestrator for OAuth flows (integrated OAuth)
             const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev'; // Deployed orchestrator URL
             
-            // Generate unique client ID for this user session
-            const clientId = 'client_' + Math.random().toString(36).substring(2, 15);
+            // Get brand name from customization data
+            const customizationData = getJSON('customizationData');
+            const brandName = customizationData?.brandName || 'unknown';
+            
+            // Generate client ID from brand name (normalize for database use)
+            const clientId = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
+            
+            console.log('OAuth setup - Brand name:', brandName, 'Client ID:', clientId);
             
             // Generate CSRF state parameter
             const state = crypto.randomUUID();
             sessionStorage.setItem('oauth_state', state);
             
+            // Store customization data for database creation
+            try {
+                await fetch(`${ORCHESTRATOR_URL}/oauth/store-customization`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        state: state,
+                        customizationData: customizationData
+                    })
+                });
+                console.log('Customization data stored for state:', state);
+            } catch (error) {
+                console.error('Failed to store customization data:', error);
+                // Continue with OAuth setup even if storage fails
+            }
+            
             // X OAuth URL using orchestrator
-            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start?state=${encodeURIComponent(state)}`;
+            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
             
             // Instagram OAuth URL using orchestrator
-            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start?state=${encodeURIComponent(state)}`;
+            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
             
             // Facebook OAuth URL using orchestrator
-            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start?state=${encodeURIComponent(state)}`;
+            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
             
             // Set up OAuth buttons with orchestrator
             document.getElementById('instagramOauthButton').href = instagramOauthUrl;
@@ -506,6 +540,23 @@
         // Check URL parameters and connection status on page load
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // Process payment success parameters
+            const sessionId = urlParams.get('session_id');
+            const flow = urlParams.get('flow');
+            
+            if (sessionId && flow === 'service') {
+                console.log('OAuth Connect: Payment verified, session:', sessionId);
+                // Store session info for OAuth flow
+                localStorage.setItem('paymentSessionId', sessionId);
+                localStorage.setItem('paymentFlow', 'service');
+                
+                // Update UI to show payment was successful
+                const statusElement = document.querySelector('.step-indicator .step.active .step-title');
+                if (statusElement) {
+                    statusElement.textContent = 'Payment Complete - Connect Accounts';
+                }
+            }
             
             // Check Instagram connection
             if (urlParams.get('instagram') === 'connected') {

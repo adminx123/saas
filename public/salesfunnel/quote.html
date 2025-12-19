@@ -304,6 +304,30 @@
             console.log('Customization data:', customizationData);
             
             try {
+                // First, store customization data and get reference ID
+                let customizationId = null;
+                if (Object.keys(customizationData).length > 0) {
+                    console.log('Storing customization data...');
+                    const storeResponse = await fetch('https://stripe-saas.4hm7q4q75z.workers.dev/store-customization', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            customizationData: customizationData
+                        })
+                    });
+                    
+                    if (!storeResponse.ok) {
+                        const errorData = await storeResponse.json();
+                        throw new Error('Failed to store customization data: ' + (errorData.error || 'Unknown error'));
+                    }
+                    
+                    const storeResult = await storeResponse.json();
+                    customizationId = storeResult.customizationId;
+                    console.log('Customization stored with ID:', customizationId);
+                }
+                
                 // Call backend to create checkout session
                 const response = await fetch('https://stripe-saas.4hm7q4q75z.workers.dev/package-checkout', {
                     method: 'POST',
@@ -315,7 +339,7 @@
                         platforms: platforms,
                         addons: filteredAddons.map(a => a.id),
                         customerEmail: document.getElementById('email').value,
-                        customization: customizationData,
+                        customizationId: customizationId,
                         flow_type: "service"
                     })
                 });
@@ -325,7 +349,7 @@
                     platforms: platforms,
                     addons: filteredAddons.map(a => a.id),
                     customerEmail: document.getElementById('email').value,
-                    customization: customizationData,
+                    customizationId: customizationId,
                     flow_type: "service"
                 });
                 
@@ -385,11 +409,11 @@
     </script>
     
     <script src="../utilities/footer.js"></script>
-    <script src="../../utility/modal.js"></script>
+    <script src="../utilities/modal.js"></script>
     <script src="../utilities/step-indicator.js"></script>
     
     <script type="module">
-        import { getJSON } from '../../utility/getJSON.js';
+        import { getJSON } from '../utilities/getJSON.js';
         
         // Make getJSON available globally for the checkout functions
         window.getJSON = getJSON;

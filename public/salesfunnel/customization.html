@@ -61,6 +61,24 @@
             </div>
 
             <div class="form-group">
+                <label class="form-label" for="supportEmail">Support Email</label>
+                <input type="email" class="form-input" id="supportEmail" name="supportEmail"
+                    placeholder="e.g., support@yourcompany.com" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Legal URLs</label>
+                <div class="legal-urls-group">
+                    <input type="url" class="form-input" id="privacyUrl" name="privacyUrl"
+                        placeholder="Privacy Policy URL" required>
+                    <input type="url" class="form-input" id="termsUrl" name="termsUrl"
+                        placeholder="Terms of Service URL" required>
+                    <input type="url" class="form-input" id="dpaUrl" name="dpaUrl"
+                        placeholder="Data Processing Agreement URL" required>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label" for="brandVoice">Brand Voice</label>
                 <textarea class="form-textarea" id="brandVoice" name="brandVoice"
                     placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" required></textarea>
@@ -184,23 +202,24 @@
                     <input type="hidden" name="rolesChat" id="rolesChat" required>
                 </div>
 
-                <div class="form-group" id="roleDocuments" style="display: none;">
-                    <label class="form-label">Role-Specific Documents</label>
-                    <p style="color: #666; font-size: 0.9em;">If you don't have documents for each role, download templates first. Otherwise, skip to uploading your existing documents below.</p>
-                    <button type="button" id="downloadBtn" class="action-button" onclick="downloadRoleTemplates()">Download Role Templates</button>
-                    <p style="color: #666; font-size: 0.9em;">Upload documents and check off the core documents they cover from the checklist below.</p>
-                    <input type="file" class="form-input" id="roleDocs" name="roleDocs" multiple accept=".txt,.pdf,.doc,.docx" style="display:none;">
-                    <button type="button" id="uploadBtn" class="action-button" onclick="document.getElementById('roleDocs').click()">Upload Files</button>
-                    <div id="fileList"></div>
-                    <div id="categoryGrid" style="display:none; margin-top:20px;">
-                        <p>Select all core documents covered by your uploaded files:</p>
-                        <div class="grid-selection"></div>
+                <!-- Category Selection (hidden for RAG - users just upload docs) -->
+                <div class="form-group" id="categoryGrid" style="display: none;">
+                    <label class="form-label">Knowledge Categories</label>
+                    <p style="color: #666; font-size: 0.9em;">Upload any knowledge documents below - the AI will reference them for responses.</p>
+                    <div class="grid-selection" id="categoryGridSelection">
+                        <!-- Categories no longer required for completion -->
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Brand Assets & Knowledge Documents</label>
+                    <p style="color: #666; font-size: 0.9em;">Upload your logo, brand images, and any knowledge documents (FAQs, manuals, procedures, etc.) - the AI will use them to provide accurate responses.</p>
+                    <input type="file" class="form-input" id="brandFiles" name="brandFiles" multiple accept="image/*,.txt,.pdf,.doc,.docx" style="display:none;" required>
+                    <button type="button" id="brandUploadBtn" class="action-button" onclick="document.getElementById('brandFiles').click()">Upload Brand Assets & Knowledge Documents</button>
+                    <div id="brandFileList"></div>
                 </div>
             </div>
             </div>
-
-        <!-- Social Posting Configuration Section -->
         <div class="package-card collapsed" id="socialSection" data-section="social">
             <div class="package-header">
                 <h3 class="card-title">Social Posting Configuration</h3>
@@ -325,9 +344,7 @@
                 </div>
             </div>
             <div class="card-content">
-                <p>Deploy your customized client worker and configuration automatically.</p>
-                <button id="deployButton" class="btn btn-primary" onclick="deployClient()">Deploy Client</button>
-                <div id="deployStatus" style="margin-top: 10px;"></div>
+                <p>Your customized client worker and configuration will be automatically deployed after successful payment.</p>
             </div>
         </div>
 
@@ -405,6 +422,11 @@
                     console.log('Skipping hidden grid:', grid.id);
                     return; // Skip hidden grids
                 }
+                // Skip categoryGridSelection for conversational section (RAG doesn't need categories)
+                if (card.id === 'conversationalSection' && grid.id === 'categoryGridSelection') {
+                    console.log('Skipping categoryGridSelection for RAG');
+                    return;
+                }
                 const items = grid.querySelectorAll('.grid-item1');
                 const selectedItems = Array.from(items).filter(i => i.classList.contains('selected'));
                 const hasSelection = selectedItems.length > 0;
@@ -428,11 +450,16 @@
             requiredInputs.forEach(input => {
                 let hasValue = false;
                 if (input.type === 'file') {
-                    hasValue = input.files.length > 0;
+                    // Special handling for brandFiles - check the uploadedBrandFiles array
+                    if (input.id === 'brandFiles') {
+                        hasValue = uploadedBrandFiles.length > 0;
+                    } else {
+                        hasValue = input.files.length > 0;
+                    }
                 } else {
                     hasValue = !!input.value;
                 }
-                console.log('Input', input.id, 'has value:', hasValue, 'value:', input.value, 'files:', input.files?.length);
+                console.log('Input', input.id, 'has value:', hasValue, 'value:', input.value, 'files:', input.files?.length, 'uploadedBrandFiles:', uploadedBrandFiles.length);
                 if (!hasValue) allInputsCompleted = false;
             });
             console.log('All inputs completed:', allInputsCompleted);
@@ -456,32 +483,17 @@
                 console.log('No day toggles in this card');
             }
             
-            // Check role documents completion
+            // Check role documents completion - for RAG, just require some files uploaded
             let roleDocsCompleted = true;
             if (card.id === 'conversationalSection') {
                 const selectedRoles = getSelectedRoles();
                 if (selectedRoles.length > 0) {
-                    const covered = new Set();
-                    const categoryGrid = document.getElementById('categoryGrid');
-                    if (categoryGrid.style.display !== 'none') {
-                        const grid = categoryGrid.querySelector('.grid-selection');
-                        if (grid) {
-                            const selectedItems = grid.querySelectorAll('.grid-item1.selected');
-                            Array.from(selectedItems).forEach(item => {
-                                covered.add(item.dataset.value);
-                            });
-                        }
-                    }
-                    const required = new Set();
-                    selectedRoles.forEach(role => {
-                        roleCategories[role].forEach(cat => required.add(cat));
-                    });
-                    const missing = Array.from(required).filter(cat => !covered.has(cat));
-                    if (missing.length > 0) {
+                    // For RAG, just require that some knowledge files have been uploaded
+                    if (uploadedBrandFiles.length === 0) {
                         roleDocsCompleted = false;
-                        console.log('Role docs not completed, missing:', missing);
+                        console.log('Role docs not completed: no files uploaded');
                     } else {
-                        console.log('Role docs completed');
+                        console.log('Role docs completed: files uploaded');
                     }
                 }
             }
@@ -634,8 +646,13 @@
                             item.classList.remove('selected');
                         }
                     });
+                    
+                    // Category grid no longer needed for RAG
+                    // populateCategoryGrid();
+                    // document.getElementById('categoryGrid').style.display = 'block';
                 } else {
                     document.getElementById('roleGroupChat').style.display = 'none';
+                    document.getElementById('categoryGrid').style.display = 'none';
                 }
             } else {
                 document.getElementById('functionGroupChat').style.display = 'none';
@@ -682,6 +699,11 @@
                         // Progressive disclosure and filtering
                         if (grid.id.includes('Chat')) {
                             updateVisibilityChat();
+                            
+                            // Category grid no longer needed
+                            // if (grid.id === 'roleGridChat') {
+                            //     populateCategoryGrid();
+                            // }
                         } else {
                             updateVisibility();
                         }
@@ -913,6 +935,16 @@
                 }
             });
             
+            // Collect legal URLs as an object
+            setupData.legalUrls = {
+                privacy: document.getElementById('privacyUrl').value,
+                terms: document.getElementById('termsUrl').value,
+                dpa: document.getElementById('dpaUrl').value
+            };
+            
+            // Add brand files to setup data
+            setupData.brandFiles = uploadedBrandFiles;
+            
             // Handle grid selections - only if section is relevant
             if (relevantSections.includes('main')) {
                 // No grids for main section
@@ -932,6 +964,10 @@
             // This prevents data contamination by excluding fields from sections not applicable to the current package
             const fieldSectionMap = {
                 timezone: 'main',
+                brandName: 'main',
+                supportEmail: 'main',
+                legalUrls: 'main',
+                brandVoice: 'main',
                 industry: 'conversational',
                 roleScope: 'main',
                 functions: 'main',
@@ -941,6 +977,7 @@
                 rolesChat: 'conversational',
                 chatWidgetName: 'conversational',
                 chatColors: 'conversational',
+                brandFiles: 'conversational',
                 knowledgeBase: 'conversational',
                 postingSchedule: 'social',
                 scheduleDetails: 'social',
@@ -1007,35 +1044,9 @@
                 return;
             }
             
-            // Validate role documents
-            if (relevantSections.includes('conversational') && uploadedFiles.length > 0) {
-                const selectedRoles = getSelectedRoles();
-                if (selectedRoles.length > 0) {
-                    const covered = new Set();
-                    const categoryGrid = document.getElementById('categoryGrid');
-                    if (categoryGrid && categoryGrid.style.display !== 'none') {
-                        const grid = categoryGrid.querySelector('.grid-selection');
-                        if (grid) {
-                            const selectedItems = grid.querySelectorAll('.grid-item1.selected');
-                            Array.from(selectedItems).forEach(item => {
-                                covered.add(item.dataset.value);
-                            });
-                        }
-                    }
-                    const required = new Set();
-                    selectedRoles.forEach(role => {
-                        roleCategories[role].forEach(cat => required.add(cat));
-                    });
-                    const missing = Array.from(required).filter(cat => !covered.has(cat));
-                    if (missing.length > 0) {
-                        alert(`Please ensure all required categories are covered. Missing: ${missing.join(', ')}`);
-                        return;
-                    }
-                }
-            }
-            
             // Upload files to R2 storage if any exist
-            if (uploadedFiles.length > 0) {
+            const allFilesToUpload = [...uploadedBrandFiles];
+            if (allFilesToUpload.length > 0) {
                 console.log('Uploading files to R2 storage...');
                 
                 // Show loading indicator
@@ -1049,7 +1060,7 @@
                     const formData = new FormData();
                     const brandName = document.getElementById('brandName').value.trim() || 'unknown';
                     formData.append('brandName', brandName);
-                    uploadedFiles.forEach((file, index) => {
+                    allFilesToUpload.forEach((file, index) => {
                         formData.append(`file_${index}`, file);
                     });
                     
@@ -1081,6 +1092,11 @@
                 continueBtn.textContent = originalText;
                 continueBtn.disabled = false;
             }
+            
+            // Generate client ID from brand name
+            const brandName = filteredSetupData.brandName || 'unknown';
+            const clientId = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
+            filteredSetupData.clientId = clientId;
             
             // Store customization data for Stripe integration
             setJSON('customizationData', filteredSetupData);
@@ -1119,90 +1135,40 @@
             return [];
         }
 
-        function updateRoleDocuments() {
-            const selectedRoles = getSelectedRoles();
-            console.log('Updating role documents, selected roles:', selectedRoles);
-            if (selectedRoles.length > 0) {
-                document.getElementById('roleDocuments').style.display = 'block';
-                // Expand the card if collapsed
-                document.getElementById('conversationalSection').classList.remove('collapsed');
-                // Update file list display
-                const fileListDiv = document.getElementById('fileList');
-                if (uploadedFiles.length === 0) {
-                    fileListDiv.innerHTML = '';
-                    document.getElementById('categoryGrid').style.display = 'none';
-                } else {
-                    fileListDiv.innerHTML = '';
-                    uploadedFiles.forEach((file, index) => {
-                        const fileDiv = document.createElement('div');
-                        fileDiv.style.marginBottom = '10px';
-                        fileDiv.innerHTML = `<strong style="color: green;">${file.name}</strong>`;
-                        fileListDiv.appendChild(fileDiv);
-                    });
-                    document.getElementById('categoryGrid').style.display = 'block';
-                    populateCategoryGrid();
-                }
-            } else {
-                document.getElementById('roleDocuments').style.display = 'none';
-                document.getElementById('categoryGrid').style.display = 'none';
-            }
-        }
+        let uploadedBrandFiles = [];
 
-        let uploadedFiles = [];
-
-        // Load saved file names from localStorage
-        const savedFileNames = JSON.parse(localStorage.getItem('uploadedFiles') || '[]');
-        uploadedFiles = savedFileNames.map(name => ({ name }));
-
-        function populateCategoryGrid() {
-            const categoryGridDiv = document.getElementById('categoryGrid');
-            const grid = categoryGridDiv.querySelector('.grid-selection');
-            grid.innerHTML = '';
-            const selectedRoles = getSelectedRoles();
-            const allCategories = new Set();
-            selectedRoles.forEach(role => {
-                roleCategories[role].forEach(cat => allCategories.add(cat));
-            });
-            allCategories.forEach(cat => {
-                const item = document.createElement('div');
-                item.className = 'grid-item1';
-                item.dataset.value = cat;
-                item.textContent = cat;
-                item.addEventListener('click', () => {
-                    item.classList.toggle('selected');
-                    // Trigger completion check
-                    checkCardCompletion(document.getElementById('conversationalSection'));
-                });
-                grid.appendChild(item);
-            });
-        }
-
-        function handleFileSelect(event) {
+        function handleBrandFileSelect(event) {
             const newFiles = Array.from(event.target.files);
             // Add new files to the list
-            uploadedFiles.push(...newFiles);
+            uploadedBrandFiles.push(...newFiles);
             // Clear the input to allow selecting the same files again or new ones
             event.target.value = '';
             // Update the display
-            updateRoleDocuments();
+            updateBrandFileDisplay();
+            // Check card completion
+            checkCardCompletion(document.getElementById('conversationalSection'));
+        }
+
+        function updateBrandFileDisplay() {
+            const fileListDiv = document.getElementById('brandFileList');
+            if (uploadedBrandFiles.length === 0) {
+                fileListDiv.innerHTML = '';
+            } else {
+                fileListDiv.innerHTML = '';
+                uploadedBrandFiles.forEach((file, index) => {
+                    const fileDiv = document.createElement('div');
+                    fileDiv.style.marginBottom = '10px';
+                    fileDiv.innerHTML = `<strong style="color: green;">${file.name}</strong>`;
+                    fileListDiv.appendChild(fileDiv);
+                });
+            }
         }
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('roleDocs').addEventListener('change', handleFileSelect);
-            // Listen for role changes
-            const rolesInput = document.getElementById('rolesChat');
-            if (rolesInput) {
-                rolesInput.addEventListener('change', updateRoleDocuments);
-            }
-            // Specific listener for role grid clicks
-            document.getElementById('roleGridChat').addEventListener('click', function(e) {
-                if (e.target.closest('.grid-item1')) {
-                    setTimeout(updateRoleDocuments, 10);
-                }
-            });
+            document.getElementById('brandFiles').addEventListener('change', handleBrandFileSelect);
             // Initial check
-            updateRoleDocuments();
+            updateBrandFileDisplay();
         });
     </script>
     
@@ -1212,35 +1178,19 @@
     <script type="module">
         import { BusinessFormPersistence } from '../utilities/businessFormPersistence.js';
         import { setJSON } from '../utilities/setJSON.js';
+        import { getJSON } from '../utilities/getJSON.js';
         
-        // Make setJSON available globally for the form submission function
+        // Make functions available globally
         window.setJSON = setJSON;
+        window.getJSON = getJSON;
         
         // Deploy client function
-        async function deployClient() {
-            const button = document.getElementById('deployButton');
-            const status = document.getElementById('deployStatus');
-            button.disabled = true;
-            status.innerHTML = 'Deploying...';
-            
-            try {
-                // In a real implementation, this would call the deploy-client.js script
-                // For now, simulate deployment
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                status.innerHTML = '<span style="color: green;">Client deployed successfully!</span>';
-            } catch (error) {
-                status.innerHTML = '<span style="color: red;">Deployment failed: ' + error.message + '</span>';
-            } finally {
-                button.disabled = false;
-            }
-        }
         
         // Initialize form persistence for customization form after a short delay
         // to ensure grid selection event listeners are set up
         setTimeout(() => {
             const customizationPersistence = new BusinessFormPersistence('mainContent', 'customization-form-data');
             customizationPersistence.init();
-            updateRoleDocuments(); // Ensure role documents section updates after load
         }, 100);
     </script>
 </body>
