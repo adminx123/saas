@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- Trigger rebuild 2 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+        .container {
+            text-align: center;
+            background: rgba(20, 20, 20, 0.95);
+            color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(255,255,255,0.1);
+            max-width: 400px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success {
+            color: #4ade80;
+        }
+        .error {
+            color: #f87171;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner" id="spinner"></div>
+        <h2 id="status">Processing your payment...</h2>
+        <p id="message">Please wait while we verify your payment and update your account.</p>
+        <div id="countdown" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Update UI
+        function updateUI(status, message, isError = false) {
+            document.getElementById('spinner').style.display = isError ? 'none' : 'block';
+            document.getElementById('status').textContent = status;
+            document.getElementById('status').className = isError ? 'error' : 'success';
+            document.getElementById('message').textContent = message;
+        }
+
+        // Main processing function
+        async function processPayment() {
+            try {
+                // Get parameters from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const sessionId = urlParams.get('session_id');
+                const isCanceled = urlParams.get('canceled') === 'true';
+
+                // Handle cancellation
+                if (isCanceled) {
+                    updateUI('Payment Canceled', 'You have canceled the payment. Returning to quote page...', false);
+                    setTimeout(() => {
+                        window.location.href = '/salesfunnel/quote.html';
+                    }, 2000);
+                    return;
+                }
+
+                if (!sessionId) {
+                    throw new Error('No session ID found in URL');
+                }
+
+                // Step 1: Verify payment with SaaS worker
+                let checkResponse;
+                try {
+                    checkResponse = await fetch(`https://stripe-saas.4hm7q4q75z.workers.dev/verify-session?session_id=${sessionId}`);
+                } catch (networkError) {
+                    throw new Error('Network error: Unable to connect to payment server. Please check your internet connection.');
+                }
+
+                if (!checkResponse) {
+                    throw new Error('Server returned null response');
+                }
+
+                if (!checkResponse.ok) {
+                    const errorText = await checkResponse.text();
+                    throw new Error('Payment verification failed: ' + checkResponse.status + ' - ' + errorText);
+                }
+
+                let checkData;
+                try {
+                    checkData = await checkResponse.json();
+                } catch (parseError) {
+                    throw new Error('Invalid response from server: ' + parseError.message);
+                }
+
+                if (!checkData || !checkData.success) {
+                    throw new Error('Payment not completed: ' + (checkData?.error || 'Unknown error'));
+                }
+
+                // Success!
+                document.getElementById('spinner').style.display = 'none';
+
+                // Redirect to setup completion page
+                const currentDomain = window.location.origin;
+                const setupUrl = currentDomain + '/salesfunnel/setupComplete.html';
+                window.location.href = setupUrl;
+
+            } catch (error) {
+                updateUI('Payment Processing Failed', error.message, true);
+
+                // On error, redirect to sales funnel after a delay
+                setTimeout(() => {
+                    window.location.href = '/salesfunnel/quote.html';
+                }, 3000);
+            }
+        }
+
+        // Start processing when page loads
+        document.addEventListener('DOMContentLoaded', processPayment);
+    </script>
+</body>
+</html>
