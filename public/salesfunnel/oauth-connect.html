@@ -420,12 +420,25 @@
             }
         }
         
-        // Track connected platforms
+        // Track connected platforms with localStorage persistence
         let connectedPlatforms = {
             instagram: false,
             facebook: false,
             x: false
         };
+        
+        // Load connected platforms from localStorage
+        function loadConnectedPlatforms() {
+            const stored = localStorage.getItem('connectedPlatforms');
+            if (stored) {
+                connectedPlatforms = JSON.parse(stored);
+            }
+        }
+        
+        // Save connected platforms to localStorage
+        function saveConnectedPlatforms() {
+            localStorage.setItem('connectedPlatforms', JSON.stringify(connectedPlatforms));
+        }
         
         // Fetch OAuth configuration and set up buttons
         async function setupOAuthButtons() {
@@ -520,7 +533,38 @@
         // Mark platform as connected
         function markPlatformConnected(platform) {
             connectedPlatforms[platform] = true;
+            saveConnectedPlatforms();
             checkConnectionStatus();
+            updateButtonAppearance(platform);
+        }
+        
+        // Update button appearance for connected platform
+        function updateButtonAppearance(platform) {
+            const buttonId = platform + 'OauthButton';
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            
+            let icon, text;
+            switch(platform) {
+                case 'instagram':
+                    icon = '<i class="fab fa-instagram"></i>';
+                    text = 'Instagram Connected';
+                    break;
+                case 'facebook':
+                    icon = '<i class="fab fa-facebook"></i>';
+                    text = 'Facebook Connected';
+                    break;
+                case 'x':
+                    icon = '<i class="platform-icon-x">𝕏</i>';
+                    text = 'X Connected';
+                    break;
+            }
+            
+            button.innerHTML = icon + ' ' + text;
+            button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+            button.style.color = '#fff';
+            button.style.fontWeight = 'bold';
+            button.style.pointerEvents = 'none';
         }
         
         // Initialize OAuth buttons after page loads
@@ -539,6 +583,16 @@
         
         // Check URL parameters and connection status on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Load previously connected platforms
+            loadConnectedPlatforms();
+            
+            // Update UI for already connected platforms
+            Object.entries(connectedPlatforms).forEach(([platform, connected]) => {
+                if (connected) {
+                    updateButtonAppearance(platform);
+                }
+            });
+            
             const urlParams = new URLSearchParams(window.location.search);
             
             // Process payment success parameters
@@ -561,46 +615,16 @@
             // Check Instagram connection
             if (urlParams.get('instagram') === 'connected') {
                 markPlatformConnected('instagram');
-                
-                // Update Instagram button appearance
-                const instagramBtn = document.getElementById('instagramOauthButton');
-                if (instagramBtn) {
-                    instagramBtn.innerHTML = '<i class="fab fa-instagram"></i> Instagram Connected';
-                    instagramBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-                    instagramBtn.style.color = '#fff';
-                    instagramBtn.style.fontWeight = 'bold';
-                    instagramBtn.style.pointerEvents = 'none';
-                }
             }
             
-            // Check X connection (you can add URL parameter logic for X as well)
+            // Check X connection
             if (urlParams.get('x') === 'connected') {
                 markPlatformConnected('x');
-                
-                // Update X button appearance
-                const xBtn = document.getElementById('xOauthButton');
-                if (xBtn) {
-                    xBtn.innerHTML = '<i class="platform-icon-x">𝕏</i> X Connected';
-                    xBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-                    xBtn.style.color = '#fff';
-                    xBtn.style.fontWeight = 'bold';
-                    xBtn.style.pointerEvents = 'none';
-                }
             }
             
             // Check Facebook connection
             if (urlParams.get('facebook') === 'connected') {
                 markPlatformConnected('facebook');
-                
-                // Update Facebook button appearance
-                const facebookBtn = document.getElementById('facebookOauthButton');
-                if (facebookBtn) {
-                    facebookBtn.innerHTML = '<i class="fab fa-facebook"></i> Facebook Connected';
-                    facebookBtn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-                    facebookBtn.style.color = '#fff';
-                    facebookBtn.style.fontWeight = 'bold';
-                    facebookBtn.style.pointerEvents = 'none';
-                }
             }
             
             // Initial check
