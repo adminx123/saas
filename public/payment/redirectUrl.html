@@ -115,10 +115,10 @@
                 // Success!
                 document.getElementById('spinner').style.display = 'none';
 
-                // Redirect to setup completion page
+                // Redirect to OAuth connection page
                 const currentDomain = window.location.origin;
-                const setupUrl = currentDomain + '/public/salesfunnel/setupComplete.html';
-                window.location.href = setupUrl;
+                const oauthUrl = currentDomain + '/public/salesfunnel/oauth-connect.html';
+                window.location.href = oauthUrl;
 
             } catch (error) {
                 updateUI('Payment Processing Failed', error.message, true);
