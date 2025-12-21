@@ -94,8 +94,16 @@
                     throw new Error('Missing setup data. Please complete the setup process first.');
                 }
 
-                // Generate client ID (use email or random)
-                const clientId = customizationData.email || `client_${Date.now()}`;
+                // Validate brand name is present (required for client ID)
+                if (!customizationData.brandName) {
+                    alert('Brand name is required. Please complete the customization step.');
+                    deployButton.disabled = false;
+                    deployButton.innerHTML = '🚀 Deploy Automation';
+                    return;
+                }
+
+                // Generate client ID from brand name
+                const clientId = customizationData.brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
                 
                 // Map customization data to config format
                 const configData = {
