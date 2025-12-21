@@ -112,11 +112,6 @@
                     brand_voice: customizationData.brandVoice || '',
                     default_tone: 'professional', // Default
                     timezone: customizationData.timezone || 'America/New_York',
-                    handles: {
-                        instagram: customizationData.instagramHandle || '',
-                        twitter: customizationData.twitterHandle || '',
-                        facebook: customizationData.facebookHandle || ''
-                    },
                     supportEmail: customizationData.supportEmail || 'support@inexasli.com',
                     legalUrls: {
                         privacy: customizationData.privacyUrl || '',
@@ -131,12 +126,11 @@
                     },
                     post_times: ['13:00'], // Default
                     mixed_mode: 'dynamic_text_static_image', // Default
-                    topicElementMappings: {},
-                    contextPromptTemplate: {},
-                    imagePromptTemplate: '',
-                    staticContentArray: [],
-                    dynamicContentArray: [],
-                    imageStyleArray: [],
+                    topicElementMappings: customizationData.topicElementMappings ? JSON.parse(customizationData.topicElementMappings) : {},
+                    imagePromptTemplate: customizationData.imagePromptTemplate || '',
+                    staticContentArray: customizationData.staticContentArray ? JSON.parse(customizationData.staticContentArray) : [],
+                    dynamicContentArray: customizationData.dynamicContentArray ? JSON.parse(customizationData.dynamicContentArray) : [],
+                    imageStyleArray: customizationData.imageStyleArray ? JSON.parse(customizationData.imageStyleArray) : [],
                     platformConsiderations: customizationData.platformConsiderations || '',
                     industry: customizationData.industry || '',
                     chatAudience: customizationData.chatAudience || '',

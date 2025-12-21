@@ -8,6 +8,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        .form-help {
+            display: block;
+            color: #666;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .content-row .char-counter {
+            position: absolute;
+            bottom: -1.25rem;
+            right: 0;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        .content-row {
+            position: relative;
+            margin-bottom: 1.5rem; /* Extra space for char counter */
+        }
+        .content-row .form-input {
+            width: 100%;
+        }
+        .content-row .remove-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: transparent;
+            color: #6b7280;
+            border: none;
+            width: 1rem;
+            height: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+            cursor: pointer;
+            transform: translate(50%, -50%);
+        }
+        .content-row .remove-btn:hover {
+            color: #dc2626;
+        }
+        .mapping-row {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .mapping-row .remove-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: transparent;
+            color: #6b7280;
+            border: none;
+            width: 1rem;
+            height: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+            cursor: pointer;
+            transform: translate(50%, -50%);
+        }
+        .mapping-row .remove-btn:hover {
+            color: #dc2626;
+        }
+    </style>
 </head>
 <body>
     <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
@@ -57,31 +128,35 @@
             <div class="form-group">
                 <label class="form-label" for="brandName">Brand Name</label>
                 <input type="text" class="form-input" id="brandName" name="brandName"
-                    placeholder="e.g., INEXASLI, Your Company Name" required>
+                    placeholder="e.g., INEXASLI, Your Company Name" maxlength="50" required>
+                <small class="form-help">Maximum 50 characters</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="supportEmail">Support Email</label>
                 <input type="email" class="form-input" id="supportEmail" name="supportEmail"
-                    placeholder="e.g., support@yourcompany.com" required>
+                    placeholder="e.g., support@yourcompany.com" maxlength="100" required>
+                <small class="form-help">Maximum 100 characters</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Legal URLs</label>
                 <div class="legal-urls-group">
                     <input type="url" class="form-input" id="privacyUrl" name="privacyUrl"
-                        placeholder="Privacy Policy URL" required>
+                        placeholder="Privacy Policy URL" maxlength="200" required>
                     <input type="url" class="form-input" id="termsUrl" name="termsUrl"
-                        placeholder="Terms of Service URL" required>
+                        placeholder="Terms of Service URL" maxlength="200" required>
                     <input type="url" class="form-input" id="dpaUrl" name="dpaUrl"
-                        placeholder="Data Processing Agreement URL" required>
+                        placeholder="Data Processing Agreement URL" maxlength="200" required>
                 </div>
+                <small class="form-help">Maximum 200 characters per URL</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="brandVoice">Brand Voice</label>
                 <textarea class="form-textarea" id="brandVoice" name="brandVoice"
-                    placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" required></textarea>
+                    placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" maxlength="300" required></textarea>
+                <small class="form-help">Maximum 300 characters</small>
             </div>
         </div>
         </div>
@@ -116,7 +191,8 @@
                 <div class="form-group">
                     <label class="form-label">Chat Users</label>
                     <textarea class="form-textarea" id="chatAudience" name="chatAudience"
-                        placeholder="Describe your target users (e.g., age, interests, demographics)" required></textarea>
+                        placeholder="Describe your target users (e.g., age, interests, demographics)" maxlength="200" required></textarea>
+                    <small class="form-help">Maximum 200 characters</small>
                 </div>
 
                 <div class="form-group">
@@ -128,7 +204,8 @@
                 <div class="form-group">
                     <label class="form-label">Chat Colours</label>
                     <textarea class="form-textarea" id="chatColors" name="chatColors"
-                        placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" required></textarea>
+                        placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" maxlength="150" required></textarea>
+                    <small class="form-help">Maximum 150 characters</small>
                 </div>
 
 
@@ -269,43 +346,70 @@
                         <div class="form-group">
                 <label class="form-label" for="scheduleDetails">Schedule Details & Preferences</label>
                 <textarea class="form-textarea" id="scheduleDetails" name="scheduleDetails"
-                    placeholder="Describe your posting preferences (e.g., preferred times, posting frequency, any other scheduling requirements or preferences we should discuss)" required></textarea>
+                    placeholder="Describe your posting preferences (e.g., preferred times, posting frequency, any other scheduling requirements or preferences we should discuss)" maxlength="400" required></textarea>
+                <small class="form-help">Maximum 400 characters</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="contentFocus">Content Focus</label>
                 <textarea class="form-textarea" id="contentFocus" name="contentFocus"
-                    placeholder="What topics or themes should the posts focus on? (e.g., industry insights, customer success stories, educational content)" required></textarea>
+                    placeholder="What topics or themes should the posts focus on? (e.g., industry insights, customer success stories, educational content)" maxlength="300" required></textarea>
+                <small class="form-help">Maximum 300 characters</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="imagePromptTemplate">Image Generation Prompt Template</label>
                 <textarea class="form-textarea" id="imagePromptTemplate" name="imagePromptTemplate"
-                    placeholder="Template for AI image generation (e.g., 'Create [style] for: [content]... Incorporate [elements] with [mood] mood. [colors]. [composition].')" required></textarea>
+                    placeholder="Template for AI image generation (e.g., 'Create [style] for: [content]... Incorporate [elements] with [mood] mood. [colors]. [composition].')" maxlength="800" required></textarea>
+                <small class="form-help">Maximum 800 characters</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="targetAudience">Target Audience</label>
                 <textarea class="form-textarea" id="targetAudience" name="targetAudience"
-                    placeholder="Describe your target audience (e.g., age range, interests, pain points, what they care about)" required></textarea>
+                    placeholder="Describe your target audience (e.g., age range, interests, pain points, what they care about)" maxlength="200" required></textarea>
+                <small class="form-help">Maximum 200 characters</small>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-label" for="topicElementMappings">Content Topic Categories</label>
+                <small class="form-help">Map topics to specific content elements for consistent branding (e.g., 'Fitness Tips' → 'exercise routines, nutrition advice')</small>
+                <div id="topicMappingsContainer">
+                    <!-- Dynamic rows added here -->
+                </div>
+                <button type="button" id="addTopicMappingButton" onclick="addTopicMappingRow()">+ Add Topic Mapping</button>
+                <small class="form-help">Maximum 10 topic mappings allowed</small>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="instagramHandle">Instagram Handle</label>
-                <input type="text" class="form-input" id="instagramHandle" name="instagramHandle"
-                    placeholder="e.g., @yourbrand">
+                <label class="form-label" for="staticContentArray">Pre-written Static Posts</label>
+                <small class="form-help">Complete posts that will be published exactly as written (e.g., promotional announcements, fixed content)</small>
+                <div id="staticContentContainer">
+                    <!-- Dynamic rows added here -->
+                </div>
+                <button type="button" id="addStaticButton" onclick="addStaticContentItem()">+ Add Static Post</button>
+                <small class="form-help">Maximum 7 static posts allowed</small>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="twitterHandle">Twitter Handle</label>
-                <input type="text" class="form-input" id="twitterHandle" name="twitterHandle"
-                    placeholder="e.g., @yourbrand">
+                <label class="form-label" for="dynamicContentArray">Rotating Content Themes</label>
+                <small class="form-help">Content themes that rotate through your automated posting schedule (e.g., 'Motivational Quotes', 'Recipe Ideas')</small>
+                <div id="dynamicContentContainer">
+                    <!-- Dynamic rows added here -->
+                </div>
+                <button type="button" id="addDynamicButton" onclick="addDynamicContentItem()">+ Add Content Item</button>
+                <small class="form-help">Maximum 7 content themes allowed</small>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="facebookHandle">Facebook Page ID or Handle</label>
-                <input type="text" class="form-input" id="facebookHandle" name="facebookHandle"
-                    placeholder="e.g., 1234567890 or @yourbrand">
+                <label class="form-label" for="imageStyleArray">Visual Style Preferences</label>
+                <small class="form-help">Describe the visual aesthetic for AI-generated images (e.g., 'Bright & Energetic', 'Minimalist')</small>
+                <div id="imageStyleContainer">
+                    <!-- Dynamic rows added here -->
+                </div>
+                <button type="button" id="addImageStyleButton" onclick="addImageStyleItem()">+ Add Style Item</button>
+                <small class="form-help">Maximum 7 style preferences allowed</small>
             </div>
         </div>
         </div>
@@ -323,13 +427,15 @@
                 <div class="form-group">
                     <label class="form-label" for="replyGuidelines">Comment Reply Guidelines</label>
                     <textarea class="form-textarea" id="replyGuidelines" name="replyGuidelines"
-                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" required></textarea>
+                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" maxlength="400" required></textarea>
+                    <small class="form-help">Maximum 400 characters</small>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="platformConsiderations">Platform Considerations</label>
                     <textarea class="form-textarea" id="platformConsiderations" name="platformConsiderations"
-                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" required></textarea>
+                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" maxlength="300" required></textarea>
+                    <small class="form-help">Maximum 300 characters</small>
                 </div>
             </div>
             </div>
@@ -934,6 +1040,18 @@
                 }
             });
             
+            // Collect topic element mappings
+            setupData.topicElementMappings = collectTopicMappings();
+            
+            // Collect static content array
+            setupData.staticContentArray = collectStaticContentArray();
+            
+            // Collect dynamic content array
+            setupData.dynamicContentArray = collectDynamicContentArray();
+            
+            // Collect image style array
+            setupData.imageStyleArray = collectImageStyleArray();
+            
             // Collect legal URLs as an object
             setupData.legalUrls = {
                 privacy: document.getElementById('privacyUrl').value,
@@ -982,7 +1100,11 @@
                 contentFocus: 'social',
                 targetAudience: 'social',
                 replyGuidelines: 'reply',
-                platformConsiderations: 'reply'
+                platformConsiderations: 'reply',
+                topicElementMappings: 'social',
+                staticContentArray: 'social',
+                dynamicContentArray: 'social',
+                imageStyleArray: 'social'
             };
             
             const filteredSetupData = {};
@@ -1205,6 +1327,487 @@
         window.setJSON = setJSON;
         window.getJSON = getJSON;
         
+        window.addTopicMappingRow = addTopicMappingRow;
+        window.removeTopicMappingRow = removeTopicMappingRow;
+        window.collectTopicMappings = collectTopicMappings;
+        window.saveTopicMappings = saveTopicMappings;
+        window.loadTopicMappings = loadTopicMappings;
+        
+        window.addStaticContentItem = addStaticContentItem;
+        window.removeStaticContentItem = removeStaticContentItem;
+        window.collectStaticContentArray = collectStaticContentArray;
+        window.saveStaticContentArray = saveStaticContentArray;
+        window.loadStaticContentArray = loadStaticContentArray;
+        
+        window.addDynamicContentItem = addDynamicContentItem;
+        window.removeDynamicContentItem = removeDynamicContentItem;
+        window.collectDynamicContentArray = collectDynamicContentArray;
+        window.saveDynamicContentArray = saveDynamicContentArray;
+        window.loadDynamicContentArray = loadDynamicContentArray;
+        
+        window.addImageStyleItem = addImageStyleItem;
+        window.removeImageStyleItem = removeImageStyleItem;
+        window.collectImageStyleArray = collectImageStyleArray;
+        window.saveImageStyleArray = saveImageStyleArray;
+        window.loadImageStyleArray = loadImageStyleArray;
+        
+        function addTopicMappingRow() {
+            const container = document.getElementById('topicMappingsContainer');
+            const existingRows = container.querySelectorAll('.mapping-row').length;
+            
+            if (existingRows >= 10) {
+                alert('Maximum 10 topic mappings allowed');
+                return;
+            }
+            
+            const row = document.createElement('div');
+            row.className = 'mapping-row';
+            row.innerHTML = `
+                <div style="position: relative;">
+                    <input type="text" placeholder="e.g., 'Wellness Advice'" class="form-input mapping-key" maxlength="100">
+                    <span class="char-counter" style="bottom: -1.25rem; right: 0;">0/100</span>
+                </div>
+                <div style="position: relative;">
+                    <input type="text" placeholder="Content elements (e.g., 'healthy recipes, exercise tips')" class="form-input mapping-value" maxlength="200">
+                    <span class="char-counter" style="bottom: -1.25rem; right: 0;">0/200</span>
+                </div>
+                <button type="button" class="remove-btn" onclick="removeTopicMappingRow(this)">×</button>
+            `;
+            container.appendChild(row);
+            // Attach event listeners for persistence
+            attachMappingListeners(row);
+            updateTopicMappingButtonState();
+            // Save after adding
+            saveTopicMappings();
+        }
+        
+        function removeTopicMappingRow(button) {
+            button.parentElement.remove();
+            updateTopicMappingButtonState();
+            // Save after removing
+            saveTopicMappings();
+        }
+        
+        function updateTopicMappingButtonState() {
+            const container = document.getElementById('topicMappingsContainer');
+            const existingRows = container.querySelectorAll('.mapping-row').length;
+            const button = document.getElementById('addTopicMappingButton');
+            button.disabled = existingRows >= 10;
+            button.textContent = existingRows >= 10 ? 'Maximum 10 items reached' : '+ Add Topic Mapping';
+        }
+        
+        function attachMappingListeners(row) {
+            const keyInput = row.querySelector('.mapping-key');
+            const valueInput = row.querySelector('.mapping-value');
+            const keyCounter = row.querySelector('.mapping-key').parentElement.querySelector('.char-counter');
+            const valueCounter = row.querySelector('.mapping-value').parentElement.querySelector('.char-counter');
+            
+            function updateCounters() {
+                const keyLength = keyInput.value.length;
+                const valueLength = valueInput.value.length;
+                keyCounter.textContent = `${keyLength}/100`;
+                valueCounter.textContent = `${valueLength}/200`;
+                keyCounter.style.color = keyLength > 80 ? '#d97706' : keyLength > 90 ? '#dc2626' : '#6b7280';
+                valueCounter.style.color = valueLength > 160 ? '#d97706' : valueLength > 180 ? '#dc2626' : '#6b7280';
+                saveTopicMappings();
+            }
+            
+            keyInput.addEventListener('input', updateCounters);
+            valueInput.addEventListener('input', updateCounters);
+            updateCounters(); // Initial update
+        }
+        
+        function saveTopicMappings() {
+            const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
+            const mappings = [];
+            rows.forEach(row => {
+                const key = row.querySelector('.mapping-key').value.trim();
+                const value = row.querySelector('.mapping-value').value.trim();
+                mappings.push({ key, value });
+            });
+            localStorage.setItem('topicMappingsData', JSON.stringify(mappings));
+        }
+        
+        function loadTopicMappings() {
+            const container = document.getElementById('topicMappingsContainer');
+            if (!container) {
+                console.log('Topic mappings container not found');
+                return;
+            }
+            // Clear existing rows
+            container.innerHTML = '';
+            let mappings = [];
+            // First try 'topicMappingsData'
+            const data = localStorage.getItem('topicMappingsData');
+            if (data && data !== '[]' && data !== '[{\"key\":\"\",\"value\":\"\"}]') {  // Avoid loading empty or placeholder data
+                mappings = JSON.parse(data);
+                console.log('Loaded from topicMappingsData:', mappings);
+            } else {
+                // Fallback to customizationData
+                const customizationData = getJSON('customizationData', {});
+                if (customizationData.topicElementMappings) {
+                    try {
+                        const parsed = JSON.parse(customizationData.topicElementMappings);
+                        if (Array.isArray(parsed)) {
+                            mappings = parsed;
+                        } else if (typeof parsed === 'object' && parsed !== null) {
+                            // Convert object format to array format
+                            mappings = Object.entries(parsed).map(([key, value]) => ({ key, value }));
+                        }
+                        console.log('Loaded from customizationData:', mappings);
+                    } catch (e) {
+                        console.log('Error parsing topicElementMappings from customizationData:', e);
+                    }
+                } else {
+                    console.log('No topic mappings data found');
+                }
+            }
+            mappings.forEach(mapping => {
+                addTopicMappingRow();
+                const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
+                const lastRow = rows[rows.length - 1];
+                lastRow.querySelector('.mapping-key').value = mapping.key;
+                lastRow.querySelector('.mapping-value').value = mapping.value;
+                // Trigger counter updates
+                const keyInput = lastRow.querySelector('.mapping-key');
+                const valueInput = lastRow.querySelector('.mapping-value');
+                keyInput.dispatchEvent(new Event('input'));
+            });
+            updateTopicMappingButtonState();
+            console.log('Topic mappings loaded');
+        }
+        
+        function collectTopicMappings() {
+            const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
+            const mappings = {};
+            rows.forEach(row => {
+                const key = row.querySelector('.mapping-key').value.trim();
+                const value = row.querySelector('.mapping-value').value.trim();
+                if (key && value) {
+                    mappings[key] = value;
+                }
+            });
+            return JSON.stringify(mappings);
+        }
+        
+        // Static Content Array functions
+        function addStaticContentItem() {
+            const container = document.getElementById('staticContentContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            
+            if (existingRows >= 7) {
+                alert('Maximum 7 static posts allowed');
+                return;
+            }
+            
+            const row = document.createElement('div');
+            row.className = 'content-row';
+            row.innerHTML = `
+                <input type="text" placeholder="e.g., '🚀 Ready to supercharge your business with AI? DM to get started!'" class="form-input content-item" maxlength="280">
+                <span class="char-counter">0/280</span>
+                <button type="button" class="remove-btn" onclick="removeStaticContentItem(this)">×</button>
+            `;
+            container.appendChild(row);
+            attachStaticContentListeners(row);
+            updateStaticButtonState();
+            saveStaticContentArray();
+        }
+        
+        function removeStaticContentItem(button) {
+            button.parentElement.remove();
+            updateStaticButtonState();
+            saveStaticContentArray();
+        }
+        
+        function updateStaticButtonState() {
+            const container = document.getElementById('staticContentContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            const button = document.getElementById('addStaticButton');
+            button.disabled = existingRows >= 7;
+            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Static Post';
+        }
+        
+        function attachStaticContentListeners(row) {
+            const input = row.querySelector('.content-item');
+            const counter = row.querySelector('.char-counter');
+            
+            function updateCounter() {
+                const length = input.value.length;
+                counter.textContent = `${length}/280`;
+                counter.style.color = length > 250 ? '#d97706' : length > 270 ? '#dc2626' : '#6b7280';
+                saveStaticContentArray();
+            }
+            
+            input.addEventListener('input', updateCounter);
+            updateCounter(); // Initial update
+        }
+        
+        function saveStaticContentArray() {
+            const rows = document.querySelectorAll('#staticContentContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            localStorage.setItem('staticContentData', JSON.stringify(items));
+        }
+        
+        function loadStaticContentArray() {
+            const container = document.getElementById('staticContentContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            let items = [];
+            const data = localStorage.getItem('staticContentData');
+            if (data && data !== '[]') {
+                items = JSON.parse(data);
+            } else {
+                const customizationData = getJSON('customizationData', {});
+                if (customizationData.staticContentArray) {
+                    try {
+                        const parsed = JSON.parse(customizationData.staticContentArray);
+                        if (Array.isArray(parsed)) {
+                            items = parsed;
+                        }
+                    } catch (e) {
+                        console.log('Error parsing staticContentArray from customizationData:', e);
+                    }
+                }
+            }
+            items.forEach(item => {
+                addStaticContentItem();
+                const rows = document.querySelectorAll('#staticContentContainer .content-row');
+                const lastRow = rows[rows.length - 1];
+                lastRow.querySelector('.content-item').value = item;
+            });
+            updateStaticButtonState();
+        }
+        
+        function collectStaticContentArray() {
+            const rows = document.querySelectorAll('#staticContentContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            return JSON.stringify(items);
+        }
+        
+        // Dynamic Content Array functions
+        function addDynamicContentItem() {
+            const container = document.getElementById('dynamicContentContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            
+            if (existingRows >= 7) {
+                alert('Maximum 7 content themes allowed');
+                return;
+            }
+            
+            const row = document.createElement('div');
+            row.className = 'content-row';
+            row.innerHTML = `
+                <input type="text" placeholder="e.g., 'Healthy Meal Prep'" class="form-input content-item" maxlength="100">
+                <span class="char-counter">0/100</span>
+                <button type="button" class="remove-btn" onclick="removeDynamicContentItem(this)">×</button>
+            `;
+            container.appendChild(row);
+            attachDynamicContentListeners(row);
+            updateDynamicButtonState();
+            saveDynamicContentArray();
+        }
+        
+        function removeDynamicContentItem(button) {
+            button.parentElement.remove();
+            updateDynamicButtonState();
+            saveDynamicContentArray();
+        }
+        
+        function updateDynamicButtonState() {
+            const container = document.getElementById('dynamicContentContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            const button = document.getElementById('addDynamicButton');
+            button.disabled = existingRows >= 7;
+            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Content Item';
+        }
+        
+        function attachDynamicContentListeners(row) {
+            const input = row.querySelector('.content-item');
+            const counter = row.querySelector('.char-counter');
+            
+            function updateCounter() {
+                const length = input.value.length;
+                counter.textContent = `${length}/100`;
+                counter.style.color = length > 80 ? '#d97706' : length > 90 ? '#dc2626' : '#6b7280';
+                saveDynamicContentArray();
+            }
+            
+            input.addEventListener('input', updateCounter);
+            updateCounter(); // Initial update
+        }
+        
+        function saveDynamicContentArray() {
+            const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            localStorage.setItem('dynamicContentData', JSON.stringify(items));
+        }
+        
+        function loadDynamicContentArray() {
+            const container = document.getElementById('dynamicContentContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            let items = [];
+            const data = localStorage.getItem('dynamicContentData');
+            if (data && data !== '[]') {
+                items = JSON.parse(data);
+            } else {
+                const customizationData = getJSON('customizationData', {});
+                if (customizationData.dynamicContentArray) {
+                    try {
+                        const parsed = JSON.parse(customizationData.dynamicContentArray);
+                        if (Array.isArray(parsed)) {
+                            items = parsed;
+                        }
+                    } catch (e) {
+                        console.log('Error parsing dynamicContentArray from customizationData:', e);
+                    }
+                }
+            }
+            items.forEach(item => {
+                addDynamicContentItem();
+                const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
+                const lastRow = rows[rows.length - 1];
+                lastRow.querySelector('.content-item').value = item;
+            });
+            updateDynamicButtonState();
+        }
+        
+        function collectDynamicContentArray() {
+            const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            return JSON.stringify(items);
+        }
+        
+        // Image Style Array functions
+        function addImageStyleItem() {
+            const container = document.getElementById('imageStyleContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            
+            if (existingRows >= 7) {
+                alert('Maximum 7 style preferences allowed');
+                return;
+            }
+            
+            const row = document.createElement('div');
+            row.className = 'content-row';
+            row.innerHTML = `
+                <input type="text" placeholder="e.g., 'Warm colors, nature backgrounds'" class="form-input content-item" maxlength="150">
+                <span class="char-counter">0/150</span>
+                <button type="button" class="remove-btn" onclick="removeImageStyleItem(this)">×</button>
+            `;
+            container.appendChild(row);
+            attachImageStyleListeners(row);
+            updateImageStyleButtonState();
+            saveImageStyleArray();
+        }
+        
+        function removeImageStyleItem(button) {
+            button.parentElement.remove();
+            updateImageStyleButtonState();
+            saveImageStyleArray();
+        }
+        
+        function updateImageStyleButtonState() {
+            const container = document.getElementById('imageStyleContainer');
+            const existingRows = container.querySelectorAll('.content-row').length;
+            const button = document.getElementById('addImageStyleButton');
+            button.disabled = existingRows >= 7;
+            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Style Item';
+        }
+        
+        function attachImageStyleListeners(row) {
+            const input = row.querySelector('.content-item');
+            const counter = row.querySelector('.char-counter');
+            
+            function updateCounter() {
+                const length = input.value.length;
+                counter.textContent = `${length}/150`;
+                counter.style.color = length > 120 ? '#d97706' : length > 135 ? '#dc2626' : '#6b7280';
+                saveImageStyleArray();
+            }
+            
+            input.addEventListener('input', updateCounter);
+            updateCounter(); // Initial update
+        }
+        
+        function saveImageStyleArray() {
+            const rows = document.querySelectorAll('#imageStyleContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            localStorage.setItem('imageStyleData', JSON.stringify(items));
+        }
+        
+        function loadImageStyleArray() {
+            const container = document.getElementById('imageStyleContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            let items = [];
+            const data = localStorage.getItem('imageStyleData');
+            if (data && data !== '[]') {
+                items = JSON.parse(data);
+            } else {
+                const customizationData = getJSON('customizationData', {});
+                if (customizationData.imageStyleArray) {
+                    try {
+                        const parsed = JSON.parse(customizationData.imageStyleArray);
+                        if (Array.isArray(parsed)) {
+                            items = parsed;
+                        }
+                    } catch (e) {
+                        console.log('Error parsing imageStyleArray from customizationData:', e);
+                    }
+                }
+            }
+            items.forEach(item => {
+                addImageStyleItem();
+                const rows = document.querySelectorAll('#imageStyleContainer .content-row');
+                const lastRow = rows[rows.length - 1];
+                lastRow.querySelector('.content-item').value = item;
+            });
+            updateImageStyleButtonState();
+        }
+        
+        function collectImageStyleArray() {
+            const rows = document.querySelectorAll('#imageStyleContainer .content-row');
+            const items = [];
+            rows.forEach(row => {
+                const value = row.querySelector('.content-item').value.trim();
+                if (value) {
+                    items.push(value);
+                }
+            });
+            return JSON.stringify(items);
+        }
+        
         // Deploy client function
         
         // Initialize form persistence for customization form after a short delay
@@ -1212,7 +1815,14 @@
         setTimeout(() => {
             const customizationPersistence = new BusinessFormPersistence('mainContent', 'customization-form-data');
             customizationPersistence.init();
+            // Load persisted data
+            loadTopicMappings();
+            loadStaticContentArray();
+            loadDynamicContentArray();
+            loadImageStyleArray();
         }, 100);
+        
+        // Load topic mappings immediately on module load - removed to avoid loading before customizationData is available
     </script>
 </body>
 </html>
