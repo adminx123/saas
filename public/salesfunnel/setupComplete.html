@@ -102,7 +102,7 @@
                     client_id: clientId,
                     brand_name: customizationData.brandName || 'New Client',
                     brand_voice: customizationData.brandVoice || '',
-                    default_tone: customizationData.tone || 'professional',
+                    default_tone: 'professional', // Default
                     timezone: customizationData.timezone || 'America/New_York',
                     handles: {
                         instagram: customizationData.instagramHandle || '',
@@ -110,21 +110,32 @@
                         facebook: customizationData.facebookHandle || ''
                     },
                     supportEmail: customizationData.supportEmail || 'support@inexasli.com',
-                    enabled_social_platforms: customizationData.platforms || ['instagram'],
+                    legalUrls: {
+                        privacy: customizationData.privacyUrl || '',
+                        terms: customizationData.termsUrl || '',
+                        dpa: customizationData.dpaUrl || ''
+                    },
+                    enabled_social_platforms: ['instagram'], // Default, can be expanded
                     business_synopsis: {
                         description: customizationData.businessDescription || '',
-                        key_areas: customizationData.keyAreas || [],
-                        mission: customizationData.mission || ''
+                        key_areas: [],
+                        mission: ''
                     },
-                    post_times: customizationData.postTimes || ['13:00'],
-                    mixed_mode: customizationData.contentMode || 'dynamic_text_static_image',
-                    topicElementMappings: customizationData.topicMappings || {},
-                    contextPromptTemplate: customizationData.promptTemplate || {},
-                    imagePromptTemplate: customizationData.imagePrompt || '',
-                    staticContentArray: customizationData.staticContent || [],
-                    dynamicContentArray: customizationData.dynamicTopics || [],
-                    imageStyleArray: customizationData.imageStyles || [],
-                    platformConsiderations: customizationData.platformConsiderations || ''
+                    post_times: ['13:00'], // Default
+                    mixed_mode: 'dynamic_text_static_image', // Default
+                    topicElementMappings: {},
+                    contextPromptTemplate: {},
+                    imagePromptTemplate: '',
+                    staticContentArray: [],
+                    dynamicContentArray: [],
+                    imageStyleArray: [],
+                    platformConsiderations: customizationData.platformConsiderations || '',
+                    industry: customizationData.industry || '',
+                    chatAudience: customizationData.chatAudience || '',
+                    chatWidgetName: customizationData.chatWidgetName || '',
+                    chatColors: customizationData.chatColors || '',
+                    postingSchedule: customizationData.postingSchedule || '[]',
+                    scheduleDetails: customizationData.scheduleDetails || ''
                 };
 
                 // For now, no secrets in setup; OAuth tokens would be added separately

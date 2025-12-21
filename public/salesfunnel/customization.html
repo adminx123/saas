@@ -143,6 +143,9 @@
                         <div class="grid-item1" data-value="external">
                             <div class="grid-item-text">External</div>
                         </div>
+                        <div class="grid-item1" data-value="both">
+                            <div class="grid-item-text">Both</div>
+                        </div>
                     </div>
                     <input type="hidden" name="roleScopeChat" id="roleScopeChat" required>
                 </div>
@@ -174,23 +177,19 @@
                 <div class="form-group" id="roleGroupChat" style="display: none;">
                     <label class="form-label">AI Chat Role Support</label>
                     <div class="grid-selection" id="roleGridChat" data-type="multiple" data-name="rolesChat">
+                        <!-- External Roles -->
                         <div class="grid-item1" data-value="customer-service-rep" data-scope="external" data-function="support">
                             <div class="grid-item-text">Customer Service Rep</div>
                         </div>
                         <div class="grid-item1" data-value="sales-assistant" data-scope="both" data-function="sales">
                             <div class="grid-item-text">Sales Assistant</div>
                         </div>
-                        <div class="grid-item1" data-value="support-technician" data-scope="both" data-function="support">
-                            <div class="grid-item-text">Support Technician</div>
-                        </div>
+                        <!-- Internal Roles -->
                         <div class="grid-item1" data-value="hr-assistant" data-scope="internal" data-function="hr">
                             <div class="grid-item-text">HR Assistant</div>
                         </div>
                         <div class="grid-item1" data-value="admin-assistant" data-scope="internal" data-function="admin">
                             <div class="grid-item-text">Admin Assistant</div>
-                        </div>
-                        <div class="grid-item1" data-value="order-fulfillment" data-scope="external" data-function="operations">
-                            <div class="grid-item-text">Order Fulfillment Staff</div>
                         </div>
                         <div class="grid-item1" data-value="it-support" data-scope="internal" data-function="operations">
                             <div class="grid-item-text">IT Support</div>
@@ -973,7 +972,6 @@
                 functions: 'main',
                 roles: 'main',
                 roleScopeChat: 'conversational',
-                functionsChat: 'conversational',
                 rolesChat: 'conversational',
                 chatWidgetName: 'conversational',
                 chatColors: 'conversational',
@@ -1008,11 +1006,6 @@
                 }
             });
             if (!allCardsCompleted) return;
-            
-            if (relevantSections.includes('conversational') && !filteredSetupData.functionsChat) {
-                alert('Please select departments.');
-                return;
-            }
             
             if (relevantSections.includes('conversational') && !filteredSetupData.rolesChat) {
                 alert('Please select AI chat role support.');
@@ -1164,11 +1157,39 @@
             }
         }
 
+        function filterRolesByScope() {
+            const selectedScope = document.getElementById('roleScopeChat').value;
+            const roleItems = document.querySelectorAll('#roleGridChat .grid-item1');
+            
+            roleItems.forEach(item => {
+                const itemScope = item.getAttribute('data-scope');
+                if (selectedScope === 'both' || itemScope === 'both' || itemScope === selectedScope) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('brandFiles').addEventListener('change', handleBrandFileSelect);
             // Initial check
             updateBrandFileDisplay();
+            
+            // Add scope change listener
+            const scopeGrid = document.getElementById('roleScopeGridChat');
+            if (scopeGrid) {
+                scopeGrid.addEventListener('click', (e) => {
+                    if (e.target.closest('.grid-item1')) {
+                        // Allow time for hidden input to update
+                        setTimeout(filterRolesByScope, 50);
+                    }
+                });
+            }
+            
+            // Initial filter
+            filterRolesByScope();
         });
     </script>
     
