@@ -21,8 +21,8 @@
         
         <h1 class="success-title">Setup Complete!</h1>
         <p class="success-subtitle" id="setupMessage">
-            Your account setup is now being configured.<br>
-            <strong id="setupTime">Estimated setup time: 1-2 days.</strong>
+            Your account is configured and ready to deploy.<br>
+            <strong>Click the button below to activate your automation.</strong>
         </p>
         
         <div class="success-details" id="timelineContainer">
@@ -45,6 +45,10 @@
 
        
 
+
+        <button class="btn-primary" id="deployButton" onclick="deployAutomation()" style="background: linear-gradient(45deg, #28a745, #20c997); margin-bottom: 20px;">
+            🚀 Deploy Automation
+        </button>
 
                <button class="btn-primary" onclick="scheduleConsultation()">
                 📞 Schedule Strategy Call
@@ -76,6 +80,89 @@
             // TODO: Integrate with Calendly or your scheduling system
             alert('Strategy call scheduling coming soon! We\'ll contact you within 2-5 days to arrange a consultation.');
         }
+
+        async function deployAutomation() {
+            const deployButton = document.getElementById('deployButton');
+            deployButton.disabled = true;
+            deployButton.innerHTML = '🚀 Deploying...';
+
+            try {
+                const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
+                const customizationData = JSON.parse(localStorage.getItem('customizationData') || '{}');
+                
+                if (!orderData.package || !customizationData) {
+                    throw new Error('Missing setup data. Please complete the setup process first.');
+                }
+
+                // Generate client ID (use email or random)
+                const clientId = customizationData.email || `client_${Date.now()}`;
+                
+                // Map customization data to config format
+                const configData = {
+                    client_id: clientId,
+                    brand_name: customizationData.brandName || 'New Client',
+                    brand_voice: customizationData.brandVoice || '',
+                    default_tone: customizationData.tone || 'professional',
+                    timezone: customizationData.timezone || 'America/New_York',
+                    handles: {
+                        instagram: customizationData.instagramHandle || '',
+                        twitter: customizationData.twitterHandle || '',
+                        facebook: customizationData.facebookHandle || ''
+                    },
+                    supportEmail: customizationData.supportEmail || 'support@inexasli.com',
+                    enabled_social_platforms: customizationData.platforms || ['instagram'],
+                    business_synopsis: {
+                        description: customizationData.businessDescription || '',
+                        key_areas: customizationData.keyAreas || [],
+                        mission: customizationData.mission || ''
+                    },
+                    post_times: customizationData.postTimes || ['13:00'],
+                    mixed_mode: customizationData.contentMode || 'dynamic_text_static_image',
+                    topicElementMappings: customizationData.topicMappings || {},
+                    contextPromptTemplate: customizationData.promptTemplate || {},
+                    imagePromptTemplate: customizationData.imagePrompt || '',
+                    staticContentArray: customizationData.staticContent || [],
+                    dynamicContentArray: customizationData.dynamicTopics || [],
+                    imageStyleArray: customizationData.imageStyles || [],
+                    platformConsiderations: customizationData.platformConsiderations || ''
+                };
+
+                // For now, no secrets in setup; OAuth tokens would be added separately
+                const secretData = {};
+
+                const setupPayload = {
+                    clientId: clientId.toLowerCase(),
+                    clientName: configData.brand_name,
+                    configData,
+                    secretData
+                };
+
+                const response = await fetch('https://orchestrator.4hm7q4q75z.workers.dev/setup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Domain': window.location.hostname
+                    },
+                    body: JSON.stringify(setupPayload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    deployButton.innerHTML = '✅ Deployed Successfully!';
+                    deployButton.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+                    alert('Automation deployed successfully! Your AI will start posting according to your schedule.');
+                } else {
+                    throw new Error(result.error || 'Deployment failed');
+                }
+
+            } catch (error) {
+                console.error('Deployment error:', error);
+                deployButton.disabled = false;
+                deployButton.innerHTML = '🚀 Deploy Automation';
+                alert('Deployment failed: ' + error.message);
+            }
+        }
         
         // Dynamic content based on user selections
         function loadUserSelections() {
@@ -90,7 +177,6 @@
             const { package: selectedPackage, addons = [] } = orderData;
             const timelineContainer = document.getElementById('timelineContainer');
             const setupMessage = document.getElementById('setupMessage');
-            const setupTime = document.getElementById('setupTime');
             
             // Check if user has automation features (very specific detection)
             const hasAutomation = selectedPackage.features.some(feature =>
@@ -104,12 +190,7 @@
                 addon.name.toLowerCase().includes('content')
             );
             
-            // Update main message based on selections
-            if (hasAutomation) {
-                setupMessage.innerHTML = 'Your Instagram automation is now being configured.<br><strong id="setupTime">Estimated setup time: 2-5 days.</strong>';
-            } else {
-                setupMessage.innerHTML = 'Your social media accounts have been successfully connected.<br><strong id="setupTime">Setup complete! You can start using your accounts immediately.</strong>';
-            }
+            // Message is already set to ready to deploy
             
             let timelineHTML = '';
             
