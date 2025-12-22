@@ -1143,6 +1143,7 @@
                 <input type="text" placeholder="e.g., '🚀 Ready to supercharge your business with AI? DM to get started!'" class="form-input content-item" maxlength="280">
                 <span class="char-counter">0/280</span>
                 <button type="button" class="remove-btn" onclick="removeStaticContentItem(this)">×</button>
+                <button type="button" class="add-btn" onclick="addStaticContentItem()">+</button>
             `;
             container.appendChild(row);
             attachStaticContentListeners(row);
@@ -1218,6 +1219,12 @@
                 const lastRow = rows[rows.length - 1];
                 lastRow.querySelector('.content-item').value = item;
             });
+            
+            // If no items loaded, add one empty input
+            if (items.length === 0) {
+                addStaticContentItem();
+            }
+            
             updateStaticButtonState();
         }
         
@@ -1249,6 +1256,7 @@
                 <input type="text" placeholder="e.g., 'A serene mountain landscape at sunset'" class="form-input content-item" maxlength="200">
                 <span class="char-counter">0/200</span>
                 <button type="button" class="remove-btn" onclick="removeImagePromptItem(this)">×</button>
+                <button type="button" class="add-btn" onclick="addImagePromptItem()">+</button>
             `;
             container.appendChild(row);
             attachImagePromptListeners(row);
@@ -1324,6 +1332,12 @@
                 const lastRow = rows[rows.length - 1];
                 lastRow.querySelector('.content-item').value = item;
             });
+            
+            // If no items loaded, add one empty input
+            if (items.length === 0) {
+                addImagePromptItem();
+            }
+            
             updateImagePromptButtonState();
         }
         

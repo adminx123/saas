@@ -2014,6 +2014,7 @@ textarea {
 
 .content-row .form-input {
     padding-right: 35px; /* Make room for the remove button */
+    padding-left: 35px; /* Make room for the add button */
 }
 
 .content-row .remove-btn {
@@ -2039,6 +2040,33 @@ textarea {
 .content-row .remove-btn:hover {
     background: rgba(239, 68, 68, 0.2);
     color: #ef4444;
+    transform: scale(1.1);
+}
+
+.content-row .add-btn {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.content-row .add-btn:hover {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
     transform: scale(1.1);
 }
 
