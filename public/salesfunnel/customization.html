@@ -268,16 +268,14 @@
 
             <div class="form-group">
                 <label class="form-label">Pre-written Static Posts</label>
+                <small class="form-help">Add up to 7 pre-written posts that will be randomly selected for posting</small>
                 <div id="staticContentContainer"></div>
-                <button type="button" id="addStaticButton" class="form-button-secondary" onclick="addStaticContentItem()">+ Add Static Post</button>
-                <small class="form-help">Add pre-written posts that will be randomly selected for posting</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Image Prompts</label>
+                <small class="form-help">Add up to 7 image generation prompts that will rotate daily</small>
                 <div id="imagePromptContainer"></div>
-                <button type="button" id="addImagePromptButton" class="form-button-secondary" onclick="addImagePromptItem()">+ Add Prompt</button>
-                <small class="form-help">Add image generation prompts that will rotate daily (up to 7 prompts)</small>
             </div>
         </div>
         </div>
@@ -782,27 +780,42 @@
             });
             
             // Form section collapse/expand functionality
-            const sectionTitles = document.querySelectorAll('.package-card');
-            sectionTitles.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // Prevent collapse when clicking on form elements
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON' || e.target.closest('.grid-item1') || e.target.closest('.day-toggle')) {
+            const sectionHeaders = document.querySelectorAll('.package-header');
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', function(e) {
+                    // Prevent collapse when clicking on form elements within header
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') {
                         return;
                     }
                     e.preventDefault();
                     e.stopPropagation();
                     
+                    const card = this.closest('.package-card');
+                    
                     // If this card is collapsed, expand it and collapse all others
-                    if (this.classList.contains('collapsed')) {
+                    if (card.classList.contains('collapsed')) {
                         // Collapse all cards first
-                        sectionTitles.forEach(otherCard => {
+                        const allCards = document.querySelectorAll('.package-card');
+                        allCards.forEach(otherCard => {
                             otherCard.classList.add('collapsed');
                         });
                         // Then expand this one
-                        this.classList.remove('collapsed');
+                        card.classList.remove('collapsed');
+                        
+                        // Scroll the header to the top of the viewport with some padding
+                        setTimeout(() => {
+                            const headerRect = this.getBoundingClientRect();
+                            const absoluteTop = window.pageYOffset + headerRect.top;
+                            const scrollTo = absoluteTop - 20; // 20px padding from top
+                            
+                            window.scrollTo({
+                                top: scrollTo,
+                                behavior: 'smooth'
+                            });
+                        }, 100); // Small delay to allow expansion animation to start
                     } else {
                         // If already expanded, collapse it
-                        this.classList.add('collapsed');
+                        card.classList.add('collapsed');
                     }
                 });
             });
@@ -1152,17 +1165,23 @@
         }
         
         function removeStaticContentItem(button) {
+            const container = document.getElementById('staticContentContainer');
+            const currentRows = container.querySelectorAll('.content-row').length;
+            
             button.parentElement.remove();
+            
+            // If this was the last input, add a new empty one to maintain minimum
+            if (currentRows <= 1) {
+                addStaticContentItem();
+            }
+            
             updateStaticButtonState();
             saveStaticContentArray();
         }
         
         function updateStaticButtonState() {
-            const container = document.getElementById('staticContentContainer');
-            const existingRows = container.querySelectorAll('.content-row').length;
-            const button = document.getElementById('addStaticButton');
-            button.disabled = existingRows >= 7;
-            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Static Post';
+            // Button removed - functionality now handled by individual + buttons on each row
+            return;
         }
         
         function attachStaticContentListeners(row) {
@@ -1265,17 +1284,23 @@
         }
         
         function removeImagePromptItem(button) {
+            const container = document.getElementById('imagePromptContainer');
+            const currentRows = container.querySelectorAll('.content-row').length;
+            
             button.parentElement.remove();
+            
+            // If this was the last input, add a new empty one to maintain minimum
+            if (currentRows <= 1) {
+                addImagePromptItem();
+            }
+            
             updateImagePromptButtonState();
             saveImagePromptArray();
         }
         
         function updateImagePromptButtonState() {
-            const container = document.getElementById('imagePromptContainer');
-            const existingRows = container.querySelectorAll('.content-row').length;
-            const button = document.getElementById('addImagePromptButton');
-            button.disabled = existingRows >= 7;
-            button.textContent = existingRows >= 7 ? 'Maximum 7 prompts reached' : '+ Add Prompt';
+            // Button removed - functionality now handled by individual + buttons on each row
+            return;
         }
         
         function attachImagePromptListeners(row) {
