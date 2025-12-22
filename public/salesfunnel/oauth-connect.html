@@ -369,7 +369,7 @@
         function showSelectedPlatformButtons() {
             const quoteData = JSON.parse(localStorage.getItem('quoteData') || '{}');
             const selectedPackage = quoteData.package || {};
-            const selectedPlatforms = selectedPackage.platforms || [];
+            const selectedPlatforms = quoteData.platforms || [];
             
             console.log('Quote data:', quoteData);
             console.log('Selected package:', selectedPackage);

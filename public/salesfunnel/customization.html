@@ -1812,6 +1812,8 @@
         
         // Initialize form persistence for customization form after a short delay
         // to ensure grid selection event listeners are set up
+        // DISABLED: Auto-saving was causing data to persist across sessions
+        /*
         setTimeout(() => {
             const customizationPersistence = new BusinessFormPersistence('mainContent', 'customization-form-data');
             customizationPersistence.init();
@@ -1821,6 +1823,7 @@
             loadDynamicContentArray();
             loadImageStyleArray();
         }, 100);
+        */
         
         // Load topic mappings immediately on module load - removed to avoid loading before customizationData is available
     </script>

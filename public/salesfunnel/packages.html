@@ -728,12 +728,12 @@
                     // Show the continue button for this package
                     const packageContinueBtn = this.querySelector('.package-continue-btn');
                     if (packageContinueBtn) {
-                        if (packageType === 'basic') {
-                            // Delay showing continue button for basic package to allow expansion to be visible first
+                        if (packageType === 'basic' || packageType === 'enterprise') {
+                            // Delay showing continue button for basic and enterprise packages to allow expansion to be visible first
                             setTimeout(() => {
                                 packageContinueBtn.style.display = 'block';
                             }, 300);
-                        } else if (packageType !== 'pro' && packageType !== 'enterprise' && packageType !== 'basic' && packageType !== 'social') {
+                        } else if (packageType !== 'pro' && packageType !== 'basic' && packageType !== 'social') {
                             // Don't show continue button for coming soon packages
                             // TO ENABLE: Remove the condition and use: packageContinueBtn.style.display = 'block';
                             packageContinueBtn.style.display = 'block';
@@ -742,7 +742,7 @@
                     
                     // Show package total for selected package
                     const selectedTotal = this.querySelector('.package-total');
-                    if (selectedTotal && packageType !== 'pro' && packageType !== 'enterprise' && packageType !== 'basic' && packageType !== 'social') selectedTotal.style.display = 'block';
+                    if (selectedTotal && packageType !== 'pro' && packageType !== 'basic' && packageType !== 'social') selectedTotal.style.display = 'block';
                     // TO ENABLE: Remove the packageType condition and use: if (selectedTotal) selectedTotal.style.display = 'block';
                     
                     selectedPackage = {
@@ -795,7 +795,7 @@
                     // Show expansion sections for all packages
                     // Commented out expansion for 'pro' and 'enterprise' as they are coming soon
                     // TO ENABLE: Change back to: if (packageType === 'basic' || packageType === 'social' || packageType === 'pro' || packageType === 'enterprise') {
-                    if (packageType === 'basic' || packageType === 'social') {
+                    if (packageType === 'basic' || packageType === 'social' || packageType === 'enterprise') {
                         const platforms = this.querySelector('.package-platforms');
                         if (platforms) {
                             platforms.style.display = 'block';
@@ -845,7 +845,7 @@
                     
                     // Enable continue button
                     const continueBtn = document.getElementById('continue-btn');
-                    if (continueBtn && packageType !== 'pro' && packageType !== 'enterprise') {
+                    if (continueBtn && packageType !== 'pro') {
                         continueBtn.disabled = false;
                     }
                     // TO ENABLE: Remove the packageType condition and use: if (continueBtn) { continueBtn.disabled = false; }
