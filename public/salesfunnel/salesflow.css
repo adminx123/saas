@@ -2004,6 +2004,53 @@ textarea {
 }
 
 /* ==========================================================================
+   DYNAMIC CONTENT ROWS - For Static Posts & Image Prompts
+   ========================================================================== */
+
+.content-row {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.content-row .form-input {
+    padding-right: 35px; /* Make room for the remove button */
+}
+
+.content-row .remove-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.content-row .remove-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.char-counter {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* ==========================================================================
    REUSABLE CARD COMPONENTS - DRY CSS for Package Cards & Form Sections
    ========================================================================== */
 

@@ -8,77 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <style>
-        .form-help {
-            display: block;
-            color: #666;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-            margin-bottom: 0.5rem;
-            font-style: italic;
-        }
-        .content-row .char-counter {
-            position: absolute;
-            bottom: -1.25rem;
-            right: 0;
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-        .content-row {
-            position: relative;
-            margin-bottom: 1.5rem; /* Extra space for char counter */
-        }
-        .content-row .form-input {
-            width: 100%;
-        }
-        .content-row .remove-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: transparent;
-            color: #6b7280;
-            border: none;
-            width: 1rem;
-            height: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            font-weight: bold;
-            cursor: pointer;
-            transform: translate(50%, -50%);
-        }
-        .content-row .remove-btn:hover {
-            color: #dc2626;
-        }
-        .mapping-row {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .mapping-row .remove-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: transparent;
-            color: #6b7280;
-            border: none;
-            width: 1rem;
-            height: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            font-weight: bold;
-            cursor: pointer;
-            transform: translate(50%, -50%);
-        }
-        .mapping-row .remove-btn:hover {
-            color: #dc2626;
-        }
-    </style>
 </head>
 <body>
     <div class="splash-container" id="splashContainer" style="padding-top: 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 2;">
@@ -128,35 +57,31 @@
             <div class="form-group">
                 <label class="form-label" for="brandName">Brand Name</label>
                 <input type="text" class="form-input" id="brandName" name="brandName"
-                    placeholder="e.g., INEXASLI, Your Company Name" maxlength="50" required>
-                <small class="form-help">Maximum 50 characters</small>
+                    placeholder="e.g., INEXASLI, Your Company Name" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="supportEmail">Support Email</label>
                 <input type="email" class="form-input" id="supportEmail" name="supportEmail"
-                    placeholder="e.g., support@yourcompany.com" maxlength="100" required>
-                <small class="form-help">Maximum 100 characters</small>
+                    placeholder="e.g., support@yourcompany.com" required>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Legal URLs</label>
                 <div class="legal-urls-group">
                     <input type="url" class="form-input" id="privacyUrl" name="privacyUrl"
-                        placeholder="Privacy Policy URL" maxlength="200" required>
+                        placeholder="Privacy Policy URL" required>
                     <input type="url" class="form-input" id="termsUrl" name="termsUrl"
-                        placeholder="Terms of Service URL" maxlength="200" required>
+                        placeholder="Terms of Service URL" required>
                     <input type="url" class="form-input" id="dpaUrl" name="dpaUrl"
-                        placeholder="Data Processing Agreement URL" maxlength="200" required>
+                        placeholder="Data Processing Agreement URL" required>
                 </div>
-                <small class="form-help">Maximum 200 characters per URL</small>
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="brandVoice">Brand Voice</label>
                 <textarea class="form-textarea" id="brandVoice" name="brandVoice"
-                    placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" maxlength="300" required></textarea>
-                <small class="form-help">Maximum 300 characters</small>
+                    placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" required></textarea>
             </div>
         </div>
         </div>
@@ -191,8 +116,7 @@
                 <div class="form-group">
                     <label class="form-label">Chat Users</label>
                     <textarea class="form-textarea" id="chatAudience" name="chatAudience"
-                        placeholder="Describe your target users (e.g., age, interests, demographics)" maxlength="200" required></textarea>
-                    <small class="form-help">Maximum 200 characters</small>
+                        placeholder="Describe your target users (e.g., age, interests, demographics)" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -204,8 +128,7 @@
                 <div class="form-group">
                     <label class="form-label">Chat Colours</label>
                     <textarea class="form-textarea" id="chatColors" name="chatColors"
-                        placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" maxlength="150" required></textarea>
-                    <small class="form-help">Maximum 150 characters</small>
+                        placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" required></textarea>
                 </div>
 
 
@@ -343,73 +266,18 @@
                 <input type="hidden" name="postingSchedule" id="postingSchedule" required>
             </div>
 
-                        <div class="form-group">
-                <label class="form-label" for="scheduleDetails">Schedule Details & Preferences</label>
-                <textarea class="form-textarea" id="scheduleDetails" name="scheduleDetails"
-                    placeholder="Describe your posting preferences (e.g., preferred times, posting frequency, any other scheduling requirements or preferences we should discuss)" maxlength="400" required></textarea>
-                <small class="form-help">Maximum 400 characters</small>
+            <div class="form-group">
+                <label class="form-label">Pre-written Static Posts</label>
+                <div id="staticContentContainer"></div>
+                <button type="button" id="addStaticButton" class="form-button-secondary" onclick="addStaticContentItem()">+ Add Static Post</button>
+                <small class="form-help">Add pre-written posts that will be randomly selected for posting</small>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="contentFocus">Content Focus</label>
-                <textarea class="form-textarea" id="contentFocus" name="contentFocus"
-                    placeholder="What topics or themes should the posts focus on? (e.g., industry insights, customer success stories, educational content)" maxlength="300" required></textarea>
-                <small class="form-help">Maximum 300 characters</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="imagePromptTemplate">Image Generation Prompt Template</label>
-                <textarea class="form-textarea" id="imagePromptTemplate" name="imagePromptTemplate"
-                    placeholder="Template for AI image generation (e.g., 'Create [style] for: [content]... Incorporate [elements] with [mood] mood. [colors]. [composition].')" maxlength="800" required></textarea>
-                <small class="form-help">Maximum 800 characters</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="targetAudience">Target Audience</label>
-                <textarea class="form-textarea" id="targetAudience" name="targetAudience"
-                    placeholder="Describe your target audience (e.g., age range, interests, pain points, what they care about)" maxlength="200" required></textarea>
-                <small class="form-help">Maximum 200 characters</small>
-            </div>
-
-
-            <div class="form-group">
-                <label class="form-label" for="topicElementMappings">Content Topic Categories</label>
-                <small class="form-help">Map topics to specific content elements for consistent branding (e.g., 'Fitness Tips' → 'exercise routines, nutrition advice')</small>
-                <div id="topicMappingsContainer">
-                    <!-- Dynamic rows added here -->
-                </div>
-                <button type="button" id="addTopicMappingButton" onclick="addTopicMappingRow()">+ Add Topic Mapping</button>
-                <small class="form-help">Maximum 10 topic mappings allowed</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="staticContentArray">Pre-written Static Posts</label>
-                <small class="form-help">Complete posts that will be published exactly as written (e.g., promotional announcements, fixed content)</small>
-                <div id="staticContentContainer">
-                    <!-- Dynamic rows added here -->
-                </div>
-                <button type="button" id="addStaticButton" onclick="addStaticContentItem()">+ Add Static Post</button>
-                <small class="form-help">Maximum 7 static posts allowed</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="dynamicContentArray">Rotating Content Themes</label>
-                <small class="form-help">Content themes that rotate through your automated posting schedule (e.g., 'Motivational Quotes', 'Recipe Ideas')</small>
-                <div id="dynamicContentContainer">
-                    <!-- Dynamic rows added here -->
-                </div>
-                <button type="button" id="addDynamicButton" onclick="addDynamicContentItem()">+ Add Content Item</button>
-                <small class="form-help">Maximum 7 content themes allowed</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="imageStyleArray">Visual Style Preferences</label>
-                <small class="form-help">Describe the visual aesthetic for AI-generated images (e.g., 'Bright & Energetic', 'Minimalist')</small>
-                <div id="imageStyleContainer">
-                    <!-- Dynamic rows added here -->
-                </div>
-                <button type="button" id="addImageStyleButton" onclick="addImageStyleItem()">+ Add Style Item</button>
-                <small class="form-help">Maximum 7 style preferences allowed</small>
+                <label class="form-label">Image Prompts</label>
+                <div id="imagePromptContainer"></div>
+                <button type="button" id="addImagePromptButton" class="form-button-secondary" onclick="addImagePromptItem()">+ Add Prompt</button>
+                <small class="form-help">Add image generation prompts that will rotate daily (up to 7 prompts)</small>
             </div>
         </div>
         </div>
@@ -427,15 +295,13 @@
                 <div class="form-group">
                     <label class="form-label" for="replyGuidelines">Comment Reply Guidelines</label>
                     <textarea class="form-textarea" id="replyGuidelines" name="replyGuidelines"
-                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" maxlength="400" required></textarea>
-                    <small class="form-help">Maximum 400 characters</small>
+                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="platformConsiderations">Platform Considerations</label>
                     <textarea class="form-textarea" id="platformConsiderations" name="platformConsiderations"
-                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" maxlength="300" required></textarea>
-                    <small class="form-help">Maximum 300 characters</small>
+                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" required></textarea>
                 </div>
             </div>
             </div>
@@ -518,37 +384,30 @@
     <script>
         // Global function for checking card completion
         function checkCardCompletion(card) {
-            console.log('Checking completion for card:', card.querySelector('.card-title')?.textContent);
             
             const grids = card.querySelectorAll('.grid-selection');
             let allGridsCompleted = true;
             grids.forEach(grid => {
                 if (grid.style.display === 'none') {
-                    console.log('Skipping hidden grid:', grid.id);
                     return; // Skip hidden grids
                 }
                 // Skip categoryGridSelection for conversational section (RAG doesn't need categories)
                 if (card.id === 'conversationalSection' && grid.id === 'categoryGridSelection') {
-                    console.log('Skipping categoryGridSelection for RAG');
                     return;
                 }
                 const items = grid.querySelectorAll('.grid-item1');
                 const selectedItems = Array.from(items).filter(i => i.classList.contains('selected'));
                 const hasSelection = selectedItems.length > 0;
-                console.log('Grid', grid.id, 'has selection:', hasSelection, 'selected items:', selectedItems.map(i => i.dataset.value));
                 if (!hasSelection) allGridsCompleted = false;
             });
-            console.log('All grids completed:', allGridsCompleted);
             
             // Also check required form elements (selects and inputs)
             const requiredSelects = card.querySelectorAll('select[required]');
             let allSelectsCompleted = true;
             requiredSelects.forEach(select => {
                 const hasValue = !!select.value;
-                console.log('Select', select.id, 'has value:', hasValue, 'value:', select.value);
                 if (!hasValue) allSelectsCompleted = false;
             });
-            console.log('All selects completed:', allSelectsCompleted);
             
             const requiredInputs = card.querySelectorAll('input[required]');
             let allInputsCompleted = true;
@@ -564,28 +423,21 @@
                 } else {
                     hasValue = !!input.value;
                 }
-                console.log('Input', input.id, 'has value:', hasValue, 'value:', input.value, 'files:', input.files?.length, 'uploadedBrandFiles:', uploadedBrandFiles.length);
                 if (!hasValue) allInputsCompleted = false;
             });
-            console.log('All inputs completed:', allInputsCompleted);
             
             const requiredTextareas = card.querySelectorAll('textarea[required]');
             let allTextareasCompleted = true;
             requiredTextareas.forEach(textarea => {
                 const hasValue = !!textarea.value.trim();
-                console.log('Textarea', textarea.id, 'has value:', hasValue, 'value length:', textarea.value.length);
                 if (!hasValue) allTextareasCompleted = false;
             });
-            console.log('All textareas completed:', allTextareasCompleted);
             
             // Check for day toggles (at least one must be active)
             const dayToggles = card.querySelectorAll('.day-toggle');
             let hasActiveDayToggle = true; // Default to true if no day toggles exist
             if (dayToggles.length > 0) {
                 hasActiveDayToggle = Array.from(dayToggles).some(toggle => toggle.classList.contains('active'));
-                console.log('Day toggles found:', dayToggles.length, 'active:', hasActiveDayToggle);
-            } else {
-                console.log('No day toggles in this card');
             }
             
             // Check role documents completion - for RAG, just require some files uploaded
@@ -596,33 +448,20 @@
                     // For RAG, just require that some knowledge files have been uploaded
                     if (uploadedBrandFiles.length === 0) {
                         roleDocsCompleted = false;
-                        console.log('Role docs not completed: no files uploaded');
-                    } else {
-                        console.log('Role docs completed: files uploaded');
                     }
                 }
             }
             
             const isComplete = allGridsCompleted && allSelectsCompleted && allInputsCompleted && allTextareasCompleted && hasActiveDayToggle && roleDocsCompleted;
-            console.log('Card completion status:', isComplete, {
-                allGridsCompleted,
-                allSelectsCompleted,
-                allInputsCompleted,
-                allTextareasCompleted,
-                hasActiveDayToggle,
-                roleDocsCompleted
-            });
             
             if (isComplete) {
                 card.classList.add('completed');
                 const statusText = card.querySelector('.status-text');
                 if (statusText) statusText.textContent = '✓';
-                console.log('Card marked as completed');
             } else {
                 card.classList.remove('completed');
                 const statusText = card.querySelector('.status-text');
                 if (statusText) statusText.textContent = 'To Do';
-                console.log('Card marked as To Do');
             }
         }
         
@@ -855,13 +694,10 @@
             
             // Load selected package and adapt form
             const packageData = localStorage.getItem('quoteData');
-            console.log('Package data from localStorage:', packageData);
             
             if (packageData) {
                 const quoteData = JSON.parse(packageData);
                 const selectedPackage = quoteData.package;
-                console.log('Selected package:', selectedPackage);
-                console.log('Package type:', selectedPackage.type);
                 
                 // Optional: Add package info to page
                 const subtitle = document.querySelector('.setup-subtitle');
@@ -881,47 +717,31 @@
                 const replySection = document.getElementById('replySection');
                 const socialSection = document.getElementById('socialSection');
                 
-                console.log('Section elements found:', {
-                    conversational: !!conversationalSection,
-                    reply: !!replySection,
-                    social: !!socialSection
-                });
-                
-                console.log('Conversational element details:', conversationalSection);
-                console.log('All elements with package-card class:', document.querySelectorAll('.package-card'));
-                
                 if (conversationalSection) {
-                    console.log('Setting conversationalSection display to none');
                     conversationalSection.style.display = 'none';
                 }
                 if (replySection) {
-                    console.log('Setting replySection display to none');
                     replySection.style.display = 'none';
                 }
                 if (socialSection) {
-                    console.log('Setting socialSection display to none');
                     socialSection.style.display = 'none';
                 }
                 
                 // Show sections based on package type
                 if (packageType === 'basic') {
                     // Basic Chat: Show conversational AI config
-                    console.log('Showing Basic Chat sections');
                     if (conversationalSection) conversationalSection.style.display = 'block';
                 } else if (packageType === 'social') {
                     // Social Starter: Show social media + conversational AI config
-                    console.log('Showing Social Starter sections');
                     if (socialSection) socialSection.style.display = 'block';
                     if (conversationalSection) conversationalSection.style.display = 'block';
                 } else if (packageType === 'pro') {
                     // Pro Bundle: Show all configs
-                    console.log('Showing Pro Bundle sections');
                     if (socialSection) socialSection.style.display = 'block';
                     if (conversationalSection) conversationalSection.style.display = 'block';
                     if (replySection) replySection.style.display = 'block';
                 } else if (packageType === 'enterprise') {
                     // Enterprise: Show all configs
-                    console.log('Showing Enterprise sections');
                     if (socialSection) socialSection.style.display = 'block';
                     if (conversationalSection) conversationalSection.style.display = 'block';
                     if (replySection) replySection.style.display = 'block';
@@ -929,8 +749,6 @@
                 
                 const title = document.querySelector('.setup-title');
                 if (title) title.textContent = 'Custom AI Automation';
-            } else {
-                console.log('No package data found in localStorage');
             }
             
             // After form persistence loads, check completion status of all cards
@@ -958,10 +776,7 @@
                     // Check completion status of the social media card
                     const socialCard = document.querySelector('.package-card[data-section="social"]');
                     if (socialCard) {
-                        console.log('Found social card, checking completion');
                         checkCardCompletion(socialCard);
-                    } else {
-                        console.log('Social card not found');
                     }
                 });
             });
@@ -1040,24 +855,18 @@
                 }
             });
             
-            // Collect topic element mappings
-            setupData.topicElementMappings = collectTopicMappings();
-            
-            // Collect static content array
-            setupData.staticContentArray = collectStaticContentArray();
-            
-            // Collect dynamic content array
-            setupData.dynamicContentArray = collectDynamicContentArray();
-            
-            // Collect image style array
-            setupData.imageStyleArray = collectImageStyleArray();
-            
             // Collect legal URLs as an object
             setupData.legalUrls = {
                 privacy: document.getElementById('privacyUrl').value,
                 terms: document.getElementById('termsUrl').value,
                 dpa: document.getElementById('dpaUrl').value
             };
+            
+            // Collect static content array
+            setupData.staticContentArray = collectStaticContentArray();
+            
+            // Collect image prompt array
+            setupData.imagePrompts = collectImagePromptArray();
             
             // Add brand files to setup data
             setupData.brandFiles = uploadedBrandFiles;
@@ -1096,15 +905,9 @@
                 brandFiles: 'conversational',
                 knowledgeBase: 'conversational',
                 postingSchedule: 'social',
-                scheduleDetails: 'social',
-                contentFocus: 'social',
-                targetAudience: 'social',
-                replyGuidelines: 'reply',
-                platformConsiderations: 'reply',
-                topicElementMappings: 'social',
                 staticContentArray: 'social',
-                dynamicContentArray: 'social',
-                imageStyleArray: 'social'
+                replyGuidelines: 'reply',
+                platformConsiderations: 'reply'
             };
             
             const filteredSetupData = {};
@@ -1149,20 +952,9 @@
                 return;
             }
             
-            if (relevantSections.includes('social') && (!filteredSetupData.scheduleDetails)) {
-                alert('Please fill in your schedule details and preferences.');
-                return;
-            }
-            
-            if (relevantSections.includes('social') && (!filteredSetupData.contentFocus || !filteredSetupData.targetAudience)) {
-                alert('Please fill in content focus and target audience.');
-                return;
-            }
-            
             // Upload files to R2 storage if any exist
             const allFilesToUpload = [...uploadedBrandFiles];
             if (allFilesToUpload.length > 0) {
-                console.log('Uploading files to R2 storage...');
                 
                 // Show loading indicator
                 const continueBtn = document.querySelector('.package-continue-btn');
@@ -1190,7 +982,6 @@
                     }
                     
                     const uploadResult = await uploadResponse.json();
-                    console.log('File upload successful:', uploadResult);
                     
                     // Add file URLs to customization data
                     filteredSetupData.uploadedFiles = uploadResult.files;
@@ -1319,7 +1110,6 @@
     <script src="../utilities/modal.js"></script>
     <script src="../utilities/step-indicator.js"></script>
     <script type="module">
-        import { BusinessFormPersistence } from '../utilities/businessFormPersistence.js';
         import { setJSON } from '../utilities/setJSON.js';
         import { getJSON } from '../utilities/getJSON.js';
         
@@ -1327,168 +1117,15 @@
         window.setJSON = setJSON;
         window.getJSON = getJSON;
         
-        window.addTopicMappingRow = addTopicMappingRow;
-        window.removeTopicMappingRow = removeTopicMappingRow;
-        window.collectTopicMappings = collectTopicMappings;
-        window.saveTopicMappings = saveTopicMappings;
-        window.loadTopicMappings = loadTopicMappings;
-        
         window.addStaticContentItem = addStaticContentItem;
         window.removeStaticContentItem = removeStaticContentItem;
         window.collectStaticContentArray = collectStaticContentArray;
         window.saveStaticContentArray = saveStaticContentArray;
         window.loadStaticContentArray = loadStaticContentArray;
         
-        window.addDynamicContentItem = addDynamicContentItem;
-        window.removeDynamicContentItem = removeDynamicContentItem;
-        window.collectDynamicContentArray = collectDynamicContentArray;
-        window.saveDynamicContentArray = saveDynamicContentArray;
-        window.loadDynamicContentArray = loadDynamicContentArray;
-        
-        window.addImageStyleItem = addImageStyleItem;
-        window.removeImageStyleItem = removeImageStyleItem;
-        window.collectImageStyleArray = collectImageStyleArray;
-        window.saveImageStyleArray = saveImageStyleArray;
-        window.loadImageStyleArray = loadImageStyleArray;
-        
-        function addTopicMappingRow() {
-            const container = document.getElementById('topicMappingsContainer');
-            const existingRows = container.querySelectorAll('.mapping-row').length;
-            
-            if (existingRows >= 10) {
-                alert('Maximum 10 topic mappings allowed');
-                return;
-            }
-            
-            const row = document.createElement('div');
-            row.className = 'mapping-row';
-            row.innerHTML = `
-                <div style="position: relative;">
-                    <input type="text" placeholder="e.g., 'Wellness Advice'" class="form-input mapping-key" maxlength="100">
-                    <span class="char-counter" style="bottom: -1.25rem; right: 0;">0/100</span>
-                </div>
-                <div style="position: relative;">
-                    <input type="text" placeholder="Content elements (e.g., 'healthy recipes, exercise tips')" class="form-input mapping-value" maxlength="200">
-                    <span class="char-counter" style="bottom: -1.25rem; right: 0;">0/200</span>
-                </div>
-                <button type="button" class="remove-btn" onclick="removeTopicMappingRow(this)">×</button>
-            `;
-            container.appendChild(row);
-            // Attach event listeners for persistence
-            attachMappingListeners(row);
-            updateTopicMappingButtonState();
-            // Save after adding
-            saveTopicMappings();
-        }
-        
-        function removeTopicMappingRow(button) {
-            button.parentElement.remove();
-            updateTopicMappingButtonState();
-            // Save after removing
-            saveTopicMappings();
-        }
-        
-        function updateTopicMappingButtonState() {
-            const container = document.getElementById('topicMappingsContainer');
-            const existingRows = container.querySelectorAll('.mapping-row').length;
-            const button = document.getElementById('addTopicMappingButton');
-            button.disabled = existingRows >= 10;
-            button.textContent = existingRows >= 10 ? 'Maximum 10 items reached' : '+ Add Topic Mapping';
-        }
-        
-        function attachMappingListeners(row) {
-            const keyInput = row.querySelector('.mapping-key');
-            const valueInput = row.querySelector('.mapping-value');
-            const keyCounter = row.querySelector('.mapping-key').parentElement.querySelector('.char-counter');
-            const valueCounter = row.querySelector('.mapping-value').parentElement.querySelector('.char-counter');
-            
-            function updateCounters() {
-                const keyLength = keyInput.value.length;
-                const valueLength = valueInput.value.length;
-                keyCounter.textContent = `${keyLength}/100`;
-                valueCounter.textContent = `${valueLength}/200`;
-                keyCounter.style.color = keyLength > 80 ? '#d97706' : keyLength > 90 ? '#dc2626' : '#6b7280';
-                valueCounter.style.color = valueLength > 160 ? '#d97706' : valueLength > 180 ? '#dc2626' : '#6b7280';
-                saveTopicMappings();
-            }
-            
-            keyInput.addEventListener('input', updateCounters);
-            valueInput.addEventListener('input', updateCounters);
-            updateCounters(); // Initial update
-        }
-        
-        function saveTopicMappings() {
-            const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
-            const mappings = [];
-            rows.forEach(row => {
-                const key = row.querySelector('.mapping-key').value.trim();
-                const value = row.querySelector('.mapping-value').value.trim();
-                mappings.push({ key, value });
-            });
-            localStorage.setItem('topicMappingsData', JSON.stringify(mappings));
-        }
-        
-        function loadTopicMappings() {
-            const container = document.getElementById('topicMappingsContainer');
-            if (!container) {
-                console.log('Topic mappings container not found');
-                return;
-            }
-            // Clear existing rows
-            container.innerHTML = '';
-            let mappings = [];
-            // First try 'topicMappingsData'
-            const data = localStorage.getItem('topicMappingsData');
-            if (data && data !== '[]' && data !== '[{\"key\":\"\",\"value\":\"\"}]') {  // Avoid loading empty or placeholder data
-                mappings = JSON.parse(data);
-                console.log('Loaded from topicMappingsData:', mappings);
-            } else {
-                // Fallback to customizationData
-                const customizationData = getJSON('customizationData', {});
-                if (customizationData.topicElementMappings) {
-                    try {
-                        const parsed = JSON.parse(customizationData.topicElementMappings);
-                        if (Array.isArray(parsed)) {
-                            mappings = parsed;
-                        } else if (typeof parsed === 'object' && parsed !== null) {
-                            // Convert object format to array format
-                            mappings = Object.entries(parsed).map(([key, value]) => ({ key, value }));
-                        }
-                        console.log('Loaded from customizationData:', mappings);
-                    } catch (e) {
-                        console.log('Error parsing topicElementMappings from customizationData:', e);
-                    }
-                } else {
-                    console.log('No topic mappings data found');
-                }
-            }
-            mappings.forEach(mapping => {
-                addTopicMappingRow();
-                const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
-                const lastRow = rows[rows.length - 1];
-                lastRow.querySelector('.mapping-key').value = mapping.key;
-                lastRow.querySelector('.mapping-value').value = mapping.value;
-                // Trigger counter updates
-                const keyInput = lastRow.querySelector('.mapping-key');
-                const valueInput = lastRow.querySelector('.mapping-value');
-                keyInput.dispatchEvent(new Event('input'));
-            });
-            updateTopicMappingButtonState();
-            console.log('Topic mappings loaded');
-        }
-        
-        function collectTopicMappings() {
-            const rows = document.querySelectorAll('#topicMappingsContainer .mapping-row');
-            const mappings = {};
-            rows.forEach(row => {
-                const key = row.querySelector('.mapping-key').value.trim();
-                const value = row.querySelector('.mapping-value').value.trim();
-                if (key && value) {
-                    mappings[key] = value;
-                }
-            });
-            return JSON.stringify(mappings);
-        }
+        window.addImagePromptItem = addImagePromptItem;
+        window.removeImagePromptItem = removeImagePromptItem;
+        window.collectImagePromptArray = collectImagePromptArray;
         
         // Static Content Array functions
         function addStaticContentItem() {
@@ -1571,7 +1208,7 @@
                             items = parsed;
                         }
                     } catch (e) {
-                        console.log('Error parsing staticContentArray from customizationData:', e);
+                        // Error parsing staticContentArray from customizationData
                     }
                 }
             }
@@ -1596,60 +1233,60 @@
             return JSON.stringify(items);
         }
         
-        // Dynamic Content Array functions
-        function addDynamicContentItem() {
-            const container = document.getElementById('dynamicContentContainer');
+        // Image Prompt Array functions
+        function addImagePromptItem() {
+            const container = document.getElementById('imagePromptContainer');
             const existingRows = container.querySelectorAll('.content-row').length;
             
             if (existingRows >= 7) {
-                alert('Maximum 7 content themes allowed');
+                alert('Maximum 7 image prompts allowed');
                 return;
             }
             
             const row = document.createElement('div');
             row.className = 'content-row';
             row.innerHTML = `
-                <input type="text" placeholder="e.g., 'Healthy Meal Prep'" class="form-input content-item" maxlength="100">
-                <span class="char-counter">0/100</span>
-                <button type="button" class="remove-btn" onclick="removeDynamicContentItem(this)">×</button>
+                <input type="text" placeholder="e.g., 'A serene mountain landscape at sunset'" class="form-input content-item" maxlength="200">
+                <span class="char-counter">0/200</span>
+                <button type="button" class="remove-btn" onclick="removeImagePromptItem(this)">×</button>
             `;
             container.appendChild(row);
-            attachDynamicContentListeners(row);
-            updateDynamicButtonState();
-            saveDynamicContentArray();
+            attachImagePromptListeners(row);
+            updateImagePromptButtonState();
+            saveImagePromptArray();
         }
         
-        function removeDynamicContentItem(button) {
+        function removeImagePromptItem(button) {
             button.parentElement.remove();
-            updateDynamicButtonState();
-            saveDynamicContentArray();
+            updateImagePromptButtonState();
+            saveImagePromptArray();
         }
         
-        function updateDynamicButtonState() {
-            const container = document.getElementById('dynamicContentContainer');
+        function updateImagePromptButtonState() {
+            const container = document.getElementById('imagePromptContainer');
             const existingRows = container.querySelectorAll('.content-row').length;
-            const button = document.getElementById('addDynamicButton');
+            const button = document.getElementById('addImagePromptButton');
             button.disabled = existingRows >= 7;
-            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Content Item';
+            button.textContent = existingRows >= 7 ? 'Maximum 7 prompts reached' : '+ Add Prompt';
         }
         
-        function attachDynamicContentListeners(row) {
+        function attachImagePromptListeners(row) {
             const input = row.querySelector('.content-item');
             const counter = row.querySelector('.char-counter');
             
             function updateCounter() {
                 const length = input.value.length;
-                counter.textContent = `${length}/100`;
-                counter.style.color = length > 80 ? '#d97706' : length > 90 ? '#dc2626' : '#6b7280';
-                saveDynamicContentArray();
+                counter.textContent = `${length}/200`;
+                counter.style.color = length > 180 ? '#d97706' : length > 190 ? '#dc2626' : '#6b7280';
+                saveImagePromptArray();
             }
             
             input.addEventListener('input', updateCounter);
             updateCounter(); // Initial update
         }
         
-        function saveDynamicContentArray() {
-            const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
+        function saveImagePromptArray() {
+            const rows = document.querySelectorAll('#imagePromptContainer .content-row');
             const items = [];
             rows.forEach(row => {
                 const value = row.querySelector('.content-item').value.trim();
@@ -1657,147 +1294,41 @@
                     items.push(value);
                 }
             });
-            localStorage.setItem('dynamicContentData', JSON.stringify(items));
+            localStorage.setItem('imagePromptData', JSON.stringify(items));
         }
         
-        function loadDynamicContentArray() {
-            const container = document.getElementById('dynamicContentContainer');
+        function loadImagePromptArray() {
+            const container = document.getElementById('imagePromptContainer');
             if (!container) return;
             container.innerHTML = '';
             let items = [];
-            const data = localStorage.getItem('dynamicContentData');
+            const data = localStorage.getItem('imagePromptData');
             if (data && data !== '[]') {
                 items = JSON.parse(data);
             } else {
                 const customizationData = getJSON('customizationData', {});
-                if (customizationData.dynamicContentArray) {
+                if (customizationData.imagePrompts) {
                     try {
-                        const parsed = JSON.parse(customizationData.dynamicContentArray);
+                        const parsed = JSON.parse(customizationData.imagePrompts);
                         if (Array.isArray(parsed)) {
                             items = parsed;
                         }
                     } catch (e) {
-                        console.log('Error parsing dynamicContentArray from customizationData:', e);
+                        // Error parsing imagePrompts from customizationData
                     }
                 }
             }
             items.forEach(item => {
-                addDynamicContentItem();
-                const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
+                addImagePromptItem();
+                const rows = document.querySelectorAll('#imagePromptContainer .content-row');
                 const lastRow = rows[rows.length - 1];
                 lastRow.querySelector('.content-item').value = item;
             });
-            updateDynamicButtonState();
+            updateImagePromptButtonState();
         }
         
-        function collectDynamicContentArray() {
-            const rows = document.querySelectorAll('#dynamicContentContainer .content-row');
-            const items = [];
-            rows.forEach(row => {
-                const value = row.querySelector('.content-item').value.trim();
-                if (value) {
-                    items.push(value);
-                }
-            });
-            return JSON.stringify(items);
-        }
-        
-        // Image Style Array functions
-        function addImageStyleItem() {
-            const container = document.getElementById('imageStyleContainer');
-            const existingRows = container.querySelectorAll('.content-row').length;
-            
-            if (existingRows >= 7) {
-                alert('Maximum 7 style preferences allowed');
-                return;
-            }
-            
-            const row = document.createElement('div');
-            row.className = 'content-row';
-            row.innerHTML = `
-                <input type="text" placeholder="e.g., 'Warm colors, nature backgrounds'" class="form-input content-item" maxlength="150">
-                <span class="char-counter">0/150</span>
-                <button type="button" class="remove-btn" onclick="removeImageStyleItem(this)">×</button>
-            `;
-            container.appendChild(row);
-            attachImageStyleListeners(row);
-            updateImageStyleButtonState();
-            saveImageStyleArray();
-        }
-        
-        function removeImageStyleItem(button) {
-            button.parentElement.remove();
-            updateImageStyleButtonState();
-            saveImageStyleArray();
-        }
-        
-        function updateImageStyleButtonState() {
-            const container = document.getElementById('imageStyleContainer');
-            const existingRows = container.querySelectorAll('.content-row').length;
-            const button = document.getElementById('addImageStyleButton');
-            button.disabled = existingRows >= 7;
-            button.textContent = existingRows >= 7 ? 'Maximum 7 items reached' : '+ Add Style Item';
-        }
-        
-        function attachImageStyleListeners(row) {
-            const input = row.querySelector('.content-item');
-            const counter = row.querySelector('.char-counter');
-            
-            function updateCounter() {
-                const length = input.value.length;
-                counter.textContent = `${length}/150`;
-                counter.style.color = length > 120 ? '#d97706' : length > 135 ? '#dc2626' : '#6b7280';
-                saveImageStyleArray();
-            }
-            
-            input.addEventListener('input', updateCounter);
-            updateCounter(); // Initial update
-        }
-        
-        function saveImageStyleArray() {
-            const rows = document.querySelectorAll('#imageStyleContainer .content-row');
-            const items = [];
-            rows.forEach(row => {
-                const value = row.querySelector('.content-item').value.trim();
-                if (value) {
-                    items.push(value);
-                }
-            });
-            localStorage.setItem('imageStyleData', JSON.stringify(items));
-        }
-        
-        function loadImageStyleArray() {
-            const container = document.getElementById('imageStyleContainer');
-            if (!container) return;
-            container.innerHTML = '';
-            let items = [];
-            const data = localStorage.getItem('imageStyleData');
-            if (data && data !== '[]') {
-                items = JSON.parse(data);
-            } else {
-                const customizationData = getJSON('customizationData', {});
-                if (customizationData.imageStyleArray) {
-                    try {
-                        const parsed = JSON.parse(customizationData.imageStyleArray);
-                        if (Array.isArray(parsed)) {
-                            items = parsed;
-                        }
-                    } catch (e) {
-                        console.log('Error parsing imageStyleArray from customizationData:', e);
-                    }
-                }
-            }
-            items.forEach(item => {
-                addImageStyleItem();
-                const rows = document.querySelectorAll('#imageStyleContainer .content-row');
-                const lastRow = rows[rows.length - 1];
-                lastRow.querySelector('.content-item').value = item;
-            });
-            updateImageStyleButtonState();
-        }
-        
-        function collectImageStyleArray() {
-            const rows = document.querySelectorAll('#imageStyleContainer .content-row');
+        function collectImagePromptArray() {
+            const rows = document.querySelectorAll('#imagePromptContainer .content-row');
             const items = [];
             rows.forEach(row => {
                 const value = row.querySelector('.content-item').value.trim();
@@ -1812,20 +1343,11 @@
         
         // Initialize form persistence for customization form after a short delay
         // to ensure grid selection event listeners are set up
-        // DISABLED: Auto-saving was causing data to persist across sessions
-        /*
         setTimeout(() => {
-            const customizationPersistence = new BusinessFormPersistence('mainContent', 'customization-form-data');
-            customizationPersistence.init();
             // Load persisted data
-            loadTopicMappings();
             loadStaticContentArray();
-            loadDynamicContentArray();
-            loadImageStyleArray();
+            loadImagePromptArray();
         }, 100);
-        */
-        
-        // Load topic mappings immediately on module load - removed to avoid loading before customizationData is available
     </script>
 </body>
 </html>

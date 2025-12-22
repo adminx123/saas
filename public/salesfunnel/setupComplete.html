@@ -126,18 +126,14 @@
                     },
                     post_times: ['13:00'], // Default
                     mixed_mode: 'dynamic_text_static_image', // Default
-                    topicElementMappings: customizationData.topicElementMappings ? JSON.parse(customizationData.topicElementMappings) : {},
-                    imagePromptTemplate: customizationData.imagePromptTemplate || '',
                     staticContentArray: customizationData.staticContentArray ? JSON.parse(customizationData.staticContentArray) : [],
-                    dynamicContentArray: customizationData.dynamicContentArray ? JSON.parse(customizationData.dynamicContentArray) : [],
                     imageStyleArray: customizationData.imageStyleArray ? JSON.parse(customizationData.imageStyleArray) : [],
                     platformConsiderations: customizationData.platformConsiderations || '',
                     industry: customizationData.industry || '',
                     chatAudience: customizationData.chatAudience || '',
                     chatWidgetName: customizationData.chatWidgetName || '',
                     chatColors: customizationData.chatColors || '',
-                    postingSchedule: customizationData.postingSchedule || '[]',
-                    scheduleDetails: customizationData.scheduleDetails || ''
+                    postingSchedule: customizationData.postingSchedule || '[]'
                 };
 
                 // For now, no secrets in setup; OAuth tokens would be added separately
