@@ -30,3 +30,6 @@ client/
 
 # Exception: Keep redirectUrl.html
 !src/payment/redirectUrl.html
+
+# Exception: Keep embed-schema.js
+!src/database/schema/embed-schema.js
