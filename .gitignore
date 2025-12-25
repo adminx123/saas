@@ -19,6 +19,12 @@ node_modules/
 # any folder named hide
 hide
 
+# Exception: Keep redirectUrl.html
+!src/payment/redirectUrl.html
+
+# Exception: Keep embed-schema.js
+!src/database/schema/embed-schema.js
+
 # Source code folder
 src/
 
@@ -27,9 +33,3 @@ docs/
 
 # Client folder
 client/
-
-# Exception: Keep redirectUrl.html
-!src/payment/redirectUrl.html
-
-# Exception: Keep embed-schema.js
-!src/database/schema/embed-schema.js
