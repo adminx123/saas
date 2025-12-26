@@ -294,30 +294,6 @@
         </div>
         </div>
 
-        <!-- Social Posting Configuration Section -->
-            <div class="package-card collapsed" id="replySection" style="display: none;">
-                <div class="package-header">
-                    <h3 class="card-title">Social Media Reply Configuration</h3>
-                    <div class="card-status">
-                        <span class="status-text">To Do</span>
-                    </div>
-                </div>
-                <div class="card-content">
-
-                <div class="form-group">
-                    <label class="form-label" for="replyGuidelines">Comment Reply Guidelines</label>
-                    <textarea class="form-textarea" id="replyGuidelines" name="replyGuidelines"
-                        placeholder="Specific guidelines for how the AI should respond to comments on social media posts (e.g., always be positive, focus on engagement, maintain brand voice)" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="platformConsiderations">Platform Considerations</label>
-                    <textarea class="form-textarea" id="platformConsiderations" name="platformConsiderations"
-                        placeholder="Platform-specific considerations for comment replies (e.g., Instagram comments should be under 900 characters, Twitter replies should be concise)" required></textarea>
-                </div>
-            </div>
-            </div>
-
         <!-- Deployment Section -->
         <div class="package-card collapsed" data-section="deployment">
             <div class="package-header">
@@ -726,14 +702,10 @@
                 
                 // Hide all config sections by default
                 const conversationalSection = document.getElementById('conversationalSection');
-                const replySection = document.getElementById('replySection');
                 const socialSection = document.getElementById('socialSection');
                 
                 if (conversationalSection) {
                     conversationalSection.style.display = 'none';
-                }
-                if (replySection) {
-                    replySection.style.display = 'none';
                 }
                 if (socialSection) {
                     socialSection.style.display = 'none';
@@ -751,12 +723,10 @@
                     // Pro Bundle: Show all configs
                     if (socialSection) socialSection.style.display = 'block';
                     if (conversationalSection) conversationalSection.style.display = 'block';
-                    if (replySection) replySection.style.display = 'block';
                 } else if (packageType === 'enterprise') {
                     // Enterprise: Show all configs
                     if (socialSection) socialSection.style.display = 'block';
                     if (conversationalSection) conversationalSection.style.display = 'block';
-                    if (replySection) replySection.style.display = 'block';
                 }
                 
                 const title = document.querySelector('.setup-title');
@@ -846,10 +816,6 @@
                 sections.push('social'); // Social media packages
             }
             
-            if (packageType === 'pro' || packageType === 'enterprise') {
-                sections.push('reply'); // Reply logic for higher tiers
-            }
-            
             return sections;
         }
 
@@ -932,9 +898,7 @@
                 brandFiles: 'conversational',
                 knowledgeBase: 'conversational',
                 postingSchedule: 'social',
-                staticContentArray: 'social',
-                replyGuidelines: 'reply',
-                platformConsiderations: 'reply'
+                staticContentArray: 'social'
             };
             
             const filteredSetupData = {};
@@ -966,11 +930,6 @@
             
             if (relevantSections.includes('conversational') && !filteredSetupData.chatAudience) {
                 alert('Please fill in the target users.');
-                return;
-            }
-            
-            if (relevantSections.includes('reply') && (!filteredSetupData.replyGuidelines || !filteredSetupData.platformConsiderations)) {
-                alert('Please fill in reply guidelines and platform considerations.');
                 return;
             }
             
