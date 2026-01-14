@@ -77,7 +77,7 @@ var TERMS_OF_SERVICE = {
             title: "Product-Specific Terms: Social Media Automation",
             content: `**Managed Automation for Businesses**
 - INEXASLI provides comprehensive social media automation including content creation, posting schedules, and basic engagement monitoring.
-- Services include automated posting to Instagram, Facebook, LinkedIn, and X (formerly Twitter) based on client's selected package.
+- Services include automated posting to Instagram, Facebook, and X (formerly Twitter) based on client's selected package.
 - All content is AI-generated and posted automatically without pre-publication review - businesses must monitor posts after publication.
 
 **Platform Compliance**
@@ -138,7 +138,6 @@ var TERMS_OF_SERVICE = {
 **Platform-Specific Disclaimers**
 - **Instagram/Facebook**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries.
 - **Twitter/X**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries (future implementation).
-- **LinkedIn**: Automated responses may not reflect human intent; users should verify with business directly for important inquiries.
 
 **End-User Privacy**
 - DM content is processed through INEXASLI systems and transmitted to xAI API for response generation.
@@ -238,11 +237,6 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 - Utilizes Facebook Business Manager and Meta Business API.
 - Subject to Meta's terms of service and platform policies.
 - Changes to Meta's API may affect service functionality.
-
-**LinkedIn Business Posting**
-- Requires LinkedIn Business account with appropriate permissions.
-- Subject to LinkedIn's professional platform guidelines.
-- Content must maintain professional standards appropriate for LinkedIn.
 
 **X (Twitter) Integration**
 - Subject to X's terms of service and API access policies.
@@ -482,7 +476,7 @@ var PRIVACY_POLICY = {
         {
             title: "Information Sharing",
             content: `**Third-Party Platforms**
-- Social media content shared with connected platforms (Instagram, Facebook, LinkedIn, X)
+- Social media content shared with connected platforms (Instagram, Facebook, X)
 - Platform APIs receive necessary data for content posting
 - Each platform governed by their respective privacy policies
 
