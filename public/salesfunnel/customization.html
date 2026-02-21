@@ -69,20 +69,20 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="brandName">Brand Name</label>
-                <input type="text" class="form-input" id="brandName" name="brandName"
+                <label class="form-label" for="brand_name">Brand Name</label>
+                <input type="text" class="form-input" id="brand_name" name="brand_name"
                     placeholder="e.g., INEXASLI, Your Company Name" required>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="supportEmail">Support Email</label>
-                <input type="email" class="form-input" id="supportEmail" name="supportEmail"
+                <label class="form-label" for="support_email">Support Email</label>
+                <input type="email" class="form-input" id="support_email" name="support_email"
                     placeholder="e.g., support@yourcompany.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="defaultTone">Default Tone</label>
-                    <select class="form-select" id="defaultTone" name="defaultTone" required>
+                    <label class="form-label" for="default_tone">Default Tone</label>
+                    <select class="form-select" id="default_tone" name="default_tone" required>
                         <option value="professional">Professional</option>
                         <option value="friendly">Friendly</option>
                         <option value="casual">Casual</option>
@@ -94,18 +94,18 @@
             <div class="form-group">
                 <label class="form-label">Legal URLs</label>
                 <div class="legal-urls-group">
-                    <input type="url" class="form-input" id="privacyUrl" name="privacyUrl"
+                    <input type="url" class="form-input" id="legal_urls_privacy" name="legal_urls_privacy"
                         placeholder="Privacy Policy URL" required>
-                    <input type="url" class="form-input" id="termsUrl" name="termsUrl"
+                    <input type="url" class="form-input" id="legal_urls_terms" name="legal_urls_terms"
                         placeholder="Terms of Service URL" required>
-                    <input type="url" class="form-input" id="dpaUrl" name="dpaUrl"
+                    <input type="url" class="form-input" id="legal_urls_dpa" name="legal_urls_dpa"
                         placeholder="Data Processing Agreement URL" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="brandVoice">Brand Voice</label>
-                <textarea class="form-textarea" id="brandVoice" name="brandVoice"
+                <label class="form-label" for="brand_voice">Brand Voice</label>
+                <textarea class="form-textarea" id="brand_voice" name="brand_voice"
                     placeholder="Describe your brand's voice and personality (e.g., professional yet approachable, practical philosophy expert)" required></textarea>
             </div>
         </div>
@@ -140,19 +140,19 @@
 
                 <div class="form-group">
                     <label class="form-label">Chat Users</label>
-                    <textarea class="form-textarea" id="chatAudience" name="chatAudience"
+                    <textarea class="form-textarea" id="chat_audience" name="chat_audience"
                         placeholder="Describe your target users (e.g., age, interests, demographics)" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Chat Widget Name</label>
-                    <input type="text" class="form-input" id="chatWidgetName" name="chatWidgetName"
+                    <input type="text" class="form-input" id="chat_widget_name" name="chat_widget_name"
                         placeholder="Enter a name for your chat widget" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Chat Colours</label>
-                    <textarea class="form-textarea" id="chatColors" name="chatColors"
+                    <textarea class="form-textarea" id="enabled_chat_colorway" name="enabled_chat_colorway"
                         placeholder="Describe your preferred chat colours (e.g., blue theme, green accents)" required></textarea>
                 </div>
 
@@ -261,7 +261,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="postingSchedule" id="postingSchedule" required>
+                <input type="hidden" name="post_times" id="post_times" required>
             </div>
 
             <div class="form-group">
@@ -712,10 +712,10 @@
                 toggle.addEventListener('click', function() {
                     this.classList.toggle('active');
                     // Update hidden input for form persistence
-                    const postingScheduleInput = document.getElementById('postingSchedule');
-                    if (postingScheduleInput) {
+                    const post_timesInput = document.getElementById('post_times');
+                    if (post_timesInput) {
                         const activeDays = Array.from(document.querySelectorAll('.day-toggle.active')).map(t => t.dataset.day);
-                        postingScheduleInput.value = JSON.stringify(activeDays);
+                        post_timesInput.value = JSON.stringify(activeDays);
                     }
                     // Check completion status of the social media card
                     const socialCard = document.querySelector('.package-card[data-section="social"]');
@@ -811,10 +811,10 @@
             });
             
             // Collect legal URLs as an object
-            setupData.legalUrls = {
-                privacy: document.getElementById('privacyUrl').value,
-                terms: document.getElementById('termsUrl').value,
-                dpa: document.getElementById('dpaUrl').value
+            setupData.legal_urls = {
+                privacy: document.getElementById('legal_urls_privacy').value,
+                terms: document.getElementById('legal_urls_terms').value,
+                dpa: document.getElementById('legal_urls_dpa').value
             };
             
             // Collect static content array
@@ -837,29 +837,29 @@
             
             // Collect posting schedule - only if social section is relevant
             if (relevantSections.includes('social')) {
-                const postingScheduleInput = document.getElementById('postingSchedule');
-                setupData.postingSchedule = postingScheduleInput ? JSON.parse(postingScheduleInput.value || '[]') : [];
+                const post_timesInput = document.getElementById('post_times');
+                setupData.post_times = post_timesInput ? JSON.parse(post_timesInput.value || '[]') : [];
             }
             
             // Package-aware data filtering: Filter setupData to only include fields from relevant sections
             // This prevents data contamination by excluding fields from sections not applicable to the current package
             const fieldSectionMap = {
                 timezone: 'main',
-                brandName: 'main',
-                supportEmail: 'main',
-                legalUrls: 'main',
-                brandVoice: 'main',
+                brand_name: 'main',
+                support_email: 'main',
+                legal_urls: 'main',
+                brand_voice: 'main',
                 industry: 'conversational',
                 roleScope: 'main',
                 functions: 'main',
                 roles: 'main',
                 roleScopeChat: 'conversational',
                 rolesChat: 'conversational',
-                chatWidgetName: 'conversational',
-                chatColors: 'conversational',
+                chat_widget_name: 'conversational',
+                enabled_chat_colorway: 'conversational',
                 brandFiles: 'conversational',
                 knowledgeBase: 'conversational',
-                postingSchedule: 'social',
+                post_times: 'social',
                 staticContentArray: 'social'
             };
             
@@ -890,12 +890,12 @@
                 return;
             }
             
-            if (relevantSections.includes('conversational') && !filteredSetupData.chatAudience) {
+            if (relevantSections.includes('conversational') && !filteredSetupData.chat_audience) {
                 alert('Please fill in the target users.');
                 return;
             }
             
-            if (relevantSections.includes('social') && (!filteredSetupData.postingSchedule || filteredSetupData.postingSchedule.length === 0)) {
+            if (relevantSections.includes('social') && (!filteredSetupData.post_times || filteredSetupData.post_times.length === 0)) {
                 alert('Please select at least one day for posting.');
                 return;
             }
@@ -913,8 +913,8 @@
                 try {
                     // Create FormData with files and brand name
                     const formData = new FormData();
-                    const brandName = document.getElementById('brandName').value.trim() || 'unknown';
-                    formData.append('brandName', brandName);
+                    const brand_name = document.getElementById('brand_name').value.trim() || 'unknown';
+                    formData.append('brand_name', brand_name);
                     allFilesToUpload.forEach((file, index) => {
                         formData.append(`file_${index}`, file);
                     });
@@ -948,8 +948,8 @@
             }
             
             // Generate client ID from brand name
-            const brandName = filteredSetupData.brandName || 'unknown';
-            const clientId = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
+            const brand_name = filteredSetupData.brand_name || 'unknown';
+            const clientId = brand_name.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
             filteredSetupData.clientId = clientId;
             
             // Store customization data for Stripe integration
