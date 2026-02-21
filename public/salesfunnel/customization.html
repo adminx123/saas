@@ -159,9 +159,9 @@
 
 
                 <!-- Operational Focus Selection -->
-                <div class="form-group" id="roleScopeGroupChat">
-                    <label class="form-label">Operational Focus</label>
-                    <div class="grid-selection" id="roleScopeGridChat" data-type="single" data-name="roleScopeChat">
+                <div class="form-group" id="flowTypeGroupChat">
+                    <label class="form-label">Flow Type</label>
+                    <div class="grid-selection" id="flowTypeGridChat" data-type="single" data-name="flowTypeChat">
                         <div class="grid-item1" data-value="internal">
                             <div class="grid-item-text">Internal</div>
                         </div>
@@ -172,13 +172,13 @@
                             <div class="grid-item-text">Both</div>
                         </div>
                     </div>
-                    <input type="hidden" name="roleScopeChat" id="roleScopeChat" required>
+                    <input type="hidden" name="flowTypeChat" id="flowTypeChat" required>
                 </div>
 
                 <!-- Department Selection -->
-                <div class="form-group" id="functionGroupChat" style="display: none;">
+                <div class="form-group" id="flowSubtypeGroupChat" style="display: none;">
                     <label class="form-label">Departments</label>
-                    <div class="grid-selection" id="functionGridChat" data-type="multiple" data-name="functionsChat">
+                    <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="flowSubtypeChat">
                         <div class="grid-item1" data-value="sales" data-scope="both">
                             <div class="grid-item-text">Sales</div>
                         </div>
@@ -195,36 +195,9 @@
                             <div class="grid-item-text">Operations</div>
                         </div>
                     </div>
-                    <input type="hidden" name="functionsChat" id="functionsChat" required>
+                    <input type="hidden" name="flowSubtypeChat" id="flowSubtypeChat" required>
                 </div>
 
-                <!-- Role Selection -->
-                <div class="form-group" id="roleGroupChat" style="display: none;">
-                    <label class="form-label">AI Chat Role Support</label>
-                    <div class="grid-selection" id="roleGridChat" data-type="multiple" data-name="rolesChat">
-                        <!-- External Roles -->
-                        <div class="grid-item1" data-value="customer-service-rep" data-scope="external" data-function="support">
-                            <div class="grid-item-text">Customer Service Rep</div>
-                        </div>
-                        <div class="grid-item1" data-value="sales-assistant" data-scope="both" data-function="sales">
-                            <div class="grid-item-text">Sales Assistant</div>
-                        </div>
-                        <!-- Internal Roles -->
-                        <div class="grid-item1" data-value="hr-assistant" data-scope="internal" data-function="hr">
-                            <div class="grid-item-text">HR Assistant</div>
-                        </div>
-                        <div class="grid-item1" data-value="admin-assistant" data-scope="internal" data-function="admin">
-                            <div class="grid-item-text">Admin Assistant</div>
-                        </div>
-                        <div class="grid-item1" data-value="it-support" data-scope="internal" data-function="operations">
-                            <div class="grid-item-text">IT Support</div>
-                        </div>
-                        <div class="grid-item1" data-value="team-coordinator" data-scope="internal" data-function="operations">
-                            <div class="grid-item-text">Team Coordinator</div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="rolesChat" id="rolesChat" required>
-                </div>
 
                 <!-- Category Selection (hidden for RAG - users just upload docs) -->
                 <div class="form-group" id="categoryGrid" style="display: none;">
@@ -552,17 +525,17 @@
         }
         
         function updateVisibilityChat() {
-            const selectedScopeItem = document.querySelector('#roleScopeGridChat .grid-item1.selected');
-            const selectedScope = selectedScopeItem ? selectedScopeItem.dataset.value : null;
+            const selectedFlowTypeItem = document.querySelector('#flowTypeGridChat .grid-item1.selected');
+            const selectedFlowType = selectedFlowTypeItem ? selectedFlowTypeItem.dataset.value : null;
             
-            if (selectedScope) {
-                document.getElementById('functionGroupChat').style.display = 'block';
+            if (selectedFlowType) {
+                document.getElementById('flowSubtypeGroupChat').style.display = 'block';
                 
                 // Filter functions
-                const functions = document.querySelectorAll('#functionGridChat .grid-item1');
+                const flowSubtypes = document.querySelectorAll('#flowSubtypeGridChat .grid-item1');
                 functions.forEach(item => {
-                    const scope = item.dataset.scope;
-                    if (scope === selectedScope || scope === 'both') {
+                    const flowType = item.dataset.scope;
+                    if (flowType === selectedFlowType || flowType === 'both') {
                         item.style.display = 'block';
                     } else {
                         item.style.display = 'none';
@@ -571,35 +544,35 @@
                 });
                 
                 // Check selected functions
-                const selectedFunctions = document.querySelectorAll('#functionGridChat .grid-item1.selected');
+                const selectedFlowSubtypes = document.querySelectorAll('#flowSubtypeGridChat .grid-item1.selected');
                 const selectedFunctionValues = Array.from(selectedFunctions).map(item => item.dataset.value);
-                
+
                 if (selectedFunctions.length > 0) {
-                    document.getElementById('roleGroupChat').style.display = 'block';
-                    
-                    // Filter roles
-                    const roles = document.querySelectorAll('#roleGridChat .grid-item1');
-                    roles.forEach(item => {
-                        const scope = item.dataset.scope;
+                    document.getElementById('personaGroupChat').style.display = 'block';
+
+                    // Filter personas
+                    const personas = document.querySelectorAll('#personaGridChat .grid-item1');
+                    personas.forEach(item => {
+                        const flowType = item.dataset.scope;
                         const func = item.dataset.function;
-                        if ((scope === selectedScope || scope === 'both') && selectedFunctionValues.includes(func)) {
+                        if ((flowType === selectedFlowType || flowType === 'both') && selectedFunctionValues.includes(func)) {
                             item.style.display = 'block';
                         } else {
                             item.style.display = 'none';
                             item.classList.remove('selected');
                         }
                     });
-                    
+
                     // Category grid no longer needed for RAG
                     // populateCategoryGrid();
                     // document.getElementById('categoryGrid').style.display = 'block';
                 } else {
-                    document.getElementById('roleGroupChat').style.display = 'none';
+                    document.getElementById('personaGroupChat').style.display = 'none';
                     document.getElementById('categoryGrid').style.display = 'none';
                 }
             } else {
-                document.getElementById('functionGroupChat').style.display = 'none';
-                document.getElementById('roleGroupChat').style.display = 'none';
+                document.getElementById('flowSubtypeGroupChat').style.display = 'none';
+                document.getElementById('personaGroupChat').style.display = 'none';
             }
         }
         
