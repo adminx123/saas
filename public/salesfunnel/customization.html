@@ -547,32 +547,10 @@
                 const selectedFlowSubtypes = document.querySelectorAll('#flowSubtypeGridChat .grid-item1.selected');
                 const selectedFunctionValues = Array.from(selectedFunctions).map(item => item.dataset.value);
 
-                if (selectedFunctions.length > 0) {
-                    document.getElementById('personaGroupChat').style.display = 'block';
-
-                    // Filter personas
-                    const personas = document.querySelectorAll('#personaGridChat .grid-item1');
-                    personas.forEach(item => {
-                        const flowType = item.dataset.scope;
-                        const func = item.dataset.function;
-                        if ((flowType === selectedFlowType || flowType === 'both') && selectedFunctionValues.includes(func)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                            item.classList.remove('selected');
-                        }
-                    });
-
-                    // Category grid no longer needed for RAG
-                    // populateCategoryGrid();
-                    // document.getElementById('categoryGrid').style.display = 'block';
-                } else {
-                    document.getElementById('personaGroupChat').style.display = 'none';
-                    document.getElementById('categoryGrid').style.display = 'none';
-                }
+                // Persona selection removed; category grid hidden for RAG
+                document.getElementById('categoryGrid').style.display = 'none';
             } else {
                 document.getElementById('flowSubtypeGroupChat').style.display = 'none';
-                document.getElementById('personaGroupChat').style.display = 'none';
             }
         }
         
@@ -1041,17 +1019,7 @@
         }
 
         function filterRolesByScope() {
-            const selectedScope = document.getElementById('roleScopeChat').value;
-            const roleItems = document.querySelectorAll('#roleGridChat .grid-item1');
-            
-            roleItems.forEach(item => {
-                const itemScope = item.getAttribute('data-scope');
-                if (selectedScope === 'both' || itemScope === 'both' || itemScope === selectedScope) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // roleScopeChat and roleGridChat removed; no filtering needed
         }
 
         // Event listeners
