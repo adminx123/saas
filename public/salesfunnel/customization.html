@@ -161,7 +161,7 @@
                 <!-- Operational Focus Selection -->
                 <div class="form-group" id="flowTypeGroupChat">
                     <label class="form-label">Flow Type</label>
-                    <div class="grid-selection" id="flowTypeGridChat" data-type="single" data-name="flowTypeChat">
+                    <div class="grid-selection" id="flowTypeGridChat" data-type="single" data-name="flow_type_chat">
                         <div class="grid-item1" data-value="internal">
                             <div class="grid-item-text">Internal</div>
                         </div>
@@ -172,13 +172,13 @@
                             <div class="grid-item-text">Both</div>
                         </div>
                     </div>
-                    <input type="hidden" name="flowTypeChat" id="flowTypeChat" required>
+                    <input type="hidden" name="flow_type_chat" id="flow_type_chat" required>
                 </div>
 
                 <!-- Department Selection -->
                 <div class="form-group" id="flowSubtypeGroupChat" style="display: none;">
                     <label class="form-label">Departments</label>
-                    <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="flowSubtypeChat">
+                    <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="flow_subtype_chat">
                         <div class="grid-item1" data-value="sales" data-scope="both">
                             <div class="grid-item-text">Sales</div>
                         </div>
@@ -195,7 +195,7 @@
                             <div class="grid-item-text">Operations</div>
                         </div>
                     </div>
-                    <input type="hidden" name="flowSubtypeChat" id="flowSubtypeChat" required>
+                    <input type="hidden" name="flow_subtype_chat" id="flow_subtype_chat" required>
                 </div>
 
 
@@ -211,8 +211,8 @@
                 <div class="form-group">
                     <label class="form-label">Brand Assets & Knowledge Documents</label>
                     <p style="color: #666; font-size: 0.9em;">Upload your logo, brand images, and any knowledge documents (FAQs, manuals, procedures, etc.) - the AI will use them to provide accurate responses.</p>
-                    <input type="file" class="form-input" id="brandFiles" name="brandFiles" multiple accept="image/*,.txt,.pdf,.doc,.docx" style="display:none;" required>
-                    <button type="button" id="brandUploadBtn" class="action-button" onclick="document.getElementById('brandFiles').click()">Upload Brand Assets & Knowledge Documents</button>
+                    <input type="file" class="form-input" id="brand_files" name="brand_files" multiple accept="image/*,.txt,.pdf,.doc,.docx" style="display:none;" required>
+                    <button type="button" id="brandUploadBtn" class="action-button" onclick="document.getElementById('brand_files').click()">Upload Brand Assets & Knowledge Documents</button>
                     <div id="brandFileList"></div>
                 </div>
             </div>
