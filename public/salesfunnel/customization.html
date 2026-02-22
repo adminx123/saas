@@ -160,16 +160,16 @@
 
                 <!-- Operational Focus Selection -->
                 <div class="form-group" id="flowTypeGroupChat">
-                    <label class="form-label">Flow Type</label>
+                    <label class="form-label">AI Assistant Type</label>
                     <div class="grid-selection" id="flowTypeGridChat" data-type="single" data-name="flow_type_chat">
                         <div class="grid-item1" data-value="internal">
-                            <div class="grid-item-text">Internal</div>
+                            <div class="grid-item-text">Customer Support Chatbot</div>
                         </div>
                         <div class="grid-item1" data-value="external">
-                            <div class="grid-item-text">External</div>
+                            <div class="grid-item-text">Form & Workflow Assistant</div>
                         </div>
                         <div class="grid-item1" data-value="both">
-                            <div class="grid-item-text">Both</div>
+                            <div class="grid-item-text">Knowledge Document Assistant (Internal)</div>
                         </div>
                     </div>
                     <input type="hidden" name="flow_type_chat" id="flow_type_chat" required>
@@ -177,23 +177,9 @@
 
                 <!-- Department Selection -->
                 <div class="form-group" id="flowSubtypeGroupChat" style="display: none;">
-                    <label class="form-label">Departments</label>
+                    <label class="form-label">Assistant Features</label>
                     <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="flow_subtype_chat">
-                        <div class="grid-item1" data-value="sales" data-scope="both">
-                            <div class="grid-item-text">Sales</div>
-                        </div>
-                        <div class="grid-item1" data-value="support" data-scope="both">
-                            <div class="grid-item-text">Support</div>
-                        </div>
-                        <div class="grid-item1" data-value="admin" data-scope="internal">
-                            <div class="grid-item-text">Admin</div>
-                        </div>
-                        <div class="grid-item1" data-value="hr" data-scope="internal">
-                            <div class="grid-item-text">HR</div>
-                        </div>
-                        <div class="grid-item1" data-value="operations" data-scope="both">
-                            <div class="grid-item-text">Operations</div>
-                        </div>
+                        <!-- Features populated based on AI type selection -->
                     </div>
                     <input type="hidden" name="flow_subtype_chat" id="flow_subtype_chat" required>
                 </div>
@@ -531,22 +517,57 @@
             if (selectedFlowType) {
                 document.getElementById('flowSubtypeGroupChat').style.display = 'block';
                 
-                // Filter functions
-                const flowSubtypes = document.querySelectorAll('#flowSubtypeGridChat .grid-item1');
-                functions.forEach(item => {
-                    const flowType = item.dataset.scope;
-                    if (flowType === selectedFlowType || flowType === 'both') {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                        item.classList.remove('selected');
-                    }
+                // Define features per AI type
+                const featuresByType = {
+                    'internal': [
+                        { value: 'scheduling', text: 'Scheduling' },
+                        { value: 'payment', text: 'Payment' },
+                        { value: 'support', text: 'Support' },
+                        { value: 'sales', text: 'Sales' },
+                        { value: 'billing', text: 'Billing' }
+                    ],
+                    'external': [
+                        { value: 'employee_forms', text: 'Employee Forms' },
+                        { value: 'incident_reports', text: 'Incident Reports' },
+                        { value: 'custom_workflows', text: 'Custom Workflows' }
+                    ],
+                    'both': [
+                        { value: 'faq_answers', text: 'FAQ Answers' },
+                        { value: 'manual_lookup', text: 'Manual Lookup' },
+                        { value: 'policy_guidance', text: 'Policy Guidance' }
+                    ]
+                };
+                
+                const features = featuresByType[selectedFlowType] || [];
+                
+                // Clear existing features
+                const featuresGrid = document.getElementById('flowSubtypeGridChat');
+                featuresGrid.innerHTML = '';
+                
+                // Populate new features
+                features.forEach(feature => {
+                    const featureDiv = document.createElement('div');
+                    featureDiv.className = 'grid-item1';
+                    featureDiv.dataset.value = feature.value;
+                    featureDiv.innerHTML = `<div class="grid-item-text">${feature.text}</div>`;
+                    featuresGrid.appendChild(featureDiv);
                 });
                 
-                // Check selected functions
-                const selectedFlowSubtypes = document.querySelectorAll('#flowSubtypeGridChat .grid-item1.selected');
-                const selectedFunctionValues = Array.from(selectedFunctions).map(item => item.dataset.value);
-
+                // Re-attach event listeners to new items
+                const newItems = featuresGrid.querySelectorAll('.grid-item1');
+                newItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        this.classList.toggle('selected');
+                        const selectedItems = featuresGrid.querySelectorAll('.grid-item1.selected');
+                        const selectedValues = Array.from(selectedItems).map(i => i.dataset.value);
+                        document.getElementById('flow_subtype_chat').value = selectedValues.join(',');
+                        
+                        // Check card completion
+                        const card = this.closest('.package-card');
+                        if (card) checkCardCompletion(card);
+                    });
+                });
+                
                 // Persona selection removed; category grid hidden for RAG
                 document.getElementById('categoryGrid').style.display = 'none';
             } else {
