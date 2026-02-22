@@ -373,7 +373,7 @@
                 let hasValue = false;
                 if (input.type === 'file') {
                     // Special handling for brandFiles - check the uploadedBrandFiles array
-                    if (input.id === 'brandFiles') {
+                    if (input.id === 'brand_files') {
                         hasValue = uploadedBrandFiles.length > 0;
                     } else {
                         hasValue = input.files.length > 0;
@@ -1045,7 +1045,7 @@
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('brandFiles').addEventListener('change', handleBrandFileSelect);
+            document.getElementById('brand_files').addEventListener('change', handleBrandFileSelect);
             // Initial check
             updateBrandFileDisplay();
             
