@@ -906,10 +906,7 @@
             });
             if (!allCardsCompleted) return;
             
-            if (relevantSections.includes('conversational') && !filteredSetupData.rolesChat) {
-                alert('Please select AI chat role support.');
-                return;
-            }
+            // ...existing code...
             
             if (relevantSections.includes('conversational') && !filteredSetupData.chat_audience) {
                 alert('Please fill in the target users.');
@@ -998,15 +995,7 @@
         };
 
         function getSelectedRoles() {
-            const rolesInput = document.getElementById('rolesChat');
-            if (rolesInput && rolesInput.value) {
-                const value = rolesInput.value;
-                if (value.startsWith('[')) {
-                    return JSON.parse(value);
-                } else {
-                    return value.split(',').map(s => s.trim());
-                }
-            }
+            // rolesChat is unused; always return empty array
             return [];
         }
 
