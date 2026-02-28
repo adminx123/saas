@@ -368,11 +368,15 @@
         // Show/hide OAuth buttons based on selected platforms from localStorage
         function showSelectedPlatformButtons() {
             const quoteData = JSON.parse(localStorage.getItem('quoteData') || '{}');
-            const selectedPackage = quoteData.package || {};
-            const selectedPlatforms = quoteData.platforms || [];
+            const selectedPackageType = quoteData['$selected_package'] || '';
+            const selectedPlatforms = quoteData[`$${selectedPackageType}_platforms`]
+                || quoteData['$social_platforms']
+                || quoteData['$pro_platforms']
+                || quoteData['$enterprise_platforms']
+                || [];
             
             console.log('Quote data:', quoteData);
-            console.log('Selected package:', selectedPackage);
+            console.log('Selected package type:', selectedPackageType);
             console.log('Selected platforms:', selectedPlatforms);
             
             // Check if buttons exist
@@ -387,7 +391,7 @@
             });
             
             // If no package data at all, show all buttons (for testing)
-            if (!selectedPackage || Object.keys(selectedPackage).length === 0) {
+            if (!selectedPackageType) {
                 console.log('No package data found, showing all buttons');
                 if (instagramBtn) instagramBtn.style.display = 'inline-flex';
                 if (facebookBtn) facebookBtn.style.display = 'inline-flex';

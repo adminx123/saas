@@ -668,16 +668,18 @@
             
             if (packageData) {
                 const quoteData = JSON.parse(packageData);
-                const selectedPackage = quoteData.package;
+                const packageType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
+                const packageMeta = quoteData._meta || quoteData.package || {};
                 
                 // Optional: Add package info to page
                 const subtitle = document.querySelector('.setup-subtitle');
                 if (subtitle) {
-                    subtitle.textContent = `Configure your AI chat and reply assistants for your business needs (Customizing ${selectedPackage.name})`;
+                    const pkgDisplayName = packageMeta.name || (packageType.charAt(0).toUpperCase() + packageType.slice(1));
+                    subtitle.textContent = `Configure your AI chat and reply assistants for your business needs (Customizing ${pkgDisplayName})`;
                 }
                 
                 // Show/hide sections based on selected package
-                const packageType = selectedPackage.type; // 'basic', 'social', 'pro', 'enterprise'
+                // packageType: 'basic', 'social', 'pro', 'enterprise'
                 
                 // Business category selection (shown for all packages since they all include chat)
                 const businessCategoryGroup = document.getElementById('businessCategoryGroup');
@@ -811,7 +813,7 @@
                 return;
             }
             const quoteData = JSON.parse(packageData);
-            const packageType = quoteData.package.type;
+            const packageType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
             
             // Determine which sections are relevant for this package
             const relevantSections = getRelevantSections(packageType);

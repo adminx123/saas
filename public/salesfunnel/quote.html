@@ -122,16 +122,51 @@
         function displayQuote() {
             if (!quoteData) return;
 
-            const { package: pkg, addons, platforms, total } = quoteData;
+            // Adapt new quoteData format to internal variables
+            const pkgType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
+            const meta = quoteData._meta || {};
+            const pkg = {
+                type: pkgType,
+                name: meta.name || (pkgType.charAt(0).toUpperCase() + pkgType.slice(1)),
+                monthlyPrice: meta.monthlyPrice || getMonthlyFee(pkgType),
+                features: []
+            };
+            const platforms = quoteData[`$${pkgType}_platforms`]
+                || quoteData['$social_platforms']
+                || quoteData['$pro_platforms']
+                || quoteData['$enterprise_platforms']
+                || quoteData.platforms || [];
+
+            // Build addons array from flag-based structure (new format)
+            const _addonNameMap = {
+                iterations_extra: '+10 Content Refinements',
+                ai_content_generation: 'AI Content Generation',
+                white_label_chat: 'White-label Chat',
+                basic_scheduling: 'Basic Scheduling Only',
+                reduced_frequency: 'Reduced Posting Frequency'
+            };
+            const _addonPriceMap = {
+                iterations_extra: 19, ai_content_generation: 49,
+                white_label_chat: 29, basic_scheduling: -50, reduced_frequency: -30
+            };
+            let addons = quoteData.addons ? [...quoteData.addons] : [];
+            if (!quoteData.addons) {
+                ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
+                    if (quoteData[`$${key}`] === 'yes') {
+                        addons.push({ id: key, name: _addonNameMap[key], price: _addonPriceMap[key] });
+                    }
+                });
+            }
+            const total = meta.total || 0;
 
             // Get monthly fee from package data or fallback to calculation
             const monthlyFee = pkg.monthlyPrice || getMonthlyFee(pkg.type);
-            
+
             // Package price is no longer used (subscription-only)
 
             // Get included addons for this package type
             const includedAddonIds = getIncludedAddons(pkg.type);
-            
+
             // Separate addons into included (free) and extra (paid)
             const includedAddons = addons.filter(addon => includedAddonIds.includes(addon.id));
             const extraAddons = addons.filter(addon => !includedAddonIds.includes(addon.id));
@@ -196,7 +231,9 @@
             const planDetailsContainer = document.createElement('div');
             planDetailsContainer.style.cssText = 'margin-top: 20px; text-align: left; color: white; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;';
             let detailsHTML = `<strong>Plan Details:</strong><br>`;
-            detailsHTML += pkg.features.map(feature => `• ${feature}<br>`).join('');
+            if (pkg.features && pkg.features.length > 0) {
+                detailsHTML += pkg.features.map(feature => `• ${feature}<br>`).join('');
+            }
             
             const customizationData = getJSON('customizationData', {});
             if (Object.keys(customizationData).length > 0) {
@@ -225,11 +262,16 @@
             // Fallback: derive name from ID
             const nameMap = {
                 'photos-10': '+10 Photo Storage',
-                'videos-5': '+5 Video Storage', 
+                'videos-5': '+5 Video Storage',
+                'iterations_extra': '+10 Content Refinements',
                 'iterations-extra': '+10 Content Refinements',
+                'ai_content_generation': 'AI Content Generation',
                 'ai-content-generation': 'AI Content Generation',
+                'white_label_chat': 'White-label Chat',
                 'white-label-chat': 'White-label Chat',
+                'basic_scheduling': 'Basic Scheduling Only',
                 'basic-scheduling': 'Basic Scheduling Only',
+                'reduced_frequency': 'Reduced Posting Frequency',
                 'reduced-frequency': 'Reduced Posting Frequency'
             };
             
@@ -239,8 +281,8 @@
         function getIncludedAddons(packageType) {
             if (packageType === 'basic') return [];
             if (packageType === 'social') return ['photos-10', 'videos-5'];
-            if (packageType === 'pro') return ['photos-10', 'videos-5', 'iterations-extra', 'ai-content-generation'];
-            if (packageType === 'enterprise') return ['photos-10', 'videos-5', 'iterations-extra', 'ai-content-generation', 'white-label-chat'];
+            if (packageType === 'pro') return ['photos-10', 'videos-5', 'iterations_extra', 'ai_content_generation', 'iterations-extra', 'ai-content-generation'];
+            if (packageType === 'enterprise') return ['photos-10', 'videos-5', 'iterations_extra', 'ai_content_generation', 'white_label_chat', 'iterations-extra', 'ai-content-generation', 'white-label-chat'];
             return [];
         }
 
@@ -271,7 +313,7 @@
             // Store final order data
             const orderData = {
                 ...quoteData,
-                monthlyFee: getMonthlyFee(quoteData.package.type),
+                monthlyFee: getMonthlyFee(quoteData['$selected_package'] || quoteData.package?.type || 'basic'),
                 orderDate: new Date().toISOString(),
                 orderId: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase()
             };
@@ -283,16 +325,39 @@
         }
 
         async function createCheckoutSession(orderData) {
-            const { package: selectedPackage, addons: selectedAddons = [], platforms = [] } = orderData;
-            
+            // Adapt new quoteData format to legacy variables
+            const _pkgType = orderData['$selected_package'] || orderData.package?.type || 'basic';
+            const _orderMeta = orderData._meta || {};
+            const selectedPackage = orderData.package || {
+                type: _pkgType,
+                name: _orderMeta.name || (_pkgType.charAt(0).toUpperCase() + _pkgType.slice(1))
+            };
+            const platforms = orderData[`$${_pkgType}_platforms`]
+                || orderData['$social_platforms']
+                || orderData['$pro_platforms']
+                || orderData['$enterprise_platforms']
+                || orderData.platforms || [];
+            const _addonNM = {
+                iterations_extra: '+10 Content Refinements', ai_content_generation: 'AI Content Generation',
+                white_label_chat: 'White-label Chat', basic_scheduling: 'Basic Scheduling Only',
+                reduced_frequency: 'Reduced Posting Frequency'
+            };
+            const _addonPM = { iterations_extra: 19, ai_content_generation: 49, white_label_chat: 29, basic_scheduling: -50, reduced_frequency: -30 };
+            let selectedAddons = orderData.addons ? [...orderData.addons] : [];
+            if (!orderData.addons) {
+                ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
+                    if (orderData[`$${key}`] === 'yes') selectedAddons.push({ id: key, name: _addonNM[key], price: _addonPM[key] });
+                });
+            }
+
             // Debug: Log the data being sent
             console.log('OrderData:', orderData);
             console.log('SelectedPackage:', selectedPackage);
             console.log('Platforms:', platforms);
-            
+
             // Filter out base package from addons (defensive programming)
-            const filteredAddons = selectedAddons.filter(addon => 
-                addon.id !== 'base-package' && 
+            const filteredAddons = selectedAddons.filter(addon =>
+                addon.id !== 'base-package' &&
                 addon.name !== 'Starter Social Media Automation' &&
                 addon.name !== `${selectedPackage.name} Monthly`
             );
