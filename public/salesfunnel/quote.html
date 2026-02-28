@@ -123,7 +123,7 @@
             if (!quoteData) return;
 
             // Adapt new quoteData format to internal variables
-            const pkgType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
+            const pkgType = quoteData['$selected_package'];
             const meta = quoteData._meta || {};
             const pkg = {
                 type: pkgType,
@@ -131,11 +131,7 @@
                 monthlyPrice: meta.monthlyPrice || getMonthlyFee(pkgType),
                 features: []
             };
-            const platforms = quoteData[`$${pkgType}_platforms`]
-                || quoteData['$social_platforms']
-                || quoteData['$pro_platforms']
-                || quoteData['$enterprise_platforms']
-                || quoteData.platforms || [];
+            const platforms = quoteData[`$${pkgType}_platforms`] || [];
 
             // Build addons array from flag-based structure (new format)
             const _addonNameMap = {
@@ -149,14 +145,12 @@
                 iterations_extra: 19, ai_content_generation: 49,
                 white_label_chat: 29, basic_scheduling: -50, reduced_frequency: -30
             };
-            let addons = quoteData.addons ? [...quoteData.addons] : [];
-            if (!quoteData.addons) {
-                ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
-                    if (quoteData[`$${key}`] === 'yes') {
-                        addons.push({ id: key, name: _addonNameMap[key], price: _addonPriceMap[key] });
-                    }
-                });
-            }
+            const addons = [];
+            ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
+                if (quoteData[`$${key}`] === 'yes') {
+                    addons.push({ id: key, name: _addonNameMap[key], price: _addonPriceMap[key] });
+                }
+            });
             const total = meta.total || 0;
 
             // Get monthly fee from package data or fallback to calculation
@@ -313,7 +307,7 @@
             // Store final order data
             const orderData = {
                 ...quoteData,
-                monthlyFee: getMonthlyFee(quoteData['$selected_package'] || quoteData.package?.type || 'basic'),
+                monthlyFee: getMonthlyFee(quoteData['$selected_package']),
                 orderDate: new Date().toISOString(),
                 orderId: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase()
             };
@@ -326,29 +320,23 @@
 
         async function createCheckoutSession(orderData) {
             // Adapt new quoteData format to legacy variables
-            const _pkgType = orderData['$selected_package'] || orderData.package?.type || 'basic';
+            const _pkgType = orderData['$selected_package'];
             const _orderMeta = orderData._meta || {};
-            const selectedPackage = orderData.package || {
+            const selectedPackage = {
                 type: _pkgType,
                 name: _orderMeta.name || (_pkgType.charAt(0).toUpperCase() + _pkgType.slice(1))
             };
-            const platforms = orderData[`$${_pkgType}_platforms`]
-                || orderData['$social_platforms']
-                || orderData['$pro_platforms']
-                || orderData['$enterprise_platforms']
-                || orderData.platforms || [];
+            const platforms = orderData[`$${_pkgType}_platforms`] || [];
             const _addonNM = {
                 iterations_extra: '+10 Content Refinements', ai_content_generation: 'AI Content Generation',
                 white_label_chat: 'White-label Chat', basic_scheduling: 'Basic Scheduling Only',
                 reduced_frequency: 'Reduced Posting Frequency'
             };
             const _addonPM = { iterations_extra: 19, ai_content_generation: 49, white_label_chat: 29, basic_scheduling: -50, reduced_frequency: -30 };
-            let selectedAddons = orderData.addons ? [...orderData.addons] : [];
-            if (!orderData.addons) {
-                ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
-                    if (orderData[`$${key}`] === 'yes') selectedAddons.push({ id: key, name: _addonNM[key], price: _addonPM[key] });
-                });
-            }
+            const selectedAddons = [];
+            ['iterations_extra','ai_content_generation','white_label_chat','basic_scheduling','reduced_frequency'].forEach(key => {
+                if (orderData[`$${key}`] === 'yes') selectedAddons.push({ id: key, name: _addonNM[key], price: _addonPM[key] });
+            });
 
             // Debug: Log the data being sent
             console.log('OrderData:', orderData);

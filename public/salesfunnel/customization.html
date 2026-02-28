@@ -668,8 +668,8 @@
             
             if (packageData) {
                 const quoteData = JSON.parse(packageData);
-                const packageType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
-                const packageMeta = quoteData._meta || quoteData.package || {};
+                const packageType = quoteData['$selected_package'];
+                const packageMeta = quoteData._meta || {};
                 
                 // Optional: Add package info to page
                 const subtitle = document.querySelector('.setup-subtitle');
@@ -813,7 +813,7 @@
                 return;
             }
             const quoteData = JSON.parse(packageData);
-            const packageType = quoteData['$selected_package'] || quoteData.package?.type || 'basic';
+            const packageType = quoteData['$selected_package'];
             
             // Determine which sections are relevant for this package
             const relevantSections = getRelevantSections(packageType);
