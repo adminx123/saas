@@ -131,7 +131,7 @@
                 monthlyPrice: meta.monthlyPrice || getMonthlyFee(pkgType),
                 features: []
             };
-            const platforms = quoteData[`$${pkgType}_platforms`] || [];
+            const platforms = quoteData['$platforms'] || [];
 
             // Build addons array from flag-based structure (new format)
             const _addonNameMap = {
@@ -326,7 +326,7 @@
                 type: _pkgType,
                 name: _orderMeta.name || (_pkgType.charAt(0).toUpperCase() + _pkgType.slice(1))
             };
-            const platforms = orderData[`$${_pkgType}_platforms`] || [];
+            const platforms = orderData['$platforms'] || [];
             const _addonNM = {
                 iterations_extra: '+10 Content Refinements', ai_content_generation: 'AI Content Generation',
                 white_label_chat: 'White-label Chat', basic_scheduling: 'Basic Scheduling Only',

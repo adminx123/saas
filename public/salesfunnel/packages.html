@@ -860,10 +860,9 @@
                     const total = subtotal;
                     
                     // Store quote data using flow-packages.js field names as source of truth
-                    const platformsKey = `$${selectedPackage.type}_platforms`;
                     const quoteData = {
                         '$selected_package': selectedPackage.type,
-                        [platformsKey]: selectedPlatforms,
+                        '$platforms': selectedPlatforms,
                         '$multimedia': selectedAddons.some(a => a.id === 'multimedia') ? 'yes' : 'no',
                         '$iterations_extra': selectedAddons.some(a => a.id === 'iterations_extra') ? 'yes' : 'no',
                         '$ai_content_generation': selectedAddons.some(a => a.id === 'ai_content_generation') ? 'yes' : 'no',
@@ -1178,10 +1177,9 @@
                     const total = subtotal;
                     
                     // Store quote data using flow-packages.js field names as source of truth
-                    const platformsKey2 = `$${selectedPackage.type}_platforms`;
                     const quoteData = {
                         '$selected_package': selectedPackage.type,
-                        [platformsKey2]: selectedPlatforms,
+                        '$platforms': selectedPlatforms,
                         '$multimedia': selectedAddons.some(a => a.id === 'multimedia') ? 'yes' : 'no',
                         '$iterations_extra': selectedAddons.some(a => a.id === 'iterations_extra') ? 'yes' : 'no',
                         '$ai_content_generation': selectedAddons.some(a => a.id === 'ai_content_generation') ? 'yes' : 'no',

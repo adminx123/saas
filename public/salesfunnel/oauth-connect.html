@@ -369,11 +369,7 @@
         function showSelectedPlatformButtons() {
             const quoteData = JSON.parse(localStorage.getItem('quoteData') || '{}');
             const selectedPackageType = quoteData['$selected_package'] || '';
-            const selectedPlatforms = quoteData[`$${selectedPackageType}_platforms`]
-                || quoteData['$social_platforms']
-                || quoteData['$pro_platforms']
-                || quoteData['$enterprise_platforms']
-                || [];
+            const selectedPlatforms = quoteData['$platforms'] || [];
             
             console.log('Quote data:', quoteData);
             console.log('Selected package type:', selectedPackageType);
