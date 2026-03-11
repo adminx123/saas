@@ -9,35 +9,29 @@
     <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
     <style>
         /* OAuth page specific button styling */
-        .oauth-button.instagram-button {
-            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        .oauth-button.meta-button {
+            background: linear-gradient(45deg, #1877f2, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
             color: white;
             border: none;
-            box-shadow: 0 10px 30px rgba(64, 93, 230, 0.3);
+            box-shadow: 0 10px 30px rgba(131, 58, 180, 0.35);
         }
         
-        .oauth-button.instagram-button:hover {
+        .oauth-button.meta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(64, 93, 230, 0.4);
+            box-shadow: 0 15px 40px rgba(131, 58, 180, 0.5);
         }
         
         .oauth-button.x-button {
-            background: linear-gradient(45deg, #000000, #1a1a1a);
+            background: linear-gradient(160deg, #3a3a3a 0%, #1a1a1a 40%, #111111 100%);
             color: white;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.08);
         }
         
-        .oauth-button.facebook-button {
-            background: linear-gradient(45deg, #1877f2, #42a5f5);
-            color: white;
-            border: none;
-            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.3);
-        }
-        
-        .oauth-button.facebook-button:hover {
+        .oauth-button.x-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(24, 119, 242, 0.4);
+            background: linear-gradient(160deg, #484848 0%, #242424 40%, #181818 100%);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.12);
         }
         
         .platform-icon-x {
@@ -266,14 +260,11 @@
             
             <!-- OAuth Buttons -->
             <div class="oauth-buttons">
-                <a href="#" id="instagramOauthButton" class="btn-primary oauth-button instagram-button">
-                     Connect <i class="fab fa-instagram"></i> Account
-                </a>
-                <a href="#" id="facebookOauthButton" class="btn-primary oauth-button facebook-button">
-                     Connect <i class="fab fa-facebook"></i> Account
+                <a href="#" id="metaOauthButton" class="btn-primary oauth-button meta-button">
+                    <i class="fab fa-facebook"></i> Facebook | Instagram <i class="fab fa-instagram"></i>
                 </a>
                 <a href="#" id="xOauthButton" class="btn-primary oauth-button x-button">
-                     Connect <i class="platform-icon-x">𝕏</i> Account
+                    <i class="platform-icon-x">𝕏</i>AI
                 </a>
             </div>
             
@@ -376,46 +367,41 @@
             console.log('Selected platforms:', selectedPlatforms);
             
             // Check if buttons exist
-            const instagramBtn = document.getElementById('instagramOauthButton');
-            const facebookBtn = document.getElementById('facebookOauthButton');
+            const metaBtn = document.getElementById('metaOauthButton');
             const xBtn = document.getElementById('xOauthButton');
             
             console.log('Buttons found:', {
-                instagram: !!instagramBtn,
-                facebook: !!facebookBtn,
+                meta: !!metaBtn,
                 x: !!xBtn
             });
             
             // If no package data at all, show all buttons (for testing)
             if (!selectedPackageType) {
                 console.log('No package data found, showing all buttons');
-                if (instagramBtn) instagramBtn.style.display = 'inline-flex';
-                if (facebookBtn) facebookBtn.style.display = 'inline-flex';
+                if (metaBtn) metaBtn.style.display = 'inline-flex';
                 if (xBtn) xBtn.style.display = 'inline-flex';
                 return;
             }
             
             // Hide all buttons by default
-            if (instagramBtn) instagramBtn.style.display = 'none';
-            if (facebookBtn) facebookBtn.style.display = 'none';
+            if (metaBtn) metaBtn.style.display = 'none';
             if (xBtn) xBtn.style.display = 'none';
             
-            // Show only selected platforms
-            selectedPlatforms.forEach(platform => {
-                const buttonId = platform + 'OauthButton';
-                const button = document.getElementById(buttonId);
-                console.log('Looking for button:', buttonId, 'Found:', !!button);
-                if (button) {
-                    button.style.display = 'inline-flex';
-                    console.log('Showing button:', buttonId);
-                }
-            });
+            // Show meta button if instagram or facebook selected
+            const needsMeta = selectedPlatforms.includes('instagram') || selectedPlatforms.includes('facebook');
+            if (needsMeta && metaBtn) {
+                metaBtn.style.display = 'inline-flex';
+                console.log('Showing meta button (FB+IG)');
+            }
+            if (selectedPlatforms.includes('x') && xBtn) {
+                xBtn.style.display = 'inline-flex';
+                console.log('Showing X button');
+            }
             
             // If no platforms selected, show all (fallback)
             if (selectedPlatforms.length === 0) {
                 console.log('No platforms selected, showing all buttons');
-                if (instagramBtn) instagramBtn.style.display = 'inline-flex';
-                if (facebookBtn) facebookBtn.style.display = 'inline-flex';
+                if (metaBtn) metaBtn.style.display = 'inline-flex';
                 if (xBtn) xBtn.style.display = 'inline-flex';
             }
         }
@@ -476,24 +462,35 @@
                 // Continue with OAuth setup even if storage fails
             }
             
-            // X OAuth URL using orchestrator
-            const xOauthUrl = `${ORCHESTRATOR_URL}/oauth/x/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
-            
-            // Instagram OAuth URL using orchestrator
-            const instagramOauthUrl = `${ORCHESTRATOR_URL}/oauth/instagram/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
-            
-            // Facebook OAuth URL using orchestrator
-            const facebookOauthUrl = `${ORCHESTRATOR_URL}/oauth/facebook/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
-            
-            // Set up OAuth buttons with orchestrator
-            document.getElementById('instagramOauthButton').href = instagramOauthUrl;
-            document.getElementById('facebookOauthButton').href = facebookOauthUrl;
-            document.getElementById('xOauthButton').href = xOauthUrl;
-            
-            // Log OAuth URLs for debugging
-            console.log('Instagram OAuth URL (orchestrator):', instagramOauthUrl);
-            console.log('Facebook OAuth URL (orchestrator):', facebookOauthUrl);
-            console.log('X OAuth URL (orchestrator):', xOauthUrl);
+            // Helper: fetch auth_url from orchestrator then redirect
+            async function oauthRedirect(platform) {
+                const startUrl = `${ORCHESTRATOR_URL}/oauth/${platform}/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
+                console.log(`OAuth redirect fetch: ${startUrl}`);
+                try {
+                    const res = await fetch(startUrl);
+                    const data = await res.json();
+                    const authUrl = data.auth_url || (Array.isArray(data) && data[0]?.auth_url);
+                    if (authUrl) {
+                        window.location.href = authUrl;
+                    } else {
+                        console.error('No auth_url in response:', data);
+                        alert('OAuth setup failed. Please try again.');
+                    }
+                } catch (err) {
+                    console.error('OAuth fetch error:', err);
+                    alert('OAuth setup failed. Please try again.');
+                }
+            }
+
+            // Set up OAuth buttons as click handlers (orchestrator returns JSON, not redirect)
+            const metaBtn = document.getElementById('metaOauthButton');
+            const xBtn = document.getElementById('xOauthButton');
+            metaBtn.href = '#';
+            xBtn.href = '#';
+            metaBtn.onclick = (e) => { e.preventDefault(); oauthRedirect('facebook'); };
+            xBtn.onclick = (e) => { e.preventDefault(); oauthRedirect('x'); };
+
+            console.log('OAuth buttons ready — clientId:', clientId);
         }
         
         // Check if at least one platform is connected and show complete setup button
@@ -540,23 +537,24 @@
         
         // Update button appearance for connected platform
         function updateButtonAppearance(platform) {
-            const buttonId = platform + 'OauthButton';
+            // Facebook and Instagram both map to the meta button
+            const buttonId = (platform === 'facebook' || platform === 'instagram') ? 'metaOauthButton' : platform + 'OauthButton';
             const button = document.getElementById(buttonId);
             if (!button) return;
             
             let icon, text;
             switch(platform) {
                 case 'instagram':
-                    icon = '<i class="fab fa-instagram"></i>';
-                    text = 'Instagram Connected';
+                    icon = '<i class="fab fa-facebook"></i>';
+                    text = 'Facebook | Instagram <i class="fab fa-instagram"></i> Connected';
                     break;
                 case 'facebook':
                     icon = '<i class="fab fa-facebook"></i>';
-                    text = 'Facebook Connected';
+                    text = 'Facebook | Instagram <i class="fab fa-instagram"></i> Connected';
                     break;
                 case 'x':
                     icon = '<i class="platform-icon-x">𝕏</i>';
-                    text = 'X Connected';
+                    text = 'AI Connected';
                     break;
             }
             
