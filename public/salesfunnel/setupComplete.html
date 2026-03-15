@@ -82,12 +82,19 @@
             alert('Strategy call scheduling coming soon! We\'ll contact you within 2-5 days to arrange a consultation.');
         }
 
+        // Orchestrator URL — read from localStorage (set during funnel) or fallback
+        const ORCHESTRATOR_URL = localStorage.getItem('orchestratorUrl') || '';
+
         async function deployAutomation() {
             const deployButton = document.getElementById('deployButton');
             deployButton.disabled = true;
             deployButton.innerHTML = '🚀 Deploying...';
 
             try {
+                if (!ORCHESTRATOR_URL) {
+                    throw new Error('Orchestrator URL not configured. Please restart the setup process.');
+                }
+
                 const orderData = JSON.parse(localStorage.getItem('orderData') || '{}');
                 const customizationData = JSON.parse(localStorage.getItem('customizationData') || '{}');
                 
@@ -96,7 +103,7 @@
                 }
 
                 // Validate brand name is present (required for client ID)
-                if (!customizationData.brandName) {
+                if (!customizationData.brand_name) {
                     alert('Brand name is required. Please complete the customization step.');
                     deployButton.disabled = false;
                     deployButton.innerHTML = '🚀 Deploy Automation';
@@ -104,32 +111,28 @@
                 }
 
                 // Generate client ID from brand name
-                const clientId = customizationData.brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
+                const clientId = customizationData.brand_name.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
                 
-                // Map customization data to config format
+                // Pass customization data through raw — flow step IDs ARE the config keys
                 const configData = {
                     client_id: clientId,
-                    brand_name: customizationData.brandName || 'New Client',
-                    brand_voice: customizationData.brandVoice || '',
-                    default_tone: 'professional', // Default
-                    timezone: customizationData.timezone || 'America/New_York',
-                    supportEmail: customizationData.supportEmail || 'support@inexasli.com',
-                    legalUrls: {
-                        privacy: customizationData.privacyUrl || '',
-                        terms: customizationData.termsUrl || '',
-                        dpa: customizationData.dpaUrl || ''
-                    },
-                    enabled_social_platforms: ['instagram'], // Default, can be expanded
-                    // business_synopsis removed
-                    post_times: ['13:00'], // Default
-                    mixed_mode: 'dynamic_text_static_image', // Default
+                    brand_name: customizationData.brand_name || 'New Client',
+                    brand_voice: customizationData.brand_voice || '',
+                    default_tone: customizationData.default_tone || '',
+                    timezone: customizationData.timezone || '',
+                    support_email: customizationData.support_email || '',
+                    legal_urls_privacy: customizationData.legal_urls_privacy || '',
+                    legal_urls_terms: customizationData.legal_urls_terms || '',
+                    legal_urls_dpa: customizationData.legal_urls_dpa || '',
+                    $platforms: customizationData.$platforms || [],
+                    post_times: customizationData.post_times || [],
+                    mixed_mode: customizationData.mixed_mode || '',
                     staticContentArray: customizationData.staticContentArray ? JSON.parse(customizationData.staticContentArray) : [],
-                    platformConsiderations: customizationData.platformConsiderations || '',
                     industry: customizationData.industry || '',
-                    chatAudience: customizationData.chatAudience || '',
-                    chatWidgetName: customizationData.chatWidgetName || '',
-                    chatColors: customizationData.chatColors || '',
-                    postingSchedule: customizationData.postingSchedule || '[]'
+                    chat_audience: customizationData.chat_audience || '',
+                    chat_widget_name: customizationData.chat_widget_name || '',
+                    enabled_chat_colorway: customizationData.enabled_chat_colorway || '',
+                    flow_subtype_chat: customizationData.flow_subtype_chat || ''
                 };
 
                 // For now, no secrets in setup; OAuth tokens would be added separately
@@ -142,7 +145,7 @@
                     secretData
                 };
 
-                const response = await fetch('https://orchestrator.4hm7q4q75z.workers.dev/setup', {
+                const response = await fetch(`${ORCHESTRATOR_URL}/setup`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

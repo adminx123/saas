@@ -833,12 +833,10 @@
                 }
             });
             
-            // Collect legal URLs as an object
-            setupData.legal_urls = {
-                privacy: document.getElementById('legal_urls_privacy').value,
-                terms: document.getElementById('legal_urls_terms').value,
-                dpa: document.getElementById('legal_urls_dpa').value
-            };
+            // Collect legal URLs as flat keys (matching flow-custom convention)
+            setupData.legal_urls_privacy = document.getElementById('legal_urls_privacy').value;
+            setupData.legal_urls_terms = document.getElementById('legal_urls_terms').value;
+            setupData.legal_urls_dpa = document.getElementById('legal_urls_dpa').value;
             
             // Collect static content array
             setupData.staticContentArray = collectStaticContentArray();
@@ -870,14 +868,16 @@
                 timezone: 'main',
                 brand_name: 'main',
                 support_email: 'main',
-                legal_urls: 'main',
+                legal_urls_privacy: 'main',
+                legal_urls_terms: 'main',
+                legal_urls_dpa: 'main',
                 brand_voice: 'main',
                 industry: 'conversational',
                 roleScope: 'main',
                 functions: 'main',
                 roles: 'main',
                 roleScopeChat: 'conversational',
-                rolesChat: 'conversational',
+                flow_subtype_chat: 'conversational',
                 chat_widget_name: 'conversational',
                 enabled_chat_colorway: 'conversational',
                 brandFiles: 'conversational',
