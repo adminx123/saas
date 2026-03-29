@@ -33,3 +33,6 @@ docs/
 
 # Client folder
 client/
+
+# Ignore all scripts (user request)
+scripts/
