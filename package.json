@@ -2,6 +2,7 @@
     "name": "my-web-app",
     "version": "1.0.0",
     "description": "A web application project.",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "test": "jest",
