@@ -431,40 +431,28 @@
             // Use orchestrator for OAuth flows (integrated OAuth)
             const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev'; // Deployed orchestrator URL
             
-            // Get brand name from customization data
-            const customizationData = getJSON('customizationData');
-            const brandName = customizationData?.brandName || 'unknown';
+            // Read payment session ID from localStorage (set by Stripe return)
+            const paymentSessionId = localStorage.getItem('paymentSessionId');
             
-            // Generate client ID from brand name (normalize for database use)
-            const clientId = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
-            
-            console.log('OAuth setup - Brand name:', brandName, 'Client ID:', clientId);
+            console.log('OAuth setup - paymentSessionId:', paymentSessionId);
             
             // Generate CSRF state parameter
             const state = crypto.randomUUID();
             sessionStorage.setItem('oauth_state', state);
             
-            // Store customization data for database creation
-            try {
-                await fetch(`${ORCHESTRATOR_URL}/oauth/store-customization`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        state: state,
-                        customizationData: customizationData
-                    })
-                });
-                console.log('Customization data stored for state:', state);
-            } catch (error) {
-                console.error('Failed to store customization data:', error);
-                // Continue with OAuth setup even if storage fails
-            }
-            
             // Helper: fetch auth_url from orchestrator then redirect
             async function oauthRedirect(platform) {
-                const startUrl = `${ORCHESTRATOR_URL}/oauth/${platform}/start?state=${encodeURIComponent(state)}&clientId=${encodeURIComponent(clientId)}`;
+                const startParams = new URLSearchParams({ state });
+                if (paymentSessionId) {
+                    startParams.set('payment_session_id', paymentSessionId);
+                } else {
+                    // Fallback: derive clientId from brand name for legacy flows
+                    const customizationData = getJSON('customizationData');
+                    const brandName = customizationData?.brandName || 'unknown';
+                    const clientId = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 50);
+                    startParams.set('clientId', clientId);
+                }
+                const startUrl = `${ORCHESTRATOR_URL}/oauth/${platform}/start?${startParams.toString()}`;
                 console.log(`OAuth redirect fetch: ${startUrl}`);
                 try {
                     const res = await fetch(startUrl);
