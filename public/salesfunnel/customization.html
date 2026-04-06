@@ -178,10 +178,10 @@
                 <!-- Department Selection -->
                 <div class="form-group" id="flowSubtypeGroupChat" style="display: none;">
                     <label class="form-label">Assistant Features</label>
-                    <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="flow_subtype_chat">
+                    <div class="grid-selection" id="flowSubtypeGridChat" data-type="multiple" data-name="enabled_flows">
                         <!-- Features populated based on AI type selection -->
                     </div>
-                    <input type="hidden" name="flow_subtype_chat" id="flow_subtype_chat" required>
+                    <input type="hidden" name="enabled_flows" id="enabled_flows" required>
                 </div>
 
 
@@ -560,7 +560,7 @@
                         this.classList.toggle('selected');
                         const selectedItems = featuresGrid.querySelectorAll('.grid-item1.selected');
                         const selectedValues = Array.from(selectedItems).map(i => i.dataset.value);
-                        document.getElementById('flow_subtype_chat').value = selectedValues.join(',');
+                        document.getElementById('enabled_flows').value = selectedValues.join(',');
                         
                         // Check card completion
                         const card = this.closest('.package-card');
@@ -877,7 +877,7 @@
                 functions: 'main',
                 roles: 'main',
                 roleScopeChat: 'conversational',
-                flow_subtype_chat: 'conversational',
+                enabled_flows: 'conversational',
                 chat_widget_name: 'conversational',
                 enabled_chat_colorway: 'conversational',
                 brandFiles: 'conversational',
