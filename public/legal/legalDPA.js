@@ -67,7 +67,7 @@ INEXASLI is authorized to process personal data only for the following purposes:
 • Provide customer support and troubleshooting assistance
 • Send SMS notifications to clients for AI knowledge updates (client phone numbers only)
 • Process client SMS responses to train AI systems
-• Automatically redact personal information (PII) from end user questions before SMS transmission
+• End user questions may be transmitted via SMS alerts. Do not enter personal or sensitive information in widget messages; you do so at your own risk.
 
 **Processing Limitations:**
 - INEXASLI will not process personal data for any purpose other than those specified above
