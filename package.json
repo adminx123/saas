@@ -7,7 +7,8 @@
     "scripts": {
         "test": "jest",
         "login": "npx wrangler login",
-        "deploy:orchestrator": "npx wrangler deploy --config src/orchestrator/wrangler-orchestrator.toml && node scripts/prewarm-translations.mjs",
+        "deploy:orchestrator": "npx wrangler deploy --config src/orchestrator/wrangler-orchestrator.toml",
+    "prewarm": "node scripts/prewarm-translations.mjs",
         "deploy:widget": "npx wrangler pages deploy src/widget --project-name=master-widget",
         "deploy:inexasli": "npx wrangler deploy --config client/inexasli/config-inexasli.toml",
         "deploy:meofia": "npx wrangler deploy --config client/meofia/social-meofia.toml --env meofia",
