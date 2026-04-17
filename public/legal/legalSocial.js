@@ -116,7 +116,15 @@ var TERMS_OF_SERVICE = {
 **Third-Party Data Processing**
 - Chat messages are processed through xAI (X.AI Corp) API for AI response generation.
 - Businesses acknowledge that chat data is transmitted to third-party AI providers as subprocessors.
-- Businesses must disclose subprocessor relationships to end users in their privacy policies.`
+- Businesses must disclose subprocessor relationships to end users in their privacy policies.
+
+**Client-Managed Knowledge Base (AI Collections)**
+- Clients may configure and update their own AI knowledge base (xAI Collection) used to power chat widget responses.
+- Clients are solely responsible for all content uploaded to their knowledge base, including its accuracy, legality, and appropriateness.
+- INEXASLI does not review, moderate, or approve knowledge base content provided by clients.
+- Clients must ensure knowledge base content does not contain: (1) illegal material, (2) content that infringes third-party intellectual property rights, (3) personally identifiable information without proper consent, (4) misleading or deceptive information.
+- Clients indemnify and hold harmless INEXASLI from any claims, damages, or legal actions arising from AI responses generated using client-provided knowledge base content.
+- INEXASLI reserves the right to disable access to a client's knowledge base if content is found to violate these terms or applicable law.`
         },
         {
             title: "Product-Specific Terms: DM Reply Automation",
