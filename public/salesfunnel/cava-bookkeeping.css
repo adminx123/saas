@@ -1,8 +1,12 @@
 /* Cava Bookkeeping landing page styles */
 :root {
     color-scheme: dark;
-    color: #f5f7fa;
-    background-color: #07111f;
+    color: #12251f;
+    background-color: #f6f8f3;
+}
+
+html {
+    height: 100%;
 }
 
 html, body {
@@ -17,14 +21,13 @@ html, body {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    padding: 24px 12px 48px;
+    /* padding: 24px 12px 48px; */
 }
 
 .device-container {
     width: min(100%, 480px);
-    padding: 0;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
 .hero-shell {
@@ -151,7 +154,7 @@ body {
 
 @media screen and (max-width: 560px) {
     body {
-        padding: 20px 12px 32px;
+        /* padding: 20px 12px 32px; */
     }
     .hero-card-inner {
         padding: 26px 20px 20px;
