@@ -1,0 +1,422 @@
+/* Cava Bookkeeping Stylesheet */
+
+/* Base Reset & Typography — must match salesflow.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Make h2 and h3 white by default */
+h1, h2, h3, h4, h5, h6 {
+    color: #e8edf2;
+    margin: 0 0 20px 0;
+}
+
+p {
+    color: #c8d8e4;
+}
+
+/* Global styles from salesflow.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1520;
+    color: #e8edf2;
+    line-height: 1.618;
+    overflow-x: hidden;
+}
+
+.device-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #0d1520;
+}
+
+.splash-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #0d1520;
+}
+
+.splash-logo {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    animation: rotateImage 2.1675s linear 1;
+    animation-delay: 0.180625s;
+    animation-fill-mode: both;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.splash-inexasli {
+    font-family: Arial, sans-serif;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.splash-empowering {
+    color: #7ab0d4;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 1.2em;
+    margin: 0 0 40px 0;
+    opacity: 0;
+    animation: fadeIn 1.445s ease-in forwards;
+    animation-delay: 0.7225s;
+    text-align: center;
+}
+
+.tm {
+    font-size: 0.5em;
+    position: relative;
+    top: -0.2em;
+    vertical-align: top;
+}
+
+@keyframes rotateImage {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Floating particles */
+
+.floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(122, 176, 212, 0.08);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Page-specific styles for cavaBookkeeping.html */
+
+    /* Hero Section */
+    .hero-section {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .promo-badge-outer {
+        background: linear-gradient(135deg, #4a7db5 0%, #2d5a87 100%);
+        padding: 3px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .promo-badge-inner {
+        background: linear-gradient(135deg, #3a6fa5, #2d5a87);
+        padding: 8px 20px;
+        border-radius: 50px;
+        color: #e8edf2;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .hero-title {
+        font-size: 3.2em;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #7ab0d4 0%, #4a7db5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4em;
+        color: #c8d8e4;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .hero-strong {
+        color: #e8edf2;
+    }
+
+    /* Urgency Section - Glassmorphism */
+    .urgency-section {
+        background: rgba(74, 125, 181, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        margin: 25px 0;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(74, 125, 181, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(74, 125, 181, 0.12);
+    }
+
+    .urgency-title {
+        color: #e8edf2;
+        margin-bottom: 15px;
+        font-size: 2.2em;
+    }
+
+    .urgency-text {
+        color: #c8d8e4;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .urgency-timing-box {
+        background: rgba(255,255,255,0.15);
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .urgency-timing-main {
+        color: #e8edf2;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .urgency-timing-sub {
+        color: #a0bbd0;
+        font-size: 14px;
+    }
+
+    /* Benefit Card Enhanced */
+    .benefit-card-enhanced {
+        position: relative;
+        background: rgba(74, 125, 181, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(74, 125, 181, 0.35);
+    }
+
+    .most-popular-badge {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        background: #4a7db5;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .solution-title {
+        text-align: center;
+        font-size: 2.0em;
+        margin-bottom: 25px;
+        color: white;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Stats Section */
+    .stats-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+
+    .stat-item {
+        background: rgba(255,255,255,0.1);
+        padding: 10px 12px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        flex: 1 1 calc(33.333% - 10px);
+        max-width: 140px;
+        min-width: 120px;
+        text-align: center;
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    .stat-number {
+        color: #7ab0d4;
+        font-weight: bold;
+        font-size: 24px;
+        order: 2;
+    }
+
+    .stat-label {
+        color: #c8d8e4;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.3;
+        margin: 2px 0;
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+    }
+
+    /* Make labels stack consistently */
+    .stat-label:first-child {
+        order: 1;
+    }
+    
+    .stat-label:last-child {
+        order: 3;
+    }
+
+    /* Problem Section - Glassmorphism (Muted Amber) */
+    .problem-section {
+        background: rgba(160, 100, 80, 0.1);
+        border: 1px solid rgba(160, 100, 80, 0.25);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        box-shadow: 0 8px 32px 0 rgba(160, 100, 80, 0.1);
+    }
+
+    .problem-title {
+        color: #c4917a;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+
+    .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 5px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .problem-item {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px;
+        min-height: 80px;
+    }
+
+    .problem-icon {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+        color: #c4917a;
+        opacity: 0.85;
+    }
+
+    .problem-text {
+        color: #c8d8e4;
+        max-width: 280px;
+        line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-header {
+        text-align: center;
+        margin: 30px 0 20px 0;
+    }
+
+    .cta-title {
+        font-size: 2.8em;
+        color: #e8edf2;
+        margin-bottom: 15px;
+    }
+
+    .cta-subtitle {
+        font-size: 1.3em;
+        color: #c8d8e4;
+        margin-bottom: 20px;
+    }
+
+    .guarantee-box {
+        background: rgba(74, 125, 181, 0.1);
+        border: 1px solid rgba(74, 125, 181, 0.25);
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+        backdrop-filter: blur(10px);
+    }
+
+    .guarantee-text {
+        color: #7ab0d4;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+.btn-primary {
+    font-size: 1.1em;
+    padding: 20px 50px;
+    text-decoration: none;
+    display: inline-block;
+    background: linear-gradient(135deg, #3a6fa5, #2d5a87);
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(58, 111, 165, 0.25);
+    color: #e8edf2;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(58, 111, 165, 0.38);
+}
+
+.benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.benefit-card {
+    border: 1px solid rgba(122, 176, 212, 0.15);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    text-align: left;
+}
