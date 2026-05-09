@@ -21,7 +21,7 @@ p {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d1520;
+    background: #162236;
     color: #e8edf2;
     line-height: 1.618;
     overflow-x: hidden;
@@ -31,7 +31,7 @@ body {
     max-width: 480px;
     margin: 0 auto;
     padding: 40px 20px;
-    background: #0d1520;
+    background: #162236;
 }
 
 .splash-container {
@@ -41,7 +41,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #0d1520;
+    background: #162236;
 }
 
 .splash-logo {
