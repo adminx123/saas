@@ -61,8 +61,8 @@ This DPA applies to the following INEXASLI services:
             title: "3. Data Processing Instructions",
             content: `**Permitted Processing:**
 INEXASLI is authorized to process personal data only for the following purposes:
-• Generate AI responses to chat widget queries using xAI API
-• Generate automated responses to social media direct messages using xAI API
+• Generate AI responses to chat widget queries using AI APIs (xAI or DeepSeek, depending on client configuration)
+• Generate automated responses to social media direct messages using AI APIs (xAI or DeepSeek, depending on client configuration)
 • Analyze interaction data temporarily to optimize AI response accuracy (no long-term storage)
 • Provide customer support and troubleshooting assistance
 • Send SMS notifications to clients for AI knowledge updates (client phone numbers only)
@@ -97,7 +97,7 @@ INEXASLI is authorized to process personal data only for the following purposes:
 • Incident response: Documented procedures for security incident handling
 
 **Limitations:**
-- Data transmitted to xAI API is protected by TLS encryption only (no additional encryption layer)
+- Data transmitted to AI APIs (xAI or DeepSeek) is protected by TLS encryption only (no additional encryption layer)
 - No long-term storage of chat or DM data; temporary processing only
 - INEXASLI does not implement data anonymization or pseudonymization by default
 
@@ -138,6 +138,14 @@ Controller authorizes INEXASLI to engage the following sub-processors:
    • Security: SOC 2 Type II certified, GDPR compliant
    • Privacy Policy: https://www.twilio.com/legal/privacy
    • DPA: Available at https://www.twilio.com/legal/data-protection-addendum
+
+**5. DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd.)** *(Conditional — only applies if DeepSeek is selected as AI provider)*
+   • Service: AI text generation and natural language processing
+   • Data Processed: User queries, conversation history, business context
+   • Location: People's Republic of China
+   • Security: TLS encryption in transit; data stored on servers in China
+   • Privacy Policy: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+   • ⚠️ IMPORTANT: DeepSeek stores and processes data in the People's Republic of China. China does not currently have an EU adequacy decision. By selecting DeepSeek as the AI provider, Controller acknowledges and accepts international transfer of personal data to China and accepts responsibility for assessing whether this transfer is lawful under applicable data protection law.
 
 **Sub-processor Changes:**
 - INEXASLI will provide 30 days' advance notice of any new sub-processors via email
@@ -220,6 +228,7 @@ Personal data may be processed in the following locations:
 • United States (xAI servers, Cloudflare data centers, Stripe)
 • European Union (Cloudflare data centers - if configured)
 • Global (Cloudflare's distributed network)
+• People's Republic of China (DeepSeek servers — only if DeepSeek AI provider is selected)
 
 **Transfer Mechanisms:**
 For transfers of personal data from the European Economic Area (EEA) to third countries:
@@ -236,6 +245,9 @@ For transfers of personal data from the European Economic Area (EEA) to third co
 - Encryption in transit (TLS 1.2+)
 - Access controls limiting personnel access to data
 - Cloudflare infrastructure provides data residency options (configurable per Controller needs)
+
+**China Transfer Notice (DeepSeek):**
+If DeepSeek is selected as the AI provider, personal data (user queries and conversation context) will be transferred to and processed in the People's Republic of China. China does not have an EU adequacy decision. INEXASLI will execute SCCs upon Controller's request, but Controller acknowledges that supplementary measures may be insufficient given Chinese data access laws. Controllers in the EEA/UK should conduct their own Transfer Impact Assessment before enabling DeepSeek.
 
 **Data Residency Requests:**
 Enterprise clients may request data residency restrictions (e.g., EU-only processing) subject to:

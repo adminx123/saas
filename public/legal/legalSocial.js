@@ -60,9 +60,15 @@ var TERMS_OF_SERVICE = {
 - Users acknowledge that AI outputs should not be relied upon for critical decisions without professional verification and human oversight.
 - Businesses indemnify INEXASLI against claims arising from AI harm, malpractice, biased outputs, or negligent AI behavior.
 
+**AI Provider International Data Transfers**
+- INEXASLI uses third-party AI providers to process your data. The AI provider used for your account depends on your or INEXASLI’s configuration.
+- **xAI (X.AI Corp):** Data processed in the United States. Privacy Policy: https://x.ai/legal/privacy-policy
+- **DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd.):** Data processed and stored in the **People’s Republic of China**. China does not have an EU adequacy decision. If your account is configured to use DeepSeek, user queries and conversation context will be sent to and processed in China. By using INEXASLI services configured with DeepSeek, you acknowledge and accept this international data transfer. Privacy Policy: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html; Terms of Use: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+- INEXASLI is not responsible for the data practices of these third-party AI providers. Businesses using INEXASLI services in the EEA or UK should review their legal obligations with respect to international data transfers before selecting DeepSeek as an AI provider.
+
 **System Reliability and Outages**
 - Services may experience extended downtime due to AI provider outages, infrastructure failures, maintenance, or technical issues.
-- Complete unavailability may occur during third-party service disruptions (xAI, Cloudflare, social media platforms, etc.).
+- Complete unavailability may occur during third-party service disruptions (xAI, DeepSeek, Cloudflare, social media platforms, etc.).
 - Data loss may result from system failures, though INEXASLI implements reasonable backup procedures.
 - INEXASLI is not liable for damages from service interruptions, outages, data loss, or degraded performance.
 
