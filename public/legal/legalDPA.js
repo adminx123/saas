@@ -113,8 +113,10 @@ Controller authorizes INEXASLI to engage the following sub-processors:
    • Service: AI content generation and natural language processing
    • Data Processed: User queries, conversation history, business context
    • Location: United States
-   • Security: TLS encryption, SOC 2 Type II (pending verification)
+   • Security: AES-256 encryption at rest; TLS 1.3 in transit; per-customer hashed identifiers
+   • DPA: https://x.ai/legal/data-processing-addendum — automatically applies to Enterprise API users under xAI Enterprise ToS Section 11; includes SCCs (EU/UK/Swiss), 48-hour breach notification, and Zero Data Retention (ZDR) API option
    • Privacy Policy: https://x.ai/legal/privacy-policy
+   • Note: xAI's published DPA is a binding data processing agreement — no separate execution required for API customers
 
 **2. Cloudflare, Inc.**
    • Service: Cloud infrastructure, Workers (serverless compute), R2 storage

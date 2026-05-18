@@ -62,9 +62,9 @@ var TERMS_OF_SERVICE = {
 
 **AI Provider International Data Transfers**
 - INEXASLI uses third-party AI providers to process your data. The AI provider used for your account depends on your or INEXASLI’s configuration.
-- **xAI (X.AI Corp):** Data processed in the United States. Privacy Policy: https://x.ai/legal/privacy-policy
+- **xAI (X.AI Corp):** Data processed in the United States. xAI's Data Processing Addendum (DPA) automatically applies to all Enterprise API users and includes Standard Contractual Clauses (SCCs) for EU/UK/Swiss transfers, AES-256 encryption at rest, TLS 1.3 in transit, and a 48-hour breach notification commitment. DPA: https://x.ai/legal/data-processing-addendum; Privacy Policy: https://x.ai/legal/privacy-policy
 - **DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd.):** Data processed and stored in the **People’s Republic of China**. China does not have an EU adequacy decision. If your account is configured to use DeepSeek, user queries and conversation context will be sent to and processed in China. By using INEXASLI services configured with DeepSeek, you acknowledge and accept this international data transfer. Privacy Policy: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html; Terms of Use: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
-- INEXASLI is not responsible for the data practices of these third-party AI providers. Businesses using INEXASLI services in the EEA or UK should review their legal obligations with respect to international data transfers before selecting DeepSeek as an AI provider.
+- INEXASLI is not responsible for the data practices of these third-party AI providers. Businesses using INEXASLI services in the EEA or UK should review their legal obligations with respect to international data transfers before selecting DeepSeek as an AI provider. INEXASLI recommends that EU/EEA-based businesses use xAI as their AI provider.
 
 **System Reliability and Outages**
 - Services may experience extended downtime due to AI provider outages, infrastructure failures, maintenance, or technical issues.
