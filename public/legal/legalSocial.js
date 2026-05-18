@@ -164,6 +164,29 @@ var TERMS_OF_SERVICE = {
 - Businesses are solely responsible for any harm, offense, or misinformation in automated responses.`
         },
         {
+            title: "Client Downstream User and Reseller Liability",
+            content: `**INEXASLI-to-Client Relationship Only**
+- INEXASLI's contractual relationship is exclusively with registered business clients ("Clients"). INEXASLI has no direct legal relationship, duty of care, or contractual obligation to Clients' own customers, users, subscribers, or any other downstream third parties ("Downstream Users") who interact with products or services the Client builds, deploys, or offers using INEXASLI's platform.
+
+**Client Responsibility for Downstream Users**
+- Clients who deploy INEXASLI-powered features to their own Downstream Users are solely and exclusively responsible for:
+  (1) All applicable laws, regulations, and obligations governing their relationship with Downstream Users;
+  (2) Obtaining all legally required consents, disclosures, and authorizations from Downstream Users;
+  (3) Ensuring Downstream Users' data is collected, processed, and stored in compliance with applicable privacy law;
+  (4) Providing accurate disclosures to Downstream Users about AI-powered features, automated responses, and data processing;
+  (5) Any harm, damage, loss, or claim suffered by Downstream Users arising from the Client's product or service.
+
+**No INEXASLI Liability for Downstream Claims**
+- INEXASLI accepts no liability for any claim, lawsuit, demand, regulatory action, fine, or penalty brought by or on behalf of a Downstream User, regardless of the nature of that claim.
+- INEXASLI is not a party to any agreement, representation, or warranty made by the Client to its Downstream Users.
+- Clients indemnify, defend, and hold harmless INEXASLI and its officers, directors, employees, and agents from any claim, cost, damage, attorney's fee, or liability arising from a Downstream User's interaction with the Client's product or service.
+
+**Content and Configuration Responsibility**
+- Clients are solely responsible for all content, flows, knowledge base entries, prompts, automated responses, and configurations they deploy through INEXASLI's platform to their Downstream Users.
+- INEXASLI does not review, approve, moderate, or endorse any content, flow, or configuration that Clients deploy to their Downstream Users.
+- Clients who configure INEXASLI to generate content or responses served to Downstream Users bear full legal responsibility for that content and its effects on those users.`
+        },
+        {
             title: "Data Processing and Subprocessors",
             content: `**Third-Party Subprocessors**
 INEXASLI utilizes the following third-party subprocessors to deliver services:
@@ -192,9 +215,9 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 - Continued use of services after subprocessor changes constitutes acceptance.
 
 **Data Processing Agreement (DPA)**
-- Enterprise clients requiring formal DPA should contact legal@inexasli.com.
-- DPA available as separate agreement for GDPR compliance.
-- Standard Contractual Clauses available for EU data transfers upon request.
+- A Data Processing Agreement (DPA) is presented and agreed to during client onboarding as required by GDPR Article 28 and is available for review at any time by contacting legal@inexasli.com.
+- The DPA incorporates Standard Contractual Clauses (SCCs) for transfers of personal data from the EU/EEA, UK, and Switzerland, and is binding on all registered clients.
+- xAI's DPA (https://x.ai/legal/data-processing-addendum) automatically applies to all Enterprise API users as AI subprocessor, covering GDPR, CCPA, and UK GDPR obligations.
 
 **Client Responsibilities as Data Controllers**
 - For Chat Widget and DM Reply services, businesses are data controllers for end-user data.
@@ -272,7 +295,21 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 **AI-Generated Content and Copyright Risk**
 - AI-generated content may inadvertently include copyrighted material, and INEXASLI cannot guarantee originality.
 - Clients assume all risk and liability for copyright infringement in AI-generated content.
-- Businesses must conduct their own copyright review before publishing AI-generated content.`
+- Businesses must conduct their own copyright review before publishing AI-generated content.
+
+**No Reverse Engineering or Competitive Use**
+- Businesses may not reverse engineer, decompile, disassemble, or attempt to derive the source code, underlying architecture, or trade secrets of any INEXASLI technology.
+- Clients may not use insights gained from using INEXASLI services to build, assist in building, or contribute to any competing product or service.
+- All INEXASLI platform designs, workflows, and system architecture constitute trade secrets and confidential information.
+
+**No Implied Perpetual Access**
+- Access to INEXASLI services is provided on a subscription basis only. No subscription, usage pattern, or business dependency creates any right to perpetual, irrevocable, or continuous access to the platform.
+- INEXASLI may modify, suspend, or discontinue any feature or service at any time, with reasonable notice where practicable.
+
+**Platform Dependency Acknowledgment**
+- Clients acknowledge that they are accessing and building business operations on a third-party managed platform ("Platform-as-a-Service") and have no ownership or proprietary claim to that platform.
+- Clients accept the inherent risks of building on a third-party platform, including the possibility of service changes, pricing modifications, or discontinuation.
+- INEXASLI is not liable for losses, costs, or disruptions clients incur as a result of reliance on the platform or any changes to the platform.`
         },
         {
             title: "Service Packages and Billing",
@@ -289,7 +326,13 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 **Service Modifications**
 - Package upgrades available at any time with prorated pricing.
 - Service cancellation requires 30-day written notice.
-- Downgrades take effect at the next billing cycle.`
+- Downgrades take effect at the next billing cycle.
+
+**Pricing and Feature Changes**
+- INEXASLI reserves the right to change pricing, package features, and service tiers at any time with 30 days written notice to current subscribers.
+- New pricing applies at the next billing cycle following the notice period; continued use of services after a price change constitutes acceptance of the new pricing.
+- Features included in any package are provided at INEXASLI's sole discretion and may be added, modified, or removed with reasonable notice.
+- No "most-favored-nation" pricing commitments are made; pricing may vary by client, package, or promotional offer.`
         },
         {
             title: "Limitation of Liability",
