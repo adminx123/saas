@@ -14,7 +14,7 @@
         "deploy:meofia": "npx wrangler deploy --config client/meofia/social-meofia.toml --env meofia",
         "deploy:payment": "npx wrangler deploy --config src/payment/stripe-saas.toml",
         "provision:client": "node scripts/provision-client-d1.mjs",
-        "deploy:flows": "node scripts/deploy-flows.mjs"
+        "deploy:edited-flows": "node scripts/deploy-edited-flows.mjs"
     },
     "keywords": [],
     "author": "",
