@@ -36,3 +36,6 @@ client/
 
 # Ignore all scripts (user request)
 scripts/
+
+# Ignore generated flow sync folder
+flows/

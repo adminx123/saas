@@ -12,7 +12,9 @@
         "deploy:widget": "npx wrangler pages deploy src/widget --project-name=master-widget",
         "deploy:inexasli": "npx wrangler deploy --config client/inexasli/config-inexasli.toml",
         "deploy:meofia": "npx wrangler deploy --config client/meofia/social-meofia.toml --env meofia",
-        "deploy:payment": "npx wrangler deploy --config src/payment/stripe-saas.toml"
+        "deploy:payment": "npx wrangler deploy --config src/payment/stripe-saas.toml",
+        "flows:pull": "node scripts/flows-pull.mjs",
+        "flows:push": "node scripts/flows-push.mjs"
     },
     "keywords": [],
     "author": "",
