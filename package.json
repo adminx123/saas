@@ -14,7 +14,11 @@
         "deploy:meofia": "npx wrangler deploy --config client/meofia/social-meofia.toml --env meofia",
         "deploy:payment": "npx wrangler deploy --config src/payment/stripe-saas.toml",
         "flows:pull": "node scripts/flows-pull.mjs",
-        "flows:push": "node scripts/flows-push.mjs"
+        "flows:push": "node scripts/flows-push.mjs",
+        "prompts:pull": "node scripts/prompts-pull.mjs",
+        "prompts:push": "node scripts/prompts-push.mjs",
+        "pull": "npm run flows:pull && npm run prompts:pull",
+        "push": "npm run flows:push && npm run prompts:push"
     },
     "keywords": [],
     "author": "",

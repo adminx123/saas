@@ -39,3 +39,6 @@ scripts/
 
 # Ignore generated flow sync folder
 flows/
+
+# Ignore generated prompts sync folder
+prompts/
