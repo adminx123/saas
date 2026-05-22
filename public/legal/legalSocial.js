@@ -236,7 +236,7 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 - SMS messages containing training questions and client responses are processed to update AI knowledge.
 - All SMS communications are encrypted in transit using Twilio's secure infrastructure.
 - SMS data is retained for a maximum of 30 days for service delivery and compliance purposes.
-- SMS alerts may include user questions or excerpts. Do not enter personal or sensitive information in widget messages; you do so at your own risk.
+- SMS alerts may include user questions or excerpts. Do not enter personal, sensitive, confidential, or business information in widget messages unless you are authorized to do so. If you do, you do so at your own risk and remain responsible for any privacy or legal consequences.
 
 **Client Responsibilities for SMS**
 - Clients must provide accurate phone numbers and maintain them current.
@@ -249,7 +249,7 @@ INEXASLI utilizes the following third-party subprocessors to deliver services:
 - Clients may opt-out of SMS services at any time via account settings or by replying "STOP".
 - INEXASLI will not send marketing SMS messages or share phone numbers with third parties.
 - SMS communications are limited to AI training notifications and service-related updates.
-- SMS alerts may include user questions or excerpts. Do not enter personal or sensitive information in widget messages; you do so at your own risk.
+- SMS alerts may include user questions or excerpts. Do not enter personal, sensitive, confidential, or business information in widget messages unless you are authorized to do so. If you do, you do so at your own risk and remain responsible for any privacy or legal consequences.
 
 **Liability for SMS Training**
 - INEXASLI is not liable for any inaccuracies or issues arising from client-provided SMS training data.
