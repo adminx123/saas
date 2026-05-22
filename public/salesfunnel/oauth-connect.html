@@ -295,7 +295,7 @@
     </script>
     <script>
         // Fetch OAuth config and initialize Facebook SDK dynamically
-        const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev';
+        const ORCHESTRATOR_URL = 'https://saas.inexasli.com';
         
         async function initializeFacebookSDK() {
             try {
@@ -429,7 +429,7 @@
         // Fetch OAuth configuration and set up buttons
         async function setupOAuthButtons() {
             // Use orchestrator for OAuth flows (integrated OAuth)
-            const ORCHESTRATOR_URL = 'https://orchestrator.4hm7q4q75z.workers.dev'; // Deployed orchestrator URL
+            const ORCHESTRATOR_URL = 'https://saas.inexasli.com'; // Deployed orchestrator URL
             
             // Read payment session ID from localStorage (set by Stripe return)
             const paymentSessionId = localStorage.getItem('paymentSessionId');
