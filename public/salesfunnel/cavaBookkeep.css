@@ -31,7 +31,8 @@ body {
     max-width: 480px;
     margin: 0 auto;
     padding: 40px 20px;
-    background: #162236;
+    background: #162236 url('../images/image.jpg') center/cover no-repeat;
+    background-blend-mode: overlay;
 }
 
 .splash-container {
@@ -125,8 +126,13 @@ body {
 
     /* Hero Section */
     .hero-section {
+        position: relative;
         text-align: center;
         margin-bottom: 25px;
+        padding: 40px 20px;
+        border-radius: 30px;
+        background: linear-gradient(180deg, rgba(22,34,54,0.85), rgba(22,34,54,0.85)), url('../images/image-2.jpg') center/cover no-repeat;
+        background-blend-mode: overlay;
     }
 
     .promo-badge-outer {
@@ -171,9 +177,11 @@ body {
 
     /* Urgency Section - Glassmorphism */
     .urgency-section {
-        background: rgba(74, 125, 181, 0.1);
-        padding: 20px;
-        border-radius: 15px;
+        position: relative;
+        background: linear-gradient(180deg, rgba(22,34,54,0.85), rgba(22,34,54,0.85)), url('../images/image-4.jpg') center/cover no-repeat;
+        background-blend-mode: overlay;
+        padding: 30px 20px;
+        border-radius: 30px;
         text-align: center;
         margin: 25px 0;
         backdrop-filter: blur(20px) saturate(180%);
@@ -303,11 +311,13 @@ body {
 
     /* Problem Section - Glassmorphism (Muted Amber) */
     .problem-section {
-        background: rgba(160, 100, 80, 0.1);
+        position: relative;
         border: 1px solid rgba(160, 100, 80, 0.25);
-        border-radius: 15px;
-        padding: 20px;
+        border-radius: 30px;
+        padding: 40px 20px;
         margin-bottom: 25px;
+        background: linear-gradient(180deg, rgba(22,34,54,0.84), rgba(22,34,54,0.84)), url('../images/image-3.jpg') center/cover no-repeat;
+        background-blend-mode: overlay;
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         box-shadow: 0 8px 32px 0 rgba(160, 100, 80, 0.1);
@@ -353,8 +363,14 @@ body {
 
     /* CTA Section */
     .cta-header {
+        position: relative;
         text-align: center;
         margin: 30px 0 20px 0;
+        padding: 40px 20px;
+        border-radius: 30px;
+        background: linear-gradient(180deg, rgba(22,34,54,0.88), rgba(22,34,54,0.88)), url('../images/image-5.jpg') center/cover no-repeat;
+        background-blend-mode: overlay;
+        border: 1px solid rgba(122, 176, 212, 0.18);
     }
 
     .cta-title {
