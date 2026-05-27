@@ -24,7 +24,6 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "jest": "^26.0.0",
-        "wrangler": "^4.94.0"
+        "wrangler": "^4.95.0"
     }
 }
