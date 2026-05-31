@@ -19,26 +19,13 @@ node_modules/
 # any folder named hide
 hide
 
-# Exception: Keep redirectUrl.html
-!src/payment/redirectUrl.html
-
-# Exception: Keep embed-schema.js
-!src/database/schema/embed-schema.js
-
-# Source code folder
-src/
+# Source code folders (DO NOT TRACK)
+content/
+widget/
+workers/
 
 # Documentation folder
 docs/
 
-# Client folder
-client/
-
 # Ignore all scripts (user request)
 scripts/
-
-# Ignore generated flow sync folder
-flows/
-
-# Ignore generated prompts sync folder
-prompts/
