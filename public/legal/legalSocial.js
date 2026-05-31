@@ -184,7 +184,9 @@ var TERMS_OF_SERVICE = {
 **Content and Configuration Responsibility**
 - Clients are solely responsible for all content, flows, knowledge base entries, prompts, automated responses, and configurations they deploy through INEXASLI's platform to their Downstream Users.
 - INEXASLI does not review, approve, moderate, or endorse any content, flow, or configuration that Clients deploy to their Downstream Users.
-- Clients who configure INEXASLI to generate content or responses served to Downstream Users bear full legal responsibility for that content and its effects on those users.`
+- Clients who configure INEXASLI to generate content or responses served to Downstream Users bear full legal responsibility for that content and its effects on those users.
+- Clients are also responsible for determining whether age gating, COPPA, or other regulatory gates apply to their deployment, and for configuring consent screens or flow steps accordingly.
+- INEXASLI provides compliance-related configuration options and flow-building tools, but implementation of those gates and legal compliance remains the Client's responsibility.`
         },
         {
             title: "Data Processing and Subprocessors",
