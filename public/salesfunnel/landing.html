@@ -12,10 +12,19 @@
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: #002024;
+      background: #00141c;
       color: #f0ebe0;
       line-height: 1.618;
       overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(rgba(0, 20, 28, 0.78), rgba(0, 20, 28, 0.78)),
+                  url('image-3.jpg') center/cover no-repeat;
+      will-change: transform;
     }
 
     /* ── Scrollytelling Primitives ── */
