@@ -7,7 +7,8 @@
     "scripts": {
         "test": "jest",
         "login": "npx wrangler login",
-        "deploy:orchestrator": "npx wrangler deploy --config workers/orchestrator/wrangler-orchestrator.toml",
+        "deploy:orchestrator": "node scripts/sync-bindings.mjs && npx wrangler deploy --config workers/orchestrator/wrangler-orchestrator.toml",
+        "sync-bindings": "node scripts/sync-bindings.mjs",
         "prewarm": "node scripts/prewarm-translations.mjs",
         "deploy:widget": "npx wrangler pages deploy widget --project-name=master-widget",
         "deploy:inexasli": "npx wrangler deploy --config client/inexasli/config-inexasli.toml",

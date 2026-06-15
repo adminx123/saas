@@ -64,7 +64,6 @@
       transition: opacity 1s ease-out;
     }
     .splash-logo {
-      width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
       margin-bottom: 16px;
       animation: splashSpin 2s linear 1;
     }
@@ -125,8 +124,7 @@
     /* ── Hero ── */
     .hero-section {
       text-align: center;
-      background: linear-gradient(180deg, rgba(11,15,26,0.88), rgba(11,15,26,0.88)),
-                  url('public/images/image-x.jpg') center/cover no-repeat;
+      background: linear-gradient(180deg, rgba(11,15,26,0.88), rgba(11,15,26,0.88));
     }
     .hero-badge {
       display: inline-block; padding: 6px 18px;
@@ -259,8 +257,7 @@
     /* ── CTA Section ── */
     .cta-section {
       text-align: center;
-      background: linear-gradient(180deg, rgba(11,15,26,0.9), rgba(11,15,26,0.9)),
-                  url('public/images/image-4.jpg') center/cover no-repeat;
+      background: linear-gradient(180deg, rgba(11,15,26,0.9), rgba(11,15,26,0.9));
     }
     .cta-section h2 {
       font-size: 2em; margin-bottom: 12px;
@@ -309,7 +306,7 @@
 
 <!-- Splash -->
 <div class="splash" id="splash">
-  <img src="../../public/images/favicon.svg" alt="INEXASLI Logo" class="splash-logo">
+  <img src="/favicon.ico" alt="INEXASLI Logo" class="splash-logo">
   <div class="splash-brand">INEXASLI<span class="tm">™</span></div>
   <div class="splash-tagline">Empowering Thee<span class="tm">™</span></div>
 </div>
@@ -488,12 +485,8 @@
 
 </div><!-- /page -->
 
-<!-- Shared Utilities -->
-<script src="public/utilities/footer.js"></script>
-<script src="public/utilities/modal.js"></script>
-
 <!-- Chat Widget -->
-<script type="module" src="https://widget.inexasli.com/masterWidget.js" data-client-id="inexasli"></script>
+<script type="module" src="https://widget.inexasli.com/masterWidget.js" data-client-id="platform"></script>
 
 <!-- ── Scrollytelling Engine ── -->
 <script>
