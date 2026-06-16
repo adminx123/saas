@@ -117,11 +117,26 @@
       max-width: 440px;
       z-index: 1;
       border-radius: 24px; padding: 36px 24px;
+      max-height: 88vh;
+      overflow-y: auto;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(196, 163, 90, 0.12);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 1px 3px rgba(196, 163, 90, 0.04);
+    }
+
+    /* ── Small-screen card tightening ── */
+    @media (max-height: 700px) {
+      .section-card { padding: 24px 18px; }
+      .hero-title   { font-size: 1.9em; }
+      .hero-subtitle { font-size: 0.95em; }
+      .stat-chip    { padding: 8px 6px; }
+      .stat-chip .stat-num { font-size: 1.2em; }
+      .cta-section h2 { font-size: 1.4em; }
+      .btn-primary  { padding: 14px 36px; font-size: 1em; }
+      .steps-hint   { gap: 8px; margin-top: 14px; }
+      .steps-hint span { font-size: 11px; }
     }
 
     /* ── Hero ── */
