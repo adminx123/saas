@@ -27,20 +27,25 @@
       will-change: transform;
     }
 
-    /* ── Card Reveal Animation ── */
+    /* ── Scrollytelling Primitives ── */
     .reveal-item {
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .reveal-bot  { transform: translateX(-60px); }
-    .reveal-user { transform: translateX(60px);  }
-    .reveal-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .reveal-active { opacity: 1; transform: translateY(0); }
+
+    .zoom-on-scroll {
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
 
     .card-reveal {
       opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.97);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .card-active { opacity: 1; transform: scale(1); }
 
@@ -99,44 +104,21 @@
       50% { transform: translateY(-30px) scale(1.2); }
     }
 
-    /* ── Scroll Stages (spacers — height = scroll distance per card) ── */
-    .scroll-stage {
-      height: 40vh;
-      position: relative;
-      pointer-events: none;
-    }
-    .sticky-pin { /* structural wrapper only */ }
-
-    /* ── Section Cards (fixed at viewport center) ── */
+    /* ── Section Cards ── */
     .section-card {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: calc(100% - 40px);
-      max-width: 440px;
-      z-index: 1;
-      border-radius: 24px; padding: 36px 24px;
-      max-height: 88vh;
-      overflow-y: auto;
+      position: relative; border-radius: 24px; padding: 36px 24px;
+      margin-bottom: 24px;
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(196, 163, 90, 0.12);
+      border: none;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 1px 3px rgba(196, 163, 90, 0.04);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
-    /* ── Small-screen card tightening ── */
-    @media (max-height: 700px) {
-      .section-card { padding: 24px 18px; }
-      .hero-title   { font-size: 1.9em; }
-      .hero-subtitle { font-size: 0.95em; }
-      .stat-chip    { padding: 8px 6px; }
-      .stat-chip .stat-num { font-size: 1.2em; }
-      .cta-section h2 { font-size: 1.4em; }
-      .btn-primary  { padding: 14px 36px; font-size: 1em; }
-      .steps-hint   { gap: 8px; margin-top: 14px; }
-      .steps-hint span { font-size: 11px; }
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 6px rgba(196, 163, 90, 0.08);
     }
 
     /* ── Hero ── */
@@ -181,7 +163,6 @@
 
     /* ── Problem Section ── */
     .problem-section {
-      border-color: rgba(196, 140, 90, 0.18);
     }
     .problem-section .section-label {
       color: #c4976a; text-align: center; font-size: 12px;
@@ -207,7 +188,6 @@
 
     /* ── Solution Section ── */
     .solution-section {
-      border-color: rgba(196, 163, 90, 0.18);
     }
     .solution-section .section-label {
       color: #c4a35a; text-align: center; font-size: 12px;
@@ -219,11 +199,9 @@
 
     /* ── Feature Cards ── */
     .feature-cards {
-      position: relative;
-      min-height: 160px;
+      display: flex; flex-direction: column; gap: 14px;
     }
     .feature-card {
-      position: absolute; top: 0; left: 0; width: 100%;
       background: rgba(255,255,255,0.04);
       border-radius: 16px; padding: 20px;
       display: flex; gap: 14px; align-items: flex-start;
@@ -240,16 +218,12 @@
 
     /* ── How-It-Works ── */
     .steps-row {
-      position: relative;
-      min-height: 140px;
-      display: flex; justify-content: center;
+      display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
     }
     .step-card {
-      position: absolute; top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 100%; max-width: 300px;
       background: rgba(255,255,255,0.04);
       border-radius: 16px; padding: 20px 16px; text-align: center;
+      flex: 1 1 calc(33% - 8px); max-width: 140px; min-width: 110px;
     }
     .step-card .step-num {
       width: 36px; height: 36px; border-radius: 50%;
@@ -262,6 +236,24 @@
     }
     .step-card .step-desc {
       color: #8a8070; font-size: 11px; line-height: 1.4;
+    }
+
+    /* ── Trust Strip ── */
+    .trust-strip {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 20px; margin: 0 auto 24px; max-width: 420px;
+      background: rgba(196, 163, 90, 0.05);
+      border: 1px solid rgba(196, 163, 90, 0.10);
+      border-radius: 12px; text-align: center;
+    }
+    .trust-strip i {
+      color: #c4a35a; font-size: 1em; flex-shrink: 0;
+    }
+    .trust-strip span {
+      color: #8a8070; font-size: 12px; line-height: 1.45;
+    }
+    .trust-strip span strong {
+      color: #c4a35a;
     }
 
     /* ── Quote ── */
@@ -337,8 +329,7 @@
 <div class="page" id="main" style="opacity:0; transition: opacity 1s ease-in;">
 
   <!-- ── Hero ── -->
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card hero-section reveal-item reveal-bot">
+  <section class="section-card hero-section reveal-item">
     <div class="hero-badge">Platform</div>
     <h1 class="hero-title">Websites Are Dying.<br>Agentic Chat Is Here.</h1>
     <p class="hero-subtitle">
@@ -376,9 +367,7 @@
   </section>
 
   <!-- ── Problem ── -->
-  </div></div>
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card problem-section reveal-item reveal-user">
+  <section class="section-card problem-section reveal-item">
     <div class="section-label">The Problem</div>
     <h2>Websites Haven't Changed in 20 Years.</h2>
     <div class="problem-grid">
@@ -402,9 +391,7 @@
   </section>
 
   <!-- ── Solution ── -->
-  </div></div>
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card solution-section reveal-item reveal-bot">
+  <section class="section-card solution-section reveal-item">
     <h2 style="text-align:center;font-size:1.6em;margin-bottom:20px;">How Our System Fixes That Forever</h2>
 
     <div class="feature-cards">
@@ -459,10 +446,14 @@
     </div>
   </section>
 
+  <!-- ── Trust / Compliance ── -->
+  <div class="trust-strip reveal-item">
+    <i class="fas fa-shield-haltered"></i>
+    <span><strong>Enterprise-grade data isolation.</strong> Every client gets their own secure database — built for HIPAA and PCI compliance standards. Your data never shares a table with anyone else.</span>
+  </div>
+
   <!-- ── How It Works ── -->
-  </div></div>
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card reveal-item reveal-user" style="text-align:center;">
+  <section class="section-card reveal-item" style="text-align:center;">
     <div class="section-label" style="color:#c4a35a;">How It Works</div>
     <h2 style="font-size:1.6em;margin-bottom:20px;">Three Steps. That's It.</h2>
     <div class="steps-row">
@@ -485,9 +476,7 @@
   </section>
 
   <!-- ── Social Proof ── -->
-  </div></div>
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card reveal-item reveal-bot" style="text-align:center;">
+  <section class="section-card reveal-item" style="text-align:center;">
     <div class="section-label" style="color:#c4a35a;">What Users Say</div>
     <div class="quote-card">
       <p class="quote-text">"We replaced our entire contact page with the INEXASLI widget. Our inbound lead quality doubled in the first month because the chat pre-qualifies before we ever see it."</p>
@@ -496,9 +485,7 @@
   </section>
 
   <!-- ── CTA ── -->
-  </div></div>
-  <div class="scroll-stage"><div class="sticky-pin">
-  <section class="section-card cta-section reveal-item reveal-user">
+  <section class="section-card cta-section reveal-item">
     <h2>Ready to Replace Your Website Navigation?</h2>
     <p class="cta-sub">Open the chat. Tell us about your business. We'll show you how it works — live.</p>
 
@@ -512,10 +499,6 @@
       <span><strong>Build</strong>Manage everything yourself</span>
     </div>
   </section>
-  </div></div>
-
-  <!-- ── Bottom spacer: lets last card reach viewport center ── -->
-  <div style="height:50vh;"></div>
 
   <!-- ── Footer ── -->
   <div class="page-footer" id="legalFooterContainer"></div>
@@ -538,88 +521,55 @@
     }, 1800);
   })();
 
-  // ── Card Focus Engine ──
-  // Outer cards swap when stage changes.  Inner .card-reveal items
-  // cycle in batches (2 at a time) based on scroll progress through the stage.
-  (function(){
-    const stages = document.querySelectorAll('.scroll-stage');
-    let ticking = false;
-    let activeIdx = -1;
+  // ── Staggered Reveal (IntersectionObserver) ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('reveal-active');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    function update() {
+  document.querySelectorAll('.reveal-item').forEach(el => revealObs.observe(el));
+
+  // ── Card Reveal (scale-in) ──
+  const cardObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('card-active');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card-reveal').forEach(el => cardObs.observe(el));
+
+  // ── Zoom-on-Scroll ──
+  const zoomEls = document.querySelectorAll('.zoom-on-scroll');
+  window.addEventListener('scroll', () => {
+    zoomEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      const centerY = vh / 2;
-      const atBottom = (window.scrollY + vh) >= document.body.scrollHeight - 10;
-      let bestIdx = -1;
-      let bestTop = -Infinity;
-
-      stages.forEach((stage, i) => {
-        const top = stage.getBoundingClientRect().top;
-        if (top <= centerY && top > bestTop) { bestTop = top; bestIdx = i; }
-      });
-      if (atBottom) bestIdx = stages.length - 1;
-      if (bestIdx === -1) bestIdx = 0;
-
-      // ── Outer card swap (only when stage changes) ──
-      if (bestIdx !== activeIdx) {
-        if (activeIdx >= 0) {
-          const old = stages[activeIdx].querySelector('.reveal-item');
-          if (old) {
-            old.classList.remove('reveal-active');
-            old.querySelectorAll('.card-reveal').forEach(c => c.classList.remove('card-active'));
-            const sec = old.closest('.section-card');
-            if (sec) sec.style.zIndex = '1';
-          }
-        }
-        activeIdx = bestIdx;
-        const card = stages[activeIdx].querySelector('.reveal-item');
-        if (card) {
-          card.classList.add('reveal-active');
-          const sec = card.closest('.section-card');
-          if (sec) sec.style.zIndex = '2';
-        }
+      if (rect.top < vh && rect.bottom > 0) {
+        const distFromCenter = Math.abs((rect.top + rect.height/2) - vh/2);
+        const scale = 1 + Math.max(0, (1 - distFromCenter/vh) * 0.04);
+        el.style.transform = `scale(${scale})`;
       }
-
-      // ── Inner-card cycling (runs every tick while stage is active) ──
-      const card = stages[activeIdx].querySelector('.reveal-item');
-      if (card && card.classList.contains('reveal-active')) {
-        const inners = card.querySelectorAll('.card-reveal');
-        if (inners.length > 1) {
-          const rect = stages[activeIdx].getBoundingClientRect();
-          const progress = Math.max(0, Math.min(1, (centerY - rect.top) / (rect.height || 1)));
-          // Show one inner card at a time — replaces previous in same spot
-          const cur = Math.min(Math.floor(progress * inners.length), inners.length - 1);
-          inners.forEach((c, i) => {
-            c.classList.toggle('card-active', i === cur);
-          });
-        }
-      }
-
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(update); ticking = true; }
-    }, { passive: true });
-
-    setTimeout(update, 2200);
-  })();
+    });
+  }, { passive: true });
 
   // ── Counter Animation ──
-  setTimeout(() => {
+  function animateCounters() {
     document.querySelectorAll('.stat-num').forEach((el, i) => {
-      const target = parseInt(el.getAttribute('data-target'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      const duration = 1600;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        el.textContent = Math.floor(p * target).toLocaleString() + suffix;
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      setTimeout(() => requestAnimationFrame(tick), i * 300);
+      setTimeout(() => {
+        const target = parseInt(el.getAttribute('data-target'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        const steps = 80;
+        let cur = 0;
+        const t = setInterval(() => {
+          cur += target / steps;
+          if (cur >= target) { cur = target; clearInterval(t); }
+          el.textContent = Math.floor(cur).toLocaleString() + suffix;
+        }, 20);
+      }, i * 1800);
     });
-  }, 2400);
+  }
+  setTimeout(animateCounters, 2800);
 </script>
 
 </body>
