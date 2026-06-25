@@ -539,6 +539,12 @@ var PRIVACY_POLICY = {
 - Platform APIs receive necessary data for content posting
 - Each platform governed by their respective privacy policies
 
+**AI Processing Providers**
+- User queries and conversation data are processed through third-party AI providers to generate responses
+- **xAI (X.AI Corp):** Data processed in the United States. xAI's Data Processing Addendum (DPA) automatically applies and includes Standard Contractual Clauses (SCCs) for EU/UK/Swiss transfers. Privacy Policy: https://x.ai/legal/privacy-policy
+- **DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd.):** Data processed and stored in the People's Republic of China. China does not have an EU adequacy decision. By using services configured with DeepSeek, you acknowledge and accept this international data transfer. Privacy Policy: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+- The AI provider used depends on your or INEXASLI's service configuration
+
 **Service Providers**
 - Payment processing handled by Stripe (subject to Stripe's privacy policy)
 - Cloud hosting providers for secure data storage
@@ -574,6 +580,32 @@ var PRIVACY_POLICY = {
 - Incident response procedures for potential data breaches
 - Regular backup procedures to prevent data loss
 - 24/7 security monitoring and alerting systems`
+        },
+        {
+            title: "International Data Transfers",
+            content: `**Data Processing Locations**
+Personal data processed through INEXASLI services may be transferred to and stored in the following locations depending on your AI provider configuration:
+
+**xAI (X.AI Corp) — United States**
+- Data processed on servers in the United States
+- xAI's Data Processing Addendum (DPA) includes EU Standard Contractual Clauses (SCCs)
+- AES-256 encryption at rest and TLS 1.3 in transit
+- DPA: https://x.ai/legal/data-processing-addendum
+
+**DeepSeek — People's Republic of China**
+- Data processed and stored on servers in China
+- China does not have an EU adequacy decision under GDPR Article 45
+- Data transferred to China may be subject to Chinese law, including government access requests
+- By selecting DeepSeek as your AI provider, you acknowledge this international transfer
+- Privacy Policy: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+
+**Cloudflare — Global Network**
+- Service infrastructure operates on Cloudflare's global network
+- Data may be processed in data centers worldwide for performance and reliability
+- Cloudflare is ISO 27001 and SOC 2 Type II certified
+
+**Your Responsibility**
+If you are based in the EU/EEA, UK, or Switzerland, you should review your legal obligations regarding international data transfers before selecting DeepSeek as your AI provider. INEXASLI recommends that EU/EEA-based businesses use xAI.`
         },
         {
             title: "Your Rights and Controls",
