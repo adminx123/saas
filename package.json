@@ -15,6 +15,7 @@
         "deploy:payment": "npx wrangler deploy --config workers/payment/stripe-saas.toml",
         "flows:pull": "node scripts/flows-pull.mjs",
         "flows:push": "node scripts/flows-push.mjs",
+        "flows:push:one": "node scripts/flows-push.mjs",
         "prompts:pull": "node scripts/prompts-pull.mjs",
         "prompts:push": "node scripts/prompts-push.mjs",
         "pull": "npm run flows:pull && npm run prompts:pull",
